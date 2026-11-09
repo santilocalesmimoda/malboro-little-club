@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malboro Little Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/favicon2.png">
+</head>
+
+<body>
+
+    <div style="position: absolute; top: 0; left: 0; padding: 20px;">
+        <button onclick="navigateTo('index.html')">
+            <img id="myImage" src="images/malborolittleclub.png" style="width:400px; height:auto;" alt="Malboro Little Club">
+        </button>
+    </div>
+
+    
+    <div id="search-container"> 
+        <div id="search-bar" style="position: relative; width: 400px;">
+            <input type="text" id="searchInput" placeholder="Buscar" onkeypress="if(event.key === 'Enter') buscarVideo()"
+            style="padding-left: 45px; color: black; width: 80%; width: 80%; height: 35px; border: 1px;  border-radius: 20px;">
+            
+            <i class="fa-solid fa-magnifying-glass"
+                style="position: absolute; left: 10px; top: 40%; transform: translateY(-50%); color: gray; font-size: 18px; cursor: pointer;"
+                onclick="buscarVideo()"></i>
+        </div>
+    </div>
+
+    <div class="profile-container">     
+        <img src="images/perfil2.png" alt="Imagen de perfil" class="profile-img" onclick="toggleProfile()">
+        <div id="profile-card" class="profile-card">
+            <div class="profile-info">
+                <h2>Nombre y apellido</h2>
+                <p>@nombredeusuario</p>
+            </div>
+            <ul class="profile-options">
+                <li id="ver-perfil">Ver Perfil</li>
+                <li id="agregar-cuenta">Agregar la Cuenta</li>
+                <li id="sugerencias">Sugerencias</li>
+                <li id="ayuda-y-comentarios">Ayuda y Comentarios</li>
+                <li id="likes">Likes</li>
+                <li id="enviar-problema" button onclick="mostrarRecuadros()">Enviar Problema</button>
+                <li id="cerrar-sesion">Cerrar Sesión</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Contenedor de los tres recuadros -->
+<div id="contenedorProblemas" class="recuadros-contenedor" style="display: none;">
+
+    <!-- Recuadro 1 -->
+    <div class="recuadro estilo-facebook" id="recuadro1">
+        <div class="icono-circulo">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="contenido-recuadro">
+            <strong>Comenta tu problema</strong>
+            <div class="contenido">
+                Malboro Little Club
+            </div>
+        </div>
+        <i class="fas fa-paper-plane flecha-enviar" onclick="cerrarRecuadro('recuadro1')"></i>
+    </div>
+
+    <!-- Recuadro 2 -->
+    <div class="recuadro estilo-facebook" id="recuadro2">
+        <div class="icono-circulo">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="contenido-recuadro">
+            <strong>Enviá un saludo al grupo</strong>
+            <div class="contenido">
+                Grupal
+            </div>
+        </div>
+        <i class="fas fa-paper-plane flecha-enviar" onclick="cerrarRecuadro('recuadro2')"></i>
+    </div>
+
+    <!-- Recuadro 3 -->
+    <div class="recuadro estilo-facebook" id="recuadro3">
+        <div class="icono-circulo">
+            <i class="fas fa-key"></i>
+        </div>
+        <div class="contenido-recuadro">
+            <strong>Enviá sugerencias de amistad</strong>
+            <div class="contenido">
+                Llaveros de reglas
+            </div>
+        </div>
+        <i class="fas fa-paper-plane flecha-enviar" onclick="cerrarRecuadro('recuadro3')"></i>
+    </div>
+
+</div>
+ 
+
+
+
+<style>
+
+/*  ***************************** */
+
+/* ********************************************** */
+.profile-container {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    text-align: center;
+    display: inline-block;
+}
+
+.profile-img {
+    width: 2cm;
+    height: 2cm;
+    border-radius: 50%; /* Hace la imagen circular */
+    object-fit: cover; /* Asegura que la imagen se ajuste sin deformarse */
+    border: 2 solid; /* Opcional: borde blanco para mejor visibilidad */
+    cursor: pointer;
+    z-index: 2; 
+    position: relative;
+}
+
+.profile-card {
+    position: absolute;
+    top: 40px; /* Ajusta este valor según la posición deseada */
+    left: -190px; /* Desplaza el recuadro hacia la izquierda */
+    width: 265px; /* Ancho del recuadro */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none; /* El recuadro estará oculto inicialmente */
+    z-index: 1;
+}
+
+.profile-card.active {
+    display: block;
+}
+
+.profile-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.profile-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-options li {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.profile-options li:hover {
+    background-color: #f5f5f5;
+}
+
+ 
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #7ccd98;
+    color: #28a745;
+    margin: 0;
+    padding: 0;
+}
+
+#search-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-bar {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid #555;
+    border-radius: 30px;
+}
+
+
+header {
+    background-color: #7ccd98;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    background-color: #28a745;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+section {
+    padding: 20px;
+    text-align: center;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.control-btn {
+    background-color: #333;
+    color: green;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.control-btn:hover {
+    background-color: #555;
+}
+
+
+form {
+    max-width: 400px;
+    margin: auto;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px white(0, 0, 0, 0.1);
+
+}
+
+label, input, button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+button {
+    background-color: #7ccd98; 
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #155724;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.icon-container {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 14px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.icon-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.icon-container {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(23, 227, 98, 0.8);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 14px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.icon-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* --- ESTILOS DE NOTIFICACIONES CON CSS GRID (FORZADO AL MARGEN) --- */
+.notification-card {
+    position: absolute;
+    top: 40px;
+    left: 70px;
+    width: 320px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    padding: 0;
+    display: none;
+    z-index: 1000;
+    height: 400px;
+    box-sizing: border-box;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    color: #333;
+}
+
+.notification-header-modern {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important; /* Columna 1 para el texto, Columna 2 automática para la X */
+    align-items: center !important;
+    background-color: #1e5e34 !important;
+    padding: 12px 16px !important;
+    height: 50px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.notification-title-text {
+    margin: 0 !important;
+    font-size: 15px !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.notification-close-btn {
+    background: transparent !important;
+    border: none !important;
+    font-size: 24px !important;
+    cursor: pointer !important;
+    color: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 30px !important;
+    height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-self: end !important; /* Obliga a ubicarse al final absoluto de su celda */
+}
+
+.notification-close-btn:hover {
+    opacity: 0.7 !important;
+}
+
+.notification-list {
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+}
+
+.notification-item {
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #333;
+    border-left: 4px solid #28a745;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.notification-item strong {
+    color: #155724;
+    font-size: 14px;
+}
+
+.notification-item span {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-top: 6px;
+}
+
+
+.profile-options li {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.profile-options li:hover {
+    background-color: #f0f0f0;
+}
+
+.recuadros-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.recuadro {
+    display: flex;
+    align-items: flex-start;
+    background: #d9fae7;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    position: relative;
+    gap: 12px;
+    width: 40%;
+}
+
+.icono-circulo {
+    width: 40px;
+    height: 40px;
+    background-color: #e4ebe4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #050505;
+    flex-shrink: 0;
+}
+
+.contenido-recuadro {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contenido-recuadro strong {
+    font-size: 16px;
+    color: #050505;
+}
+
+#contenedorProblemas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 90vh; /* Altura completa de la ventana */
+}
+
+.flecha-enviar {
+    font-size: 18px;
+    color: #2a7b4f;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: transform 0.2s, color 0.3s;
+}
+
+/* ********************************************** */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.video-container {
+    position: relative;
+    width: 70%;
+    max-width: 600px;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+.controls-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    /* justify-content: space-between; <--- ELIMINAR ESTA LÍNEA */
+    align-items: center;
+    padding: 5px 2px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    height: 45px;
+}
+
+.video-container.show-controls .controls-bar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.control-button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    margin: 0;
+    font-size: 1.4em;
+    transition: color 0.2s;
+    display: flex;
+    padding: 2px; /* Asegúrate de que no haya padding que separe los botones */
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Ajusta el ancho de todos los botones */
+    height: 40px; /* Ajusta la altura de todos los botones */
+}
+
+.progress-container {
+    position: absolute;
+    bottom: 45px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.video-container.show-controls .progress-container {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- CAMBIOS APLICADOS AQUÍ --- */
+.progress-bar {
+    flex-grow: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    margin: 2px;
+    cursor: pointer;
+    outline: none;
+    --progress-value: 0%;
+    background: linear-gradient(to right, #4CAF50 var(--progress-value), #555 var(--progress-value));
+}
+
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    cursor: grab;
+}
+
+.progress-bar::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    cursor: grab;
+}
+
+.time-display {
+    color: #fff;
+    font-size: 0.9em;
+    white-space: nowrap;
+    margin-right: 0;
+}
+
+/* Añade este bloque */
+.left-controls {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+    gap: 10px; /* Esto añade un pequeño espacio entre los botones */
+}
+
+/* Modifica el bloque .right-controls */
+.right-controls {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 5px; /* Esto añade un espacio entre el tiempo y el botón de fullscreen */
+}
+
+.volume-bar {
+    width: 80px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 5px;
+    margin: 0;
+    cursor: pointer;
+    outline: none;
+    /* Variables de color para la barra de volumen */
+    --volume-color: #4CAF50; /* Verde claro */
+    --background-color: #555; /* Gris claro */
+    --volume-value: 100%; /* Valor inicial */
+    background: linear-gradient(to right, var(--volume-color), var(--volume-color) var(--volume-value), var(--background-color) var(--volume-value), var(--background-color));
+}
+
+/* Estilo del pulgar (el botón) para Chrome/Safari */
+.volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--volume-color);
+    border-radius: 50%;
+    cursor: grab;
+}
+
+/* Estilo del pulgar (el botón) para Firefox */
+.volume-bar::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: var(--volume-color);
+    border-radius: 50%;
+    cursor: grab;
+}
+
+.seek-button {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.seek-button .seek-seconds {
+    font-size: 0.1em;
+    color: #fff;
+    margin-top: 1px;
+    display: block;
+}
+
+
+.icon-expand,
+.icon-compress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+.control-button i {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.control-button .bx {
+    font-size: 1.5em;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+#playPauseBtn {
+    width: 20px;
+    height: 20px;
+}
+
+#playPauseBtn .icon-play,
+#playPauseBtn .icon-pause {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    display: block;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.control-button i:not(.icon-play):not(.icon-pause) {
+    font-size: 1.2em;
+}
+
+#fullscreenBtn {
+    margin-left: auto;
+}
+
+.control-button i {
+    margin: 0 5px;
+}
+
+#volumeBtn {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+}
+
+.titulo-abajo {
+    position: fixed; /* Se queda fijo aunque hagas scroll */
+    bottom: 100px;       /* Lo pega al borde inferior */
+    left: 30%;         /* Lo pega al borde izquierdo */
+    margin: 25px;    /* Espacio para que no esté pegado al borde */
+    font-size: 24px; /* Tamaño del texto */
+    font-weight: bold;
+    color: #083; 
+}
+
+.videos-btn {
+    background-color: #2dac46;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.videos-btn:hover {
+    background-color: #1f8c3a;
+}
+
+.right-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;     /* separación entre botones */
+}
+
+
+/* --- ESTILOS DEFINITIVOS CORREGIDOS (Líneas Negras / Fondo Blanco) --- */
+
+.language-selector-container {
+    position: relative;
+    display: flex !important;
+    align-items: center !important;
+    margin-left: 10px; 
+    height: 60px;
+}
+
+#language-toggle-btn {
+    background-color: transparent !important; 
+    border: none !important;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: 0;
+    line-height: 1.2;
+}
+
+
+/* 1. Estilo del Contenedor de la Imagen */
+.globe-icon-container {
+    width: 42px !important;
+    height: 42px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 2px;
+}
+
+/* 2. Estilo de la Imagen interna */
+.forced-globe-img {
+    width: 70% !important; /* Ajustar tamaño dentro del círculo */
+    height: 70% !important;
+}
+
+/* 3. Estilo del Texto "Idiomas" (Blanco / Más Grande) - Queda igual */
+#language-selector .language-text {
+    font-size: 16px !important; 
+    color: white !important; 
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.7); 
+}
+
+/* Estilos del desplegable CENTRADO con el ícono */
+.language-dropdown {
+    position: absolute;
+    top: 80%; 
+    /* --- CAMBIOS PARA CENTRARLO --- */
+    left: 50%;                /* Mueve el borde izquierdo al centro del botón */
+    transform: translateX(-50%); /* Lo desplaza hacia la izquierda la mitad de su propio ancho */
+    /* ------------------------------ */
+    min-width: 150px;
+    max-height: 400px;         /* Los 12 cm que querías */
+    overflow-y: auto;          /* La barra de desplazamiento */
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 5px;
+    padding: 5px 0;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.language-dropdown a {
+    color: black;
+    padding: 8px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.language-dropdown a:hover {
+    background-color: #e6f7e6;
+    color: #1f8c3a;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Para que la barra de desplazamiento sea más estética */
+.language-dropdown::-webkit-scrollbar {
+    width: 14px;
+}
+
+.language-dropdown::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 6px;
+}
+
+.language-dropdown::-webkit-scrollbar-thumb:hover {
+    background: #bbb; 
+}
+</style>
+
+
+<div class="fixed top-20 left-0 h-full w-19 flex flex-col items-center bg-gray bg-green-630 text-white py-7 space-y-0">
+    <div class="icon-container">
+        <button onclick="navigateTo('index.html')" class="m-0 p-2">
+            <i data-lucide="Home" class="w-9 h-9"></i>
+        </button>
+        <span class="tooltip">Inicio</span>
+    </div>
+
+    <div class="icon-container">
+        <button onclick="navigateTo('explore.html')" class="m-0 p-2">
+            <i data-lucide="Compass" class="w-9 h-9"></i>
+        </button>
+        <span class="tooltip">Explorar</span>
+    </div>
+
+    <!-- Botón de Notificaciones -->
+    <div class="icon-container">
+        <button id="notificationButton" class="m-0 p-2" onclick="toggleNotification()">
+            <i data-lucide="Bell" class="w-9 h-9"></i>
+        </button>
+        <span class="tooltip">Notificaciones</span>
+    </div>
+
+    <!-- Recuadro de Notificaciones -->
+    <div id="notification-card" class="notification-card">
+        <div class="notification-header-modern">
+            <span class="notification-title-text">Últimas actualizaciones</span>
+            <button class="notification-close-btn" onclick="closeNotification()">&times;</button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item">
+                <strong>Nuevo contenido cargado</strong>
+                <p style="margin: 2px 0 0 0;">Ya está disponible el trailer oficial del club.</p>
+                <span>Hace 5 minutos</span>
+            </div>
+            <div class="notification-item">
+                <strong>Aviso del equipo</strong>
+                <p style="margin: 2px 0 0 0;">Recordá revisar la sección de mensajes y soporte.</p>
+                <span>Hace 1 hora</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="icon-container">
+        <button onclick="openModal()" class="m-0 p-2">
+            <i data-lucide="Plus-circle" class="w-9 h-9"></i>
+        </button>
+        <span class="tooltip">Más Videos</span>
+    </div>
+
+    <div class="icon-container">
+        <button onclick="navigateTo('messages.html')" class="m-0 p-2">
+            <i data-lucide="Message-square" class="w-9 h-9"></i>
+        </button>
+        <span class="tooltip">Mensajes</span>
+    </div>
+
+    <div class="icon-container">
+        <button onclick="navigateTo('gifts.html')" class="m-0 p-2">
+            <i data-lucide="Gift" class="w-9 h-9"></i>
+        </button>
+        <span class="tooltip">Regalos</span>
+    </div>
+
+    <div class="icon-container">
+        <button onclick="navigateTo('settings.html')" class="m-0 p-2">
+            <i data-lucide="Settings" class="w-9 h-9"></i>
+        </button>
+        <span class="tooltip">Configuración</span>
+    </div>
+</div>
+           
+    <script>
+        lucide.createIcons()
+    </script>
+
+
+
+<div class="video-container">
+    <video id="myVideo" src="videos/Malboro Little Club Trailer.mp4" playsinline></video>
+
+    <div class="progress-container">
+        <input type="range" id="progressBar" class="progress-bar" value="0" min="0" max="100" step="0.1">
+    </div>
+
+    <div class="controls-bar">
+
+        <div class="left-controls">
+
+            <button id="playPauseBtn" class="control-button">
+                <i class="fas fa-play icon-play"></i>
+                <i class="fas fa-pause icon-pause hidden"></i>
+            </button>
+
+            <button id="rewindBtn" class="control-button">
+                <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/replay-10.png" alt="replay-10"/>
+            </button>
+            <button id="forwardBtn" class="control-button">
+                <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/forward-10.png" alt="forward-10"/>
+            </button>
+            <button id="volumeBtn" class="control-button">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <input type="range" id="volumeBar" class="volume-bar" value="100" min="0" max="100">
+
+        </div>
+
+        <div class="right-controls">
+
+            <span id="timeDisplay" class="time-display">0:00 / 0:00</span>
+
+            <button id="fullscreenBtn" class="control-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="Crop-Free-Fill--Streamline-Sharp-Fill-Material" height="40" width="40" class="icon-expand">
+                    <path fill="#FFFFFFFF" d="M3 21V15.2h1.5V19.5h4.3v1.5H3Zm12.2 0v-1.5H19.5v-4.3h1.5V21H15.2ZM3 8.8V3h5.8v1.5H4.5v4.3H3Zm16.5 0V4.5h-4.3V3H21v5.8h-1.5Z" stroke-width="0.5"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="Fullscreen-Exit-Fill--Streamline-Sharp-Fill-Material" height="40" width="40" class="icon-compress hidden">
+                    <path fill="#FFFFFFFF" d="M6.325 21v-3.325H3v-1.5h4.825V21h-1.5Zm9.85 0v-4.825H21v1.5h-3.325V21h-1.5ZM3 7.825v-1.5h3.325V3h1.5v4.825H3Zm13.175 0V3h1.5v3.325H21v1.5h-4.825Z" stroke-width="0.5"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+    
+    <div class="titulo-abajo">Malboro Little Club Trailer</div>
+
+
+
+    <div class="absolute top-4 right-40 flex space-x-4 text-3">
+        <button id="btn-login" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 whitespace-nowrap">Iniciar Sesión</button>
+            <button id="btn-signup" class="bg-green-600 text-white px-10 py-3 rounded-lg hover:bg-green-700">Registrate</button>
+
+
+        <div id="language-selector" class="language-selector-container">
+           <button id="language-toggle-btn" class="language-toggle-btn" onclick="toggleLanguageDropdown(event)">
+                <div class="globe-icon-container">
+                    <img src="images/icono_idioma_negro.png" alt="Mundo" class="forced-globe-img">
+                </div>
+            </button>
+        
+            <div id="language-dropdown" class="language-dropdown hidden">
+                <a href="#" data-lang="es" onclick="setLanguage('Español')">Español</a>
+                <a href="#" data-lang="en" onclick="setLanguage('English')">English</a>
+                <a href="#" data-lang="pt" onclick="setLanguage('Português')">Português</a>
+                <a href="#" data-lang="it" onclick="setLanguage('it')">Italiano</a>
+                <a href="#" data-lang="de" onclick="setLanguage('Deutsch')">Deutsch</a>
+                <a href="#" data-lang="de" onclick="setLanguage('la')">Latinus</a>
+                <a href="#" data-lang="de" onclick="setLanguage('sq')">Shqiptare</a>
+                <a href="#" data-lang="de" onclick="setLanguage('nd')">Ndebele</a>
+                <a href="#" data-lang="de" onclick="setLanguage('ss')">Swati</a>
+                <a href="#" data-lang="de" onclick="setLanguage('km')">ខ្មែរ</a>
+                <a href="#" data-lang="ru" onclick="setLanguage('ru')">Русский</a>
+                <a href="#" data-lang="ja" onclick="setLanguage('ja')">日本語</a>
+                <a href="#" data-lang="ja" onclick="setLanguage('zh')">繁體中文</a>
+                <a href="#" data-lang="ja" onclick="setLanguage('cn')">简体中文</a>
+                <a href="#" data-lang="da" onclick="setLanguage('ko')">한국인</a>
+                <a href="#" data-lang="id" onclick="setLanguage('vi')">Tiếng Việt</a>
+                <a href="#" data-lang="id" onclick="setLanguage('so')">Soomaali</a>
+                <a href="#" data-lang="id" onclick="setLanguage('lt')">Lietuvių</a>
+                <a href="#" data-lang="id" onclick="setLanguage('af')">Afrikaans</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('fr')">Français</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('st')">Sesotho</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('he')">עברית</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('cy')">Cymraeg</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('sk')">Slovenčina</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('sl')">Slovenščina</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('ms')">Melayu</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('ff')">Fulani</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('hu')">Magyar</a>
+                <a href="#" data-lang="es" onclick="setLanguage('az')">Azərbaycan</a>
+                <a href="#" data-lang="es" onclick="setLanguage('ku')">Kurdî</a>
+                <a href="#" data-lang="da" onclick="setLanguage('da')">Dansk</a>
+                <a href="#" data-lang="da" onclick="setLanguage('sv')">Svenska</a>
+                <a href="#" data-lang="da" onclick="setLanguage('Cebuano')">Cebuano</a>
+                <a href="#" data-lang="da" onclick="setLanguage('el')">Ελληνικά</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('be')">беларускі</a>
+                <a href="#" data-lang="es" onclick="setLanguage('kk')">Қазақша</a>
+                <a href="#" data-lang="es" onclick="setLanguage('tg')">тоҷикӣ</a>
+                <a href="#" data-lang="es" onclick="setLanguage('mk')">македонски</a>
+                <a href="#" data-lang="es" onclick="setLanguage('uk')">українська</a>
+                <a href="#" data-lang="es" onclick="setLanguage('sr')">српски</a>
+                <a href="#" data-lang="es" onclick="setLanguage('uz')">O'zbek</a>
+                <a href="#" data-lang="da" onclick="setLanguage('hi')">हिंदी</a>
+                <a href="#" data-lang="da" onclick="setLanguage('as')">অসমীয়া</a>
+                <a href="#" data-lang="da" onclick="setLanguage('or')">ଓଡ଼ିଆ</a>
+                <a href="#" data-lang="da" onclick="setLanguage('mr')">मराठी</a>
+                <a href="#" data-lang="da" onclick="setLanguage('bn')">বাংলা</a>
+                <a href="#" data-lang="da" onclick="setLanguage('ta')">தமிழ்</a>
+                <a href="#" data-lang="da" onclick="setLanguage('te')">తెలుగు</a>
+                <a href="#" data-lang="da" onclick="setLanguage('kn')">ಕನ್ನಡ</a>
+                <a href="#" data-lang="ar" onclick="setLanguage('fa')">فارسی</a>
+                <a href="#" data-lang="ar" onclick="setLanguage('ar')">عربي</a>
+                <a href="#" data-lang="ar" onclick="setLanguage('ps')">پښتو</a>
+                <a href="#" data-lang="ar" onclick="setLanguage('sd')">سنڌ</a>
+                <a href="#" data-lang="es" onclick="setLanguage('tu')">Türkçe</a>
+                <a href="#" data-lang="es" onclick="setLanguage('ca')">Català</a>
+                <a href="#" data-lang="es" onclick="setLanguage('bs')">Bosanski</a>
+                <a href="#" data-lang="es" onclick="setLanguage('eu')">Euskara</a>
+                <a href="#" data-lang="es" onclick="setLanguage('nl')">Nederlands</a>
+                <a href="#" data-lang="es" onclick="setLanguage('et')">Eesti keel</a>
+                <a href="#" data-lang="es" onclick="setLanguage('fi')">Suomi</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('fi')">Suomalainen</a>
+                <a href="#" data-lang="fr" onclick="setLanguage('sw')">Kiswahili</a>
+                <a href="#" data-lang="es" onclick="setLanguage('no')">Noruego</a>
+                <a href="#" data-lang="es" onclick="setLanguage('Norsk')">Norsk</a>
+                <a href="#" data-lang="es" onclick="setLanguage('sk')">Slovensky</a>
+                <a href="#" data-lang="es" onclick="setLanguage('ga')">Gaeilge</a>
+                <a href="#" data-lang="es" onclick="setLanguage('tl')">Tagalog</a>
+                <a href="#" data-lang="es" onclick="setLanguage('Polski')">Polski</a>
+                <a href="#" data-lang="es" onclick="setLanguage('ml')">മലയാളം</a>
+                <a href="#" data-lang="es" onclick="setLanguage('ka')">ქართული</a>
+                <a href="#" data-lang="es" onclick="setLanguage('kn')">ಕನ್ನಡ</a>
+                <a href="#" data-lang="es" onclick="setLanguage('xh')">IsiXhosa</a>
+                <a href="#" data-lang="es" onclick="setLanguage('zu')">IsiZulu</a>
+                <a href="#" data-lang="es" onclick="setLanguage('hr')">Hrvatski</a>
+                <a href="#" data-lang="es" onclick="setLanguage('Filipino')">Filipino</a>
+                <a href="#" data-lang="es" onclick="setLanguage('ro')">Română</a>
+                <a href="#" data-lang="es" onclick="setLanguage('th')">ไทย</a>
+                <a href="#" data-lang="es" onclick="setLanguage('Čeština')">Čeština</a>
+                <a href="#" data-lang="id" onclick="setLanguage('id')">Bahasa Indonesia</a>
+            </div>
+        </div>
+    
+    </div>
+
+
+        <!--
+            <button class="videos-btn" onclick="window.location.href='video2.html'">
+                🎬 Videos
+            </button>
+        --->
+
+ 
+  <!---FORMULARIO DE LOGIN--->
+<form id="login-form" class="hidden absolute top-20 right-60 bg-white p-6 rounded-lg shadow-lg">
+    <input type="email" placeholder="Correo" required class="block border p-2 mb-2 w-full">
+    <input type="password" placeholder="Contraseña" required class="block border p-2 mb-2 w-full">
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Iniciar sesión</button>
+</form>
+
+
+ <!----FORMULARIO DE REGISTRO-->
+<form id="signup-form" class="hidden absolute top-20 right-60 bg-white p-6 rounded-lg shadow-lg">
+    <input type="text" placeholder="Nombre" required class="block border p-2 mb-2 w-full">
+    <input type="text" placeholder="Apellido" required class="block border p-2 mb-2 w-full">
+    <input type="username" placeholder="Nombre de Usuario" required class="block border p-2 mb-2 w-full">
+    <input type="email" placeholder="Correo" required class="block border p-2 mb-2 w-full">
+    <input type="password" placeholder="Contraseña" required class="block border p-2 mb-2 w-full">
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Registrarse</button>
+</form>
+
+   
+    <footer>
+        <p>&copy; 2025 Malboro Little Club</p>
+    </footer>
+
+
+    <script>
+    function toggleNotification() {
+        const notificationCard = document.getElementById("notification-card");
+
+        // Mostrar el recuadro si está oculto
+        if (notificationCard.style.display === "none" || notificationCard.style.display === "") {
+            notificationCard.style.display = "block";
+
+            // Esperar un momento para permitir que el clic inicial termine antes de agregar el detector global
+            setTimeout(() => {
+                document.addEventListener("click", closeOnOutsideClick);
+            }, 10);
+        } else {
+            closeNotification();
+        }
+    }
+
+    function closeNotification() {
+        const notificationCard = document.getElementById("notification-card");
+        notificationCard.style.display = "none";
+
+        // Remover el evento global al cerrar
+        document.removeEventListener("click", closeOnOutsideClick);
+    }
+
+    // Cierra el recuadro si se hace clic fuera de él
+    function closeOnOutsideClick(event) {
+        const notificationCard = document.getElementById("notification-card");
+        const notificationButton = document.getElementById("notificationButton");
+
+        if (!notificationCard.contains(event.target) && !notificationButton.contains(event.target)) {
+            closeNotification();
+        }
+    }
+    </script>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+        // Asignar evento de búsqueda al presionar Enter
+        document.getElementById("searchInput").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Evita que el formulario se envíe
+                buscarVideo();
+            }
+        });
+
+        // Asignar evento de búsqueda al hacer clic en el ícono de la lupa
+        document.querySelector(".fa-magnifying-glass").addEventListener("click", function () {
+                buscarVideo();
+            });
+        });
+    
+        function buscarVideo() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const videos = document.querySelectorAll("[data-title]");
+            const videoGallery = document.getElementById("video-gallery");
+
+            let videoEncontrado = false;
+
+            videos.forEach(video => {
+            const title = video.getAttribute("data-title").toLowerCase();
+            if (title.includes(input)) {
+                video.style.display = "block";
+                video.style.width = "80%"; // Agrandar video
+                video.style.margin = "auto"; // Centrar video
+                video.querySelector("video").style.width = "100%"; // Ajustar tamaño del video
+                videoGallery.innerHTML = ""; // Vaciar galería
+                videoGallery.appendChild(video); // Agregar el video encontrado
+                videoEncontrado = true;
+
+            } else {
+                video.style.display = "none";
+            }
+
+            });
+            
+            if (!videoEncontrado) {
+            videoGallery.innerHTML = "<p style='color: red; text-align: center; font-size: 20px;'>No se encontró el video.</p>";
+            }
+
+        }
+    </script>
+
+    <script>
+        function toggleProfile() {
+            var card = document.getElementById("profile-card");
+            card.style.display = (card.style.display === "none" || card.style.display === "") ? "block" : "none";
+        }
+    </script>
+
+    <script>
+        document.getElementById("btn-login").addEventListener("click", function () {
+            window.location.href = "login.html"; // Redrige a la pagina de inicio de sesion
+        });
+
+        document.getElementById("btn-signup").addEventListener("click", function () {
+            window.location.href = "registrate.html"; // Redrige a la pagina de registro
+        });
+    </script>
+
+
+
+    <script>
+        // Obtener botones y formularios
+        const btnLogin = document.getElementById("btn-login");
+        const btnSignup = document.getElementById("btn-signup");
+        const loginForm = document.getElementById("login-form");
+        const signupForm = document.getElementById("signup-form");
+
+        // Función para mostrar un formulario y ocultar el otro
+        function toggleForm(showForm, hideForm) {
+            showForm.classList.toggle("hidden"); // Mostrar u ocultar el formulario activo
+            hideForm.classList.add("hidden"); // Asegurar que el otro esté oculto
+        }
+    </script>
+
+    <script>
+        function toggleProfile() {
+        var profileCard = document.getElementById("profile-card");
+        if (profileCard.classList.contains("active")) {
+            profileCard.classList.remove("active");
+        } else {
+            profileCard.classList.add("active");
+        }
+    }
+    </script>
+
+
+    <script>
+        document.getElementById("ver-perfil").onclick = function() {
+            window.location.href = "perfil.html"; // o cualquier otra acción
+        };
+
+        document.getElementById("agregar-cuenta").onclick = function() {
+            alert("Funcionalidad para agregar cuenta próximamente.");
+        };
+
+        document.getElementById("sugerencias").onclick = function() {
+            window.location.href = "sugerencias.html";
+        };
+
+        document.getElementById("ayuda-y-comentarios").onclick = function() {
+            window.location.href = "ayudacomentarios.html";
+        };
+
+        document.getElementById("likes").onclick = function() {
+            window.location.href = "likes.html";
+        };
+
+        document.getElementById("enviar-problema").onclick = function() {
+            document.getElementById("contenedorProblemas").style.display = "flex";
+        };
+
+        document.getElementById("cerrar-sesion").onclick = function() {
+            // Aquí podrías limpiar sesiones o redirigir al login
+            alert("Cerrando sesión...");
+            window.location.href = "login.html";
+        };
+    </script>
+
+    <script>
+        // Redirección genérica
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
+        // Mostrar / Ocultar tarjeta de notificaciones
+        function toggleNotification() {
+            const card = document.getElementById("notification-card");
+            card.style.display = card.style.display === "block" ? "none" : "block";
+        }
+    </script>
+
+
+    <script>
+        function mostrarRecuadros() {
+            document.getElementById("contenedorProblemas").style.display = "flex";
+        }
+
+        function cerrarRecuadro(id) {
+            document.getElementById(id).style.display = "none";
+            alert("Tu mensaje fue enviado. ¡Gracias!");
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('myVideo');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const iconPlay = playPauseBtn.querySelector('.icon-play');
+            const iconPause = playPauseBtn.querySelector('.icon-pause');
+            const rewindBtn = document.getElementById('rewindBtn');
+            const forwardBtn = document.getElementById('forwardBtn');
+            const progressBar = document.getElementById('progressBar');
+            const timeDisplay = document.getElementById('timeDisplay');
+            const volumeBtn = document.getElementById('volumeBtn');
+            const volumeBar = document.getElementById('volumeBar');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const videoContainer = document.querySelector('.video-container');
+            const iconExpand = fullscreenBtn.querySelector('.icon-expand');
+            const iconCompress = fullscreenBtn.querySelector('.icon-compress');
+
+            let controlsTimeout;
+
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = Math.floor(seconds % 60);
+                const formattedMinutes = String(minutes).padStart(0);
+                const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+                return `${formattedMinutes}:${formattedSeconds}`;
+            }
+
+            videoContainer.addEventListener('mousemove', () => {
+                videoContainer.classList.add('show-controls');
+                clearTimeout(controlsTimeout);
+                controlsTimeout = setTimeout(() => {
+                    if (!video.paused) {
+                        videoContainer.classList.remove('show-controls');
+                    }
+                }, 3000);
+            });
+
+            videoContainer.addEventListener('mouseleave', () => {
+                clearTimeout(controlsTimeout);
+                if (!video.paused) {
+                    videoContainer.classList.remove('show-controls');
+                }
+            });
+
+            video.addEventListener('pause', () => {
+                videoContainer.classList.add('show-controls');
+            });
+
+            video.addEventListener('play', () => {
+                clearTimeout(controlsTimeout);
+                controlsTimeout = setTimeout(() => {
+                    videoContainer.classList.remove('show-controls');
+                }, 3000);
+            });
+
+            playPauseBtn.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    iconPlay.classList.add('hidden');
+                    iconPause.classList.remove('hidden');
+                } else {
+                    video.pause();
+                    iconPlay.classList.remove('hidden');
+                    iconPause.classList.add('hidden');
+                }
+            });
+
+            rewindBtn.addEventListener('click', () => {
+                video.currentTime -= 10;
+            });
+
+            forwardBtn.addEventListener('click', () => {
+                video.currentTime += 10;
+            });
+
+            video.addEventListener('timeupdate', () => {
+                const progress = (video.currentTime / video.duration) * 100;
+                progressBar.value = progress;
+
+                progressBar.style.setProperty('--progress-value', `${progress}%`);
+
+                timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+            });
+
+            progressBar.addEventListener('input', () => {
+                const time = (progressBar.value / 100) * video.duration;
+                video.currentTime = time;
+            });
+
+            volumeBar.addEventListener('input', () => {
+                video.volume = volumeBar.value / 100;
+                // Esta es la línea que debes agregar o modificar
+                volumeBar.style.setProperty('--volume-value', `${volumeBar.value}%`);
+                updateVolumeIcon();
+            });
+
+            function updateVolumeIcon() {
+                if (video.volume === 0 || video.muted) {
+                    volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                } else if (video.volume < 0.5) {
+                    volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+                } else {
+                    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                }
+            }
+
+            volumeBtn.addEventListener('click', () => {
+                video.muted = !video.muted;
+                volumeBar.value = video.muted ? 0 : video.volume * 100;
+                updateVolumeIcon();
+            });
+
+            video.addEventListener('volumechange', () => {
+                updateVolumeIcon();
+                if (!video.muted) {
+                    volumeBar.value = video.volume * 100;
+                }
+            });
+
+            fullscreenBtn.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    if (videoContainer.requestFullscreen) {
+                        videoContainer.requestFullscreen();
+                    } else if (videoContainer.mozRequestFullScreen) {
+                        videoContainer.mozRequestFullScreen();
+                    } else if (videoContainer.webkitRequestFullscreen) {
+                        videoContainer.webkitRequestFullscreen();
+                    } else if (videoContainer.msRequestFullscreen) {
+                        videoContainer.msRequestFullscreen();
+                    }
+                    iconExpand.classList.add('hidden');
+                    iconCompress.classList.remove('hidden');
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                    iconExpand.classList.remove('hidden');
+                    iconCompress.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('fullscreenchange', () => {
+                if (!document.fullscreenElement) {
+                    iconExpand.classList.remove('hidden');
+                    iconCompress.classList.add('hidden');
+                }
+            });
+
+            video.addEventListener('ended', () => {
+                iconPlay.classList.remove('hidden');
+                iconPause.classList.add('hidden');
+                video.currentTime = 0;v
+                progressBar.value = 0;
+                videoContainer.classList.add('show-controls');
+            });
+
+            video.addEventListener('loadedmetadata', () => {
+                timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+            });
+
+            videoContainer.classList.add('show-controls');
+        });
+    </script>
+
+    <script>
+        // Función para mostrar/ocultar el desplegable de idiomas
+        function toggleLanguageDropdown(event) {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('hidden');
+            
+            // Detener la propagación para evitar que el document click lo cierre inmediatamente
+            event.stopPropagation(); 
+        }
+
+        // Función para cerrar el desplegable cuando se hace clic fuera
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('language-dropdown');
+            const toggleBtn = document.getElementById('language-toggle-btn');
+
+            // Si el clic no fue dentro del desplegable y no fue en el botón
+            if (!dropdown.contains(event.target) && !toggleBtn.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Función al seleccionar un idioma (muestra un mensaje)
+        function setLanguage(language) {
+            alert(`Idioma seleccionado: ${language}. (Aquí iría la lógica para cambiar el contenido de la página)`);
+            document.getElementById('language-dropdown').classList.add('hidden'); // Ocultar después de seleccionar
+        }
+    </script>
+
+
+</body>
+</html>

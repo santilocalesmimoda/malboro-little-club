@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Malboro Little Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/favicon2.png">
+</head>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #7ccd98 0%, #75c991 45%, #82d5a0 100%);
+}
+
+.register-card {
+    width: 460px;
+    max-width: calc(100% - 30px);
+    padding: 34px 38px 30px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #25a447 0%, #388b50 55%, #4f755b 100%);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.22);
+    color: white;
+}
+
+.register-card h1 {
+    text-align: center;
+    margin: 0 0 24px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 13px;
+}
+
+.form-group input {
+    width: 100%;
+    height: 50px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 28px;
+    outline: none;
+    background: #fff;
+    color: #444;
+    font-size: 16px;
+}
+
+.form-group input::placeholder {
+    color: #777;
+}
+
+.btn-register:hover { background: #f1f1f1; }
+
+.birth-title {
+    margin: 5px 0 8px 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.birth-fields {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr 1.1fr;
+    gap: 8px;
+}
+
+.birth-fields select {
+    width: 100%;
+    height: 46px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 24px;
+    outline: none;
+    background: white;
+    color: #555;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.register-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: #fff;
+    color: #28a745;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.register-button:hover {
+    background: #f1f1f1;
+}
+
+.back-login {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 17px;
+}
+
+.back-login a {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.back-login a:hover {
+    text-decoration: underline;
+}
+
+.message {
+    min-height: 20px;
+    margin: 10px 5px 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 500px) {
+    .register-card {
+        padding: 28px 22px 24px;
+    }
+
+    .register-card h1 {
+        font-size: 27px;
+    }
+
+    .birth-fields {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5px;
+    }
+
+    .birth-fields select {
+        font-size: 13px;
+        padding: 0 7px;
+    }
+}
+
+</style>
+
+
+
+<body>
+
+    <div class="register-card">
+        <h1>Register</h1>
+
+        <form id="registerForm">
+
+            <div class="form-group">
+                <input type="text" id="firstName" placeholder="First Name" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="lastName" placeholder="Last Name" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" minlength="6" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" minlength="6" required>
+            </div>
+
+            <div class="birth-title">Date of Birth</div>
+
+            <div class="birth-fields">
+                <select id="birthDay" required>
+                    <option value="">Day</option>
+                </select>
+
+                <select id="birthMonth" required>
+                    <option value="">Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <select id="birthYear" required>
+                    <option value="">Year</option>
+                </select>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <button type="submit" class="register-button">Register</button>
+        </form>
+
+        <div class="back-login">
+            Already have an account? <a href="login.html">Login</a>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        // Crear los días
+        const daySelect = document.getElementById("birthDay");
+        for (let day = 1; day <= 31; day++) {
+            const option = document.createElement("option");
+            option.value = String(day).padStart(2, "0");
+            option.textContent = day;
+            daySelect.appendChild(option);
+        }
+
+        // Crear los años: desde el año actual hacia atrás
+        const yearSelect = document.getElementById("birthYear");
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear; year >= 1900; year--) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        }
+
+        // Validar el registro y redirigir
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const day = document.getElementById("birthDay").value;
+            const month = document.getElementById("birthMonth").value;
+            const year = document.getElementById("birthYear").value;
+            const message = document.getElementById("message");
+
+            // Validar contraseñas
+            if (password !== confirmPassword) {
+                message.textContent = "Passwords do not match.";
+                message.style.color = "#ffe0e0";
+                return;
+            }
+
+            // Verificar que la fecha exista realmente
+            const birthDate = new Date(`${year}-${month}-${day}T00:00:00`);
+            if (
+                !year ||
+                !month ||
+                !day ||
+                birthDate.getFullYear() != Number(year) ||
+                birthDate.getMonth() + 1 != Number(month) ||
+                birthDate.getDate() != Number(day)
+            ) {
+                message.textContent = "Please enter a valid date of birth.";
+                message.style.color = "#ffe0e0";
+                return;
+            }
+
+            if (birthDate > new Date()) {
+                message.textContent = "Date of birth cannot be in the future.";
+                message.style.color = "#ffe0e0";
+                return;
+            }
+
+            // Mostrar mensaje de bienvenida
+            message.textContent = "¡Bienvenido a Malboro Little Club!";
+            message.style.color = "#eaffef";
+            message.style.fontSize = "18px";
+
+            // Opcional: deshabilitar el botón para evitar clics repetidos durante la espera
+            const registerBtn = document.querySelector(".register-button");
+            if (registerBtn) {
+                registerBtn.disabled = true;
+                registerBtn.style.opacity = "0.7";
+                registerBtn.style.cursor = "not-allowed";
+            }
+
+            // Esperar 2000 ms (2 segundos) y redirigir a index.html
+            setTimeout(function() {
+                window.location.href = "index.html";
+            }, 2000);
+        });
+    </script>
+
+
+
+</body>
+</html>

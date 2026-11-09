@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Frame</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+<style>
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #222;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.video-container {
+    position: relative;
+    width: 70%;
+    max-width: 900px;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+.controls-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    height: 45px;
+}
+
+.video-container.show-controls .controls-bar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.control-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.4em;
+    cursor: pointer;
+    margin: 0 6px;
+    transition: color 0.2s;
+    display: flex;
+    padding: 2px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-container {
+    position: absolute;
+    bottom: 45px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.video-container.show-controls .progress-container {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- CAMBIOS APLICADOS AQUÍ --- */
+.progress-bar {
+    flex-grow: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    margin: 2px;
+    cursor: pointer;
+    outline: none;
+    --progress-value: 0%;
+    background: linear-gradient(to right, #4CAF50 var(--progress-value), #555 var(--progress-value));
+}
+
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    cursor: grab;
+}
+
+.progress-bar::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    cursor: grab;
+}
+
+.time-display {
+    color: #fff;
+    font-size: 0.9em;
+    white-space: nowrap;
+    margin-right: 15px;
+}
+
+.right-controls {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.volume-bar {
+    width: 80px;
+    -webkit-appearance: none;
+    appearance: none;height: 4px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 20px;
+    cursor: pointer;
+    outline: none;
+    /* Variables de color para la barra de volumen */
+    --volume-color: #4CAF50; /* Verde claro */
+    --background-color: #555; /* Gris claro */
+    --volume-value: 100%; /* Valor inicial */
+    background: linear-gradient(to right, var(--volume-color), var(--volume-color) var(--volume-value), var(--background-color) var(--volume-value), var(--background-color));
+}
+
+/* Estilo del pulgar (el botón) para Chrome/Safari */
+.volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--volume-color);
+    border-radius: 50%;
+    cursor: grab;
+}
+
+/* Estilo del pulgar (el botón) para Firefox */
+.volume-bar::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: var(--volume-color);
+    border-radius: 50%;
+    cursor: grab;
+}
+
+.seek-button {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.seek-button .seek-seconds {
+    font-size: 0.1em;
+    color: #fff;
+    margin-top: 1px;
+    display: block;
+}
+
+
+.icon-expand,
+.icon-compress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+
+.control-button i {
+    font-size: 1.2em;
+}
+
+.control-button .bx {
+    font-size: 1.5em;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#playPauseBtn {
+    width: 20px;
+    height: 20px;
+}
+
+#playPauseBtn .icon-play,
+#playPauseBtn .icon-pause {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    display: block;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.control-button i:not(.icon-play):not(.icon-pause) {
+    font-size: 1.2em;
+}
+
+#fullscreenBtn {
+    margin-left: 10px;
+}
+
+.control-button i {
+    margin: 0 5px;
+}
+
+#volumeBtn {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+}
+</style>
+
+
+    <div class="video-container">
+        <video id="myVideo" src="videos/Bunnies.mp4" playsinline></video>
+
+        <div class="progress-container">
+            <input type="range" id="progressBar" class="progress-bar" value="0" min="0" max="100" step="0.1">
+        </div>
+
+        <div class="controls-bar">
+
+            <button id="playPauseBtn" class="control-button">
+                <i class="fas fa-play icon-play"></i>
+                <i class="fas fa-pause icon-pause hidden"></i>
+            </button>
+
+            <button id="rewindBtn" class="control-button">
+                <img width="35" height="35"
+                src="https://img.icons8.com/ios/50/FFFFFF/replay-10.png"
+                alt="replay-10"/>
+            </button>
+
+            <button id="forwardBtn" class="control-button">
+                <img width="35" height="35"
+                src="https://img.icons8.com/ios/50/FFFFFF/forward-10.png"
+                alt="forward-10"/>
+            </button>
+
+            <button id="volumeBtn" class="control-button">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <input type="range" id="volumeBar" class="volume-bar" value="100" min="0" max="100">
+
+            <div class="right-controls">
+
+                <span id="timeDisplay" class="time-display">0:00 / 0:00</span>
+
+                <button id="fullscreenBtn" class="control-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="Crop-Free-Fill--Streamline-Sharp-Fill-Material" height="40" width="40" class="icon-expand">
+                        <path fill="#FFFFFFFF" d="M3 21V15.2h1.5V19.5h4.3v1.5H3Zm12.2 0v-1.5H19.5v-4.3h1.5V21H15.2ZM3 8.8V3h5.8v1.5H4.5v4.3H3Zm16.5 0V4.5h-4.3V3H21v5.8h-1.5Z" stroke-width="0.5"></path>
+                    </svg>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="Fullscreen-Exit-Fill--Streamline-Sharp-Fill-Material" height="40" width="40" class="icon-compress hidden">
+                        <path fill="#FFFFFFFF" d="M6.325 21v-3.325H3v-1.5h4.825V21h-1.5Zm9.85 0v-4.825H21v1.5h-3.325V21h-1.5ZM3 7.825v-1.5h3.325V3h1.5v4.825H3Zm13.175 0V3h1.5v3.325H21v1.5h-4.825Z" stroke-width="0.5"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('myVideo');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const iconPlay = playPauseBtn.querySelector('.icon-play');
+            const iconPause = playPauseBtn.querySelector('.icon-pause');
+            const rewindBtn = document.getElementById('rewindBtn');
+            const forwardBtn = document.getElementById('forwardBtn');
+            const progressBar = document.getElementById('progressBar');
+            const timeDisplay = document.getElementById('timeDisplay');
+            const volumeBtn = document.getElementById('volumeBtn');
+            const volumeBar = document.getElementById('volumeBar');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const videoContainer = document.querySelector('.video-container');
+            const iconExpand = fullscreenBtn.querySelector('.icon-expand');
+            const iconCompress = fullscreenBtn.querySelector('.icon-compress');
+
+            let controlsTimeout;
+
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = Math.floor(seconds % 60);
+                const formattedMinutes = String(minutes).padStart(0);
+                const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+                return `${formattedMinutes}:${formattedSeconds}`;
+            }
+
+            videoContainer.addEventListener('mousemove', () => {
+                videoContainer.classList.add('show-controls');
+                clearTimeout(controlsTimeout);
+                controlsTimeout = setTimeout(() => {
+                    if (!video.paused) {
+                        videoContainer.classList.remove('show-controls');
+                    }
+                }, 3000);
+            });
+
+            videoContainer.addEventListener('mouseleave', () => {
+                clearTimeout(controlsTimeout);
+                if (!video.paused) {
+                    videoContainer.classList.remove('show-controls');
+                }
+            });
+
+            video.addEventListener('pause', () => {
+                videoContainer.classList.add('show-controls');
+            });
+
+            video.addEventListener('play', () => {
+                clearTimeout(controlsTimeout);
+                controlsTimeout = setTimeout(() => {
+                    videoContainer.classList.remove('show-controls');
+                }, 3000);
+            });
+
+            playPauseBtn.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    iconPlay.classList.add('hidden');
+                    iconPause.classList.remove('hidden');
+                } else {
+                    video.pause();
+                    iconPlay.classList.remove('hidden');
+                    iconPause.classList.add('hidden');
+                }
+            });
+
+            rewindBtn.addEventListener('click', () => {
+                video.currentTime -= 10;
+            });
+
+            forwardBtn.addEventListener('click', () => {
+                video.currentTime += 10;
+            });
+
+            video.addEventListener('timeupdate', () => {
+                const progress = (video.currentTime / video.duration) * 100;
+                progressBar.value = progress;
+
+                progressBar.style.setProperty('--progress-value', `${progress}%`);
+
+                timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+            });
+
+            progressBar.addEventListener('input', () => {
+                const time = (progressBar.value / 100) * video.duration;
+                video.currentTime = time;
+            });
+
+            volumeBar.addEventListener('input', () => {
+                video.volume = volumeBar.value / 100;
+                // Esta es la línea que debes agregar o modificar
+                volumeBar.style.setProperty('--volume-value', `${volumeBar.value}%`);
+                updateVolumeIcon();
+            });
+
+            function updateVolumeIcon() {
+                if (video.volume === 0 || video.muted) {
+                    volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                } else if (video.volume < 0.5) {
+                    volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+                } else {
+                    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                }
+            }
+
+            volumeBtn.addEventListener('click', () => {
+                video.muted = !video.muted;
+                volumeBar.value = video.muted ? 0 : video.volume * 100;
+                updateVolumeIcon();
+            });
+
+            video.addEventListener('volumechange', () => {
+                updateVolumeIcon();
+                if (!video.muted) {
+                    volumeBar.value = video.volume * 100;
+                }
+            });
+
+            fullscreenBtn.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    if (videoContainer.requestFullscreen) {
+                        videoContainer.requestFullscreen();
+                    } else if (videoContainer.mozRequestFullScreen) {
+                        videoContainer.mozRequestFullScreen();
+                    } else if (videoContainer.webkitRequestFullscreen) {
+                        videoContainer.webkitRequestFullscreen();
+                    } else if (videoContainer.msRequestFullscreen) {
+                        videoContainer.msRequestFullscreen();
+                    }
+                    iconExpand.classList.add('hidden');
+                    iconCompress.classList.remove('hidden');
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                    iconExpand.classList.remove('hidden');
+                    iconCompress.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('fullscreenchange', () => {
+                if (!document.fullscreenElement) {
+                    iconExpand.classList.remove('hidden');
+                    iconCompress.classList.add('hidden');
+                }
+            });
+
+            video.addEventListener('ended', () => {
+                iconPlay.classList.remove('hidden');
+                iconPause.classList.add('hidden');
+                video.currentTime = 0;v
+                progressBar.value = 0;
+                videoContainer.classList.add('show-controls');
+            });
+
+            video.addEventListener('loadedmetadata', () => {
+                timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+            });
+
+            videoContainer.classList.add('show-controls');
+        });
+    </script>
+
+</body>
+</html>

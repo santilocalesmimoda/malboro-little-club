@@ -1,0 +1,2509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Configuración - Malboro Little Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/favicon2.png">
+</head>
+
+<body>
+
+<style>
+body { 
+    font-family: 'Outfit', sans-serif; 
+    background-color: #f4f4f4; 
+    margin: 0; 
+    padding: 20px; 
+}
+
+.container { 
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+            
+.header-title {
+    background-color: #d1e7dd; 
+    padding: 10px; 
+    text-align: center;
+    border: 2px solid #7ccd98; 
+    margin-bottom: 30px; 
+    font-weight: bold; 
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.main-layout { 
+    display: grid; 
+    grid-template-columns: 220px 1fr; /* <--- AQUÍ SE DEFINE TODO */
+    gap: 30px; 
+    align-items: flex-start; 
+}
+
+        /* Columna Izquierda */
+.menu-sidebar { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    width: 220px; 
+}
+
+.menu-btn {
+    background: white; 
+    border: 2px solid #2d5a8e; 
+    padding: 12px;
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-family: 'Outfit';
+    text-align: left;
+    transition: 0.3s;
+}
+
+.menu-btn:hover {
+    background-color: #eef2f7;
+}
+
+    /* Columna Derecha: Contenido */
+.content-area { 
+    flex-grow: 1; 
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+.edit-profile-btn {
+    width: 100%; 
+    padding: 15px; 
+    background: white; 
+    border: 2px solid #2d5a8e;
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+    cursor: pointer;
+}
+
+.form-section { display: none; } /* Oculto por defecto */
+.form-section.active { display: block; }
+
+.input-group { margin-bottom: 20px; }
+        
+.label-box {
+    border: 1px solid #7ccd98;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.profile-pic-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #7ccd98;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.photo-circle {
+    width: 100px;
+    height: 90px;
+    border-radius: 50%;
+    border: 1px solid #7ccd98;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Importante para que la foto sea circular */
+    position: relative;
+}
+
+input[type="text"], textarea, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #7ccd98;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: 'Outfit';
+}
+
+.birthday-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.birthday-header {
+    background-color: #a3cf9e;
+    padding: 5px 15px;
+    display: inline-block;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+/* Contenedor general para todos los items de checklist */
+.checkbox-item, .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    border: 1px solid #7ccd98;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    font-size: 14px;
+}
+
+/* Ocultar el check azul original en todas las secciones */
+.checkbox-item input, .checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* El nuevo cuadro verde grande */
+.checkmark {
+    height: 22px;
+    width: 22px;
+    background-color: white;
+    border: 2px solid #7ccd98;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+/* Color de fondo al estar seleccionado */
+.checkbox-item input:checked ~ .checkmark,
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #a3cf9e;
+}
+
+/* La tilde blanca */
+.checkmark:after {
+    content: "";
+    display: none;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+
+.checkbox-item input:checked ~ .checkmark:after,
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.btn-action-access {
+    background-color: #a3cf9e; /* Color verde suave combinando con la temática */
+    color: black;              /* Letras negras */
+    border: 1px solid #7ccd98;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Outfit', sans-serif;
+    transition: background 0.2s;
+}
+
+.btn-action-access:hover {
+    background-color: #8fb98a; /* Tono verde un poco más oscuro al pasar el cursor */
+}
+
+
+.action-btns {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action {
+    padding: 10px 20px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-weight: bold;
+    background: #e0e0e0;
+}
+
+.btn-action:hover { background: #ccc; }
+
+.back-btn { 
+    margin-bottom: 20px; 
+    cursor: pointer; 
+    display: inline-block; 
+    color: #2d5a8e; 
+    font-weight: bold; 
+}
+
+/* Contenedor de la opción */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    border: 1px solid #7ccd98; 
+    border-radius: 12px; /* Bordes redondeados como en tus inputs */
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+/* Ocultamos el checkbox azul original del sistema */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* El nuevo checkbox verde (personalizado) */
+.checkmark {
+    height: 24px;
+    width: 24px;
+    background-color: white;
+    border: 2px solid #7ccd98;
+    border-radius: 6px; /* Ajusta según la imagen que compartiste */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+/* Estado cuando está seleccionado */
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #a3cf9e; /* Color verde suave de tus cabeceras */
+    border-color: #7ccd98;
+}
+
+/* La flechita blanca interna */
+.checkmark:after {
+    content: "";
+    display: none;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+
+/* Mostrar la flechita solo cuando está checked */
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.option-text {
+    font-size: 16px;
+    color: #333;
+}
+
+.user-logo {
+    width: 90px;
+    height: 90px;
+}
+
+
+.item-notif {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 18px 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Contenedor texto */
+.notif-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Título */
+.notif-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+}
+
+/* Descripción */
+.notif-desc {
+    font-size: 16px;
+    color: #555;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.switch-yt {
+    position: relative;
+    display: inline-block;
+    width: 50px;   /* largo del track */
+    height: 26px;  /* alto del track */
+    flex-shrink: 0;
+}
+
+.switch-yt input { 
+    opacity: 0; 
+    width: 0; 
+    height: 0; 
+}
+
+/* Track */
+.slider-yt {
+    position: absolute;
+    inset: 0;
+    background-color: #ccc;
+    transition: .3s;
+    border-radius: 26px;
+}
+
+/* Thumb */
+.slider-yt:before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    top: 3px;   /* centra verticalmente */
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+/* Estado activo */
+input:checked + .slider-yt {
+    background-color: #28a745;
+}
+
+input:checked + .slider-yt:before {
+    transform: translateX(24px);
+}
+/* ------------------ ANUNCIOS ------------------ */
+.clickable {
+    cursor: pointer;
+}
+
+.anuncio-box {
+    display: none;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.anuncio-box input,
+.anuncio-box select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #7ccd98;
+    font-family: 'Outfit';
+}
+
+.contenido {
+    flex: 1;                     /* texto ocupa todo */
+}
+
+.titulo {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.descripcion {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+}
+
+.arrow {
+    width: 24px;                 /* columna fija */
+    text-align: right;
+    font-size: 16px;             /* tamaño controlado */
+    color: #777;
+    flex-shrink: 0;              /* no se mueve */
+}
+
+.fila.abierto .arrow {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+}
+
+
+.config-panel {
+    width: 200%;
+}
+
+.config-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.config-title {
+    border: 2px solid #8bc9a4;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+#centroPrivacidad .config-group {
+    border: 2px solid #cdebd9;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.config-subtitle {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.config-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    line-height: 1.6;
+}
+
+.select {
+    border: 1px solid #8bc9a4;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+.toggle {
+    width: 40px;
+    height: 20px;
+}
+
+.btn-secondary {
+    border: 1px solid #8bc9a4;
+    padding: 6px 14px;
+    border-radius: 8px;
+}
+
+.btn-danger {
+    border: 1px solid #e57373;
+    color: #e57373;
+    padding: 6px 14px;
+    border-radius: 8px;
+}
+
+
+.panel {
+    background: #ffffff;
+    border: 2px solid #7fbf9a;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 700px;
+}
+
+.panel h2 {
+    border: 2px solid #7fbf9a;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.option {
+    margin-bottom: 18px;
+}
+
+.option label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.option input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.buttons button {
+    margin-right: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #7fbf9a;
+    background: #e6f3ec;
+    cursor: pointer;
+}
+
+.option select {
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.reset button {
+    background: #f3dede;
+    border: 1px solid #c88;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.high-contrast {
+    background: black !important;
+    color: white !important;
+}
+
+.reduce-animations * {
+    animation: none !important;
+    transition: none !important;
+}
+
+.dyslexia-font {
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+}
+
+.keyboard-focus :focus {
+    outline: 3px solid #2d5a8e;
+}
+
+
+/* ------------------ CAMBIAR EN PANTALLA ------------------ */
+
+.palette-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.color-circle {
+    width: 2cm;
+    height: 2cm;
+    border-radius: 50%;
+    border: 2px solid #7ccd98;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.color-circle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+
+
+.panel-configuracion {
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    padding: 30px;
+    width: 70%;
+    margin-left: 40px;
+    position: relative;
+}
+
+.titulo-panel {
+    border: 2px solid #a8c5a2;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+/* 3. Asegurate de que el contenedor permita que la foto se posicione adentro */
+.opciones-privacidad {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px;
+    position: relative !important;
+    padding-bottom: 20px;
+}
+
+/* 2. Achicamos los botones por dentro para que ocupen menos lugar */
+.item-privacidad {
+    margin: 0 !important; /* Eliminamos cualquier margen externo previo */
+    padding: 6px 12px !important; /* <-- Esto controla el "grosor" del botón */
+    border: 1px solid #b7d3b1;
+    border-radius: 8px;
+    background-color: transparent;
+    display: block !important;
+    width: auto !important;
+}
+
+.item-privacidad:hover {
+    background-color: #e3f0df;
+}
+
+/* 4. Ubicamos la imagen bien al fondo y a la izquierda */
+.imagen-privacidad {
+    position: absolute !important;
+    bottom: 5px !important;
+    left: 5px !important;
+    width: 130px !important;
+    z-index: 10;
+}
+
+/* Desplazamos solo el contenido del Centro de Privacidad */
+#centroPrivacidad .config-group {
+    margin-left: 4px; /* Este espacio es para que la foto de 130px entre cómoda */
+    transition: all 0.3s ease;
+}
+
+/* Ajuste opcional para el título si también querés que se corra */
+#centroPrivacidad .label-box {
+    margin-left: 0; /* Dejalo en 0 si querés el título ancho, o 150px si lo querés alineado al texto */
+}
+
+/* 3. Forzamos el desplazamiento de los ítems 5 al 10 */
+.item-desplazado {
+    margin-left: 150px !important; /* Ajustá este número si la foto es más ancha */
+    display: block !important;
+}
+
+.imagen-privacidad img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+
+/* Contenedor principal de las tarjetas */
+.subscription-container {
+    display: flex;
+    flex-direction: row; /* Alineación horizontal */
+    justify-content: space-between; /* Centra las columnas */
+    gap: 15px; /* Espacio entre cada tarjeta */
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Ajuste para que las tarjetas no sean demasiado anchas */
+.sub-card {
+    flex: 1; /* Hace que todas midan lo mismo */
+    background-color: #006400; /* El verde de tus columnas */
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.sub-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #7ccd98;
+    padding-bottom: 5px;
+}
+
+.sub-card p { margin: 10px 0; font-size: 0.9em; }
+
+.sub-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.intro-text {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 18px;
+    color: #333;
+}
+
+
+.idioma-bg {
+    position: relative;
+    background-image: url('images/mapa.png');
+    background-size: cover;
+    background-position: center 70%;
+    background-repeat: no-repeat;
+
+    min-height: 350px; /* 🔥 clave: hace que el fondo baje */
+    display: flex;
+    align-items: center; /* 🔥 centra verticalmente */
+    justify-content: center; /* opcional: centra horizontal */
+}
+
+
+
+/* Capa superior donde están las opciones */
+.idioma-overlay {
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,0.85); /* leve transparencia elegante */
+    padding: 20px 30px;
+    border-radius: 12px;
+    min-height: 20vh; /* ocupa la mitad de la pantalla */
+    background-position: center 60%;
+}
+
+/* Asegura que el desplegable esté SIEMPRE por encima */
+#idioma select {
+    position: relative;
+    z-index: 3;
+}
+
+</style>
+
+
+    <div class="container">
+        <div class="back-btn" onclick="history.back()">← Volver al Perfil</div>
+        <div class="header-title">CONFIGURACIÓN</div>
+
+        <div class="main-layout">
+
+        <!-- MENU -->
+            <div class="menu-sidebar">
+                <button class="menu-btn" onclick="showSection('cuenta')">Cuenta</button>
+                <button class="menu-btn" onclick="showSection('privacidad')">Privacidad y Datos</button>
+                <button class="menu-btn" onclick="showSection('notificaciones')">Notificaciones</button>
+                <button class="menu-btn" onclick="showSection('anuncios')">Anuncios</button>
+                <button class="menu-btn" onclick="showSection('seguridad')">Seguridad</button>
+                <button class="menu-btn" onclick="showSection('accessibilidad')">Accesibilidad</button>
+                <button class="menu-btn" onclick="showSection('pantalla')">Cambiar Color de Pantalla</button>
+                <button class="menu-btn" onclick="showSection('suscripciones')">Suscripciones</button>
+                <button class="menu-btn" onclick="showSection('idioma')">Idioma</button>
+                <button class="menu-btn" onclick="showSection('centroPrivacidad')">Centro de Privacidad</button>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="content-area" id="display-panel">
+
+                <!-- CUENTA -->
+                <div id="cuenta" class="form-section">
+                    <div class="label-box">CUENTA</div>
+
+                    <div class="input-group">
+                        <div class="profile-pic-row">
+                            <label class="photo-circle" for="upload-photo" id="photo-label">
+                                <img src="images/perfil2.png" alt="Logo de Usuario" class="user-logo" id="logo-circulo">
+                            </label>
+                            <div style="flex-grow: 1;">
+                                <input type="text" placeholder="Nombre apellido"  style="margin-bottom: 5px;">
+                                <input type="text" placeholder="Nombre de usuario">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="birthday-header">Cuándo es tu cumpleaños</div>
+                        <div class="birthday-row">
+                            <select id="dia" name="dia">
+                                <option value="" disabled selected>Día</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+
+                            <select id="mes" name="mes">
+                                <option value="" disabled selected>Mes</option>
+                                <option value="enero">Enero</option>
+                                <option value="febrero">Febrero</option>
+                                <option value="marzo">Marzo</option>
+                                <option value="abril">Abril</option>
+                                <option value="mayo">Mayo</option>
+                                <option value="junio">Junio</option>
+                                <option value="julio">Julio</option>
+                                <option value="agosto">Agosto</option>
+                                <option value="septiembre">Septiembre</option>
+                                <option value="octubre">Octubre</option>
+                                <option value="noviembre">Noviembre</option>
+                                <option value="diciembre">Diciembre</option>
+                            </select>
+
+                            <select id="anio" name="anio">
+                                <option value="" disabled selected>Año</option>
+                                <option value="2011">2011</option>
+                                <option value="2010">2010</option>
+                                <option value="2009">2009</option>
+                                <option value="2008">2008</option>
+                                <option value="2007">2007</option>
+                                <option value="2006">2006</option>
+                                <option value="2005">2005</option>
+                                <option value="2004">2004</option>
+                                <option value="2003">2003</option>
+                                <option value="2002">2002</option>
+                                <option value="2001">2001</option>
+                                <option value="2000">2000</option>
+                                <option value="1999">1999</option>
+                                <option value="1998">1998</option>
+                                <option value="1997">1997</option>
+                                <option value="1996">1996</option>
+                                <option value="1995">1995</option>
+                                <option value="1994">1994</option>
+                                <option value="1993">1993</option>
+                                <option value="1992">1992</option>
+                                <option value="1991">1991</option>
+                                <option value="1990">1990</option>
+                                <option value="1989">1989</option>
+                                <option value="1988">1988</option>
+                                <option value="1987">1987</option>
+                                <option value="1986">1986</option>
+                                <option value="1985">1985</option>
+                                <option value="1984">1984</option>
+                                <option value="1983">1983</option>
+                                <option value="1982">1982</option>
+                                <option value="1981">1981</option>
+                                <option value="1980">1980</option>
+                                <option value="1979">1979</option>
+                                <option value="1978">1978</option>
+                                <option value="1977">1977</option>
+                                <option value="1976">1976</option>
+                                <option value="1975">1975</option>
+                                <option value="1974">1974</option>
+                                <option value="1973">1973</option>
+                                <option value="1972">1972</option>
+                                <option value="1971">1971</option>
+                                <option value="1970">1970</option>
+                                <option value="1969">1969</option>
+                                <option value="1968">1968</option>
+                                <option value="1967">1967</option>
+                                <option value="1966">1966</option>
+                                <option value="1965">1965</option>
+                                <option value="1964">1964</option>
+                                <option value="1963">1963</option>
+                                <option value="1962">1962</option>
+                                <option value="1961">1961</option>
+                                <option value="1960">1960</option>
+                                <option value="1959">1959</option>
+                                <option value="1958">1958</option>
+                                <option value="1957">1957</option>
+                                <option value="1956">1956</option>
+                                <option value="1955">1955</option>
+                                <option value="1954">1954</option>
+                                <option value="1953">1953</option>
+                                <option value="1952">1952</option>
+                                <option value="1951">1951</option>
+                                <option value="1950">1950</option>
+                                <option value="1949">1949</option>
+                                <option value="1948">1948</option>
+                                <option value="1947">1947</option>
+                                <option value="1946">1946</option>
+                                <option value="1945">1945</option>
+                                <option value="1944">1944</option>
+                                <option value="1943">1943</option>
+                                <option value="1942">1942</option>
+                                <option value="1941">1941</option>
+                                <option value="1940">1940</option>
+                                <option value="1939">1939</option>
+                                <option value="1938">1938</option>
+                                <option value="1937">1937</option>
+                                <option value="1936">1936</option>
+                                <option value="1935">1935</option>
+                                <option value="1934">1934</option>
+                                <option value="1933">1933</option>
+                                <option value="1932">1932</option>
+                                <option value="1931">1931</option>
+                                <option value="1930">1930</option>
+                                <option value="1929">1929</option>
+                                <option value="1928">1928</option>
+                                <option value="1927">1927</option>
+                                <option value="1926">1926</option>
+                                <option value="1925">1925</option>
+                                <option value="1924">1924</option>
+                                <option value="1923">1923</option>
+                                <option value="1922">1922</option>
+                                <option value="1921">1921</option>
+                                <option value="1920">1920</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <p>Descripción</p>
+                        <textarea rows="4" placeholder="Escribí tu mensaje"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <p>Género</p>
+                        <select>
+                            <option value="">Seleccionar</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <div class="option-text">Mostrar sugerencias de contenido personalizadas según mis gustos y actividad.</div>
+                        </label>
+    
+                        <label class="checkbox-item">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <div class="option-text">Habilitar la reproducción automática y alta calidad en todos los videos.</div>
+                        </label>
+    
+                        <label class="checkbox-item">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <div class="option-text">Permitir que otros miembros me envíen mensajes y comenten mis videos compartidos.</div>
+                        </label>
+    
+                        <label class="checkbox-item">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <div class="option-text">Mostrar mi estado de membresía y fecha de unión públicamente en mi perfil.</div>
+                        </label>
+
+                        <div class="action-btns">
+                            <button class="btn-action" style="background-color: #a3cf9e;" onclick="showSection('cuenta')">CANCELAR</button> 
+                            <button class="btn-action" style="background-color: #a3cf9e;" onclick="alert('Configuración guardada')">GUARDAR</button> 
+                        </div>
+                    </div>
+
+
+                    <div class="action-btns">
+                        <button class="btn-action" style="background-color: #a3cf9e;">Cerrar Sesión</button>
+                        <button class="btn-action" style="background-color: #a3cf9e;">Eliminar Mi Cuenta</button>
+                    </div>
+                </div>
+
+                <!-- PRIVACIDAD -->
+                <div id="privacidad" class="form-section">
+                    <div class="label-box">PRIVACIDAD Y DATOS</div>
+
+                    <p>
+                    Administra la forma en que Malboro Little Club utiliza tu información para 
+                    personalizar tu experiencia publicitaria. En esta sección, puedes controlar 
+                    cómo se emplean tus datos de navegación y actividad para mejorar la 
+                    relevancia de los anuncios que visualizas, garantizando que el contenido 
+                    promocional sea útil y esté alineado con tus intereses.
+                    </p>
+
+                    <div class="birthday-header" style="background-color: #a3cf9e; margin-bottom: 15px;">Personalización de anuncios</div> <div class="checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            <div class="option-text">
+                            Usar información de los sitios que visitas: permite que Malboro Little Club use los datos de los sitios que visitas para mejorar los anuncios. </div>
+                        </label>
+
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <div class="option-text">
+                            Datos de colaboradores estratégicos: Integra información proporcionada por nuestros socios para refinar la calidad y precisión de la publicidad que recibes dentro del Club. </div>
+                        </label>
+
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <div class="option-text">
+                            Presencia de nuestra comunidad en la red: Utiliza tu interacción aquí para optimizar la forma en que Malboro Little Club se promociona en otros sitios o aplicaciones externas. </div>
+                        </label>
+
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <div class="option-text">
+                            Análisis y rendimiento: Genera informes estadísticos basados en tu actividad para medir la efectividad de las campañas y mejorar la experiencia publicitaria general. </div>
+                        </label>
+
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <div class="option-text">
+                            Intercambio con aliados comerciales: Permite la comunicación de preferencias específicas con anunciantes terceros para que puedan ofrecerte productos y servicios más útiles dentro de nuestra interfaz. </div>
+                        </label>
+                    </div>
+
+                    <div class="action-btns">
+                        <button class="btn-action" style="background-color: #a3cf9e;" onclick="showSection('cuenta')">CANCELAR</button> 
+                        <button class="btn-action" style="background-color: #a3cf9e;" onclick="alert('Configuración guardada')">GUARDAR</button> 
+                    </div>
+                </div>
+
+                <!-- NOTIFICACIONES -->
+                <div id="notificaciones" class="form-section">
+                    <div class="label-box">NOTIFICACIONES</div>
+
+                    <p>
+                    Administra cómo y cuándo quieres recibir actualizaciones sobre tu 
+                    actividad en Malboro Little Club. Configura tus alertas para mantenerte 
+                    siempre al tanto de tus seguidores, las nuevas interacciones en tus videos y 
+                    el contenido que más te interesa en la comunidad.
+                    </p>
+
+                        <div class="item-notif">
+                            <label class="switch-yt">
+                                <input type="checkbox">
+                                <span class="slider-yt"></span>
+                            </label>
+
+                            <div class="notif-text">
+                                <span class="notif-title">Actividad</span>
+                                <p class="notif-desc">
+                                    Recibir notificaciones sobre actividad relevante en la plataforma que pueda interesarme.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="item-notif">
+                            <label class="switch-yt">
+                                <input type="checkbox">
+                                <span class="slider-yt"></span>
+                            </label>
+
+                            <div class="notif-text">
+                                <span class="notif-title">Seguidores</span>
+                                <p class="notif-desc">
+                                    Notificarme cuando nuevos usuarios comiencen a seguirme o interactúen con mi perfil.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="item-notif">
+                            <label class="switch-yt">
+                                <input type="checkbox">
+                                <span class="slider-yt"></span>
+                            </label>
+
+                            <div class="notif-text">
+                                <span class="notif-title">Participación en comunidades o contenedores</span>
+                                <p class="notif-desc">
+                                    Avisarme cuando haya nueva actividad en los espacios o categorías donde participo.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="item-notif">
+                            <label class="switch-yt">
+                                <input type="checkbox">
+                                <span class="slider-yt"></span>
+                            </label>
+
+                            <div class="notif-text">
+                                <span class="notif-title">Like y Reblogueado</span>
+                                <p class="notif-desc">
+                                    Notificarme cuando alguien dé “me gusta y reblogueado” o reaccione a mis videos o publicaciones.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="item-notif">
+                            <label class="switch-yt">
+                                <input type="checkbox">
+                                <span class="slider-yt"></span>
+                            </label>
+
+                            <div class="notif-text">
+                                <span class="notif-title">Contenido</span>
+                                <p class="notif-desc">
+                                   Notificarme cuando se publique nuevo contenido en categorías que sigo.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="item-notif">
+                            <label class="switch-yt">
+                                <input type="checkbox">
+                                <span class="slider-yt"></span>
+                            </label>
+
+                            <div class="notif-text">
+                                <span class="notif-title">Menciones</span>
+                                <p class="notif-desc">
+                                    Notificar cuando otros usuarios mencionen contactarse
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="item-notif">
+                            <label class="switch-yt">
+                                <input type="checkbox">
+                                <span class="slider-yt"></span>
+                            </label>
+
+                            <div class="notif-text">
+                                <span class="notif-title">Recomendados</span>
+                                <p class="notif-desc">
+                                   Recibir sugerencias de videos basadas en mis intereses y visualizaciones.
+                                </p>
+                            </div>      
+                        </div>
+
+                        <div class="item-notif">
+                            <label class="switch-yt">
+                                <input type="checkbox">
+                                <span class="slider-yt"></span>
+                            </label>
+
+                            <div class="notif-text">
+                                <span class="notif-title">Visualizaciones de mi perfil o contenido</span>
+                                <p class="notif-desc">
+                                   Avisarme cuando otros usuarios visiten mi perfil o vean mis videos.
+                                </p>
+                            </div>
+                        </div>
+
+
+                    <div class="action-btns">
+                        <button class="btn-action" style="background-color: #a3cf9e;" onclick="navegar('cuenta')">Guardar Cambios</button>
+                    </div>
+                </div>
+
+                <!-- ANUNCIOS -->
+                <div id="anuncios" class="form-section">
+                    <div class="label-box">ANUNCIOS</div>
+
+                    <p>Personaliza tu experiencia publicitaria en Malboro Little Club. Aquí puedes 
+                       decidir qué temas te interesan, gestionar a los anunciantes que ves y 
+                       controlar cómo utilizamos tus datos para que la publicidad sea relevante 
+                       para ti y respete tu privacidad.
+                    </p>
+
+                    <div class="item-notif clickable" onclick="toggleBox('temas')">
+                        <div class="contenido">
+                            <div class="titulo">🎯 Gestionar los temas de los anuncios</div>
+                            <div class="descripcion">
+                                Cambia los factores usados para personalizar los anuncios que ves.
+                            </div>
+                        </div>
+                        <span class="arrow">⌄</span>
+                    </div>
+                    <div id="temas" class="anuncio-box">
+                        <input type="text" placeholder="Buscar temas…">
+                    </div>
+
+                    <div class="item-notif clickable" onclick="toggleBox('silenciar')">
+                        <div class="contenido">
+                            <div class="titulo">🔑 Silenciar anunciantes</div>
+                            <div class="descripcion">
+                                Silencia los anuncios de anunciantes concretos que te hayan mostrado anuncios recientemente.
+                            </div>
+                        </div>
+                        <span class="arrow">⌄</span>
+                    </div>
+                    <div id="silenciar" class="anuncio-box">
+                        <p>No tienes anunciantes silenciados recientemente.</p>
+                    </div>
+
+                    <div class="item-notif clickable" onclick="toggleBox('datos')">
+                        <div class="contenido">
+                            <div class="titulo">📜 Editar datos personales</div>
+                            <div class="descripcion">
+                                Selecciona el género que se puede usar para personalizar los anuncios que ves.
+                            </div>
+                        </div>
+                        <span class="arrow">⌄</span>
+                    </div>
+                    <div id="datos" class="anuncio-box">
+                        <select>
+                            <option>Prefiero no decirlo</option>
+                            <option>Masculino</option>
+                            <option>Femenino</option>
+                        </select>
+                    </div>
+
+                    <div class="item-notif clickable" onclick="toggleBox('admin')">
+                         <div class="contenido">
+                            <div class="titulo">🔒 Administra tus datos</div>
+                            <div class="descripcion">
+                                Malboro Little Club puede mostrarte anuncios en otros sitios web y aplicaciones.
+                            </div>
+                        </div>
+                        <span class="arrow">⌄</span>
+                    </div>
+                    <div id="admin" class="anuncio-box">
+                        <p>Todas tus elecciones de privacidad se siguen aplicando.</p>
+                    </div>
+                </div>
+
+                <div id="seguridad" class="form-section">
+                    <div class="label-box">SEGURIDAD</div>
+
+                    <p>
+                    Protege tu cuenta y personaliza tu privacidad en Malboro Little Club. En 
+                    esta sección puedes gestionar tus credenciales de acceso, decidir quién 
+                    puede interactuar con tu perfil y activar las herramientas de protección de 
+                    menores y filtros de contenido para garantizar que tu experiencia en el 
+                    Club sea siempre segura.
+                    </p>
+
+                    <div class="config-card">
+                        <!-- 1. Seguridad de la cuenta -->
+                        <div class="config-group">
+                            <h3 class="config-subtitle">Seguridad de la cuenta</h3>
+
+                            <div class="config-row">
+                                <span>Cambiar contraseña</span>
+                                <button class="btn-secondary">Cambiar</button>
+                            </div>
+
+                            <div class="config-row">
+                                <span>Verificación en dos pasos</span>
+                                <input type="checkbox" class="toggle">
+                            </div>
+
+                            <div class="config-row">
+                                <span>Cerrar sesión en todos los dispositivos</span>
+                                <button class="btn-danger">Cerrar</button>
+                            </div>
+                        </div>
+
+                        <!-- 2. Privacidad del perfil -->
+                        <div class="config-group">
+                            <h3 class="config-subtitle">Privacidad del perfil</h3>
+
+                            <div class="config-row">
+                                <span>Quién puede ver mi perfil</span>
+                                <select class="select">
+                                    <option>Público</option>
+                                    <option>Solo usuarios</option>
+                                    <option>Privado</option>
+                                </select>
+                            </div>
+
+                            <div class="config-row">
+                                <span>Quién puede enviarme mensajes</span>
+                                <select class="select">
+                                    <option>Todos</option>
+                                    <option>Solo seguidores</option>
+                                    <option>Nadie</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 3. Control de interacciones -->
+                        <div class="config-group">
+                            <h3 class="config-subtitle">Interacciones</h3>
+
+                            <div class="config-row">
+                                <span>Filtrar comentarios ofensivos</span>
+                                <input type="checkbox" class="toggle">
+                            </div>
+
+                            <div class="config-row">
+                                <span>Usuarios bloqueados</span>
+                                <button class="btn-secondary">Ver lista</button>
+                            </div>
+                        </div>
+
+                        <!-- 4. Protección de menores -->
+                        <div class="config-group">
+                            <h3 class="config-subtitle">Protección de menores</h3>
+
+                            <div class="config-row">
+                                <span>Modo menor de edad</span>
+                                <input type="checkbox" class="toggle">
+                            </div>
+
+                            <div class="config-row">
+                                <span>Contenido sensible</span>
+                                <select class="select">
+                                    <option>Restringido</option>
+                                    <option>Advertencias</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 5. Seguridad del contenido -->
+                        <div class="config-group">
+                            <h3 class="config-subtitle">Contenido</h3>
+
+                            <div class="config-row">
+                                <span>Permitir descarga de mis videos</span>
+                                <input type="checkbox" class="toggle">
+                            </div>
+
+                            <div class="config-row">
+                                <span>Denunciar uso indebido</span>
+                                <button class="btn-secondary">Denunciar</button>
+                            </div>
+                        </div>
+
+                        <!-- 6. Alertas -->
+                        <div class="config-group">
+                            <h3 class="config-subtitle">Alertas de seguridad</h3>
+
+                            <div class="config-row">
+                                <span>Nuevo inicio de sesión</span>
+                                <input type="checkbox" class="toggle" checked>
+                            </div>
+
+                            <div class="config-row">
+                                <span>Actividad sospechosa</span>
+                                <input type="checkbox" class="toggle" checked>
+                            </div>
+                        </div>
+
+                        <!-- 7. Ayuda -->
+                        <div class="config-group">
+                            <h3 class="config-subtitle">Ayuda</h3>
+
+                            <div class="config-row">
+                                <span>Consejos de seguridad</span>
+                                <button class="btn-secondary">Ver</button>
+                            </div>
+
+                            <div class="config-row">
+                                <span>Contactar soporte</span>
+                                <button class="btn-secondary">Contactar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div id="accessibilidad" class="form-section">
+                    <div class="label-box">ACCESIBILIDAD</div>
+                    <p style="margin-bottom: 25px; line-height: 1.6;">
+                        En Malboro Little Club, queremos que todos disfruten de nuestros videos sin barreras. 
+                        Personaliza tu experiencia visual y de navegación ajustando la fuente, el contraste 
+                        y las herramientas de lectura según tus necesidades.
+                    </p>
+                    <div class="input-group">
+                        <div class="label-box">Tamaño de texto</div>
+                        <button onclick="setFontSize(16)">Normal</button>
+                        <button onclick="setFontSize(18)">Grande</button>
+                        <button onclick="setFontSize(20)">Muy grande</button>
+                    </div>
+                    <div class="input-group">
+                        <label>
+                            <input type="checkbox" onchange="toggleContrast(this)">
+                            Modo alto contraste
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <label>
+                            <input type="checkbox" onchange="toggleAnimations(this)">
+                            Reducir animaciones
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <label>
+                            <input type="checkbox" onchange="toggleDyslexia(this)">
+                            Fuente amigable
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <label>
+                            <input type="checkbox" onchange="toggleKeyboardFocus(this)">
+                            Foco visible por teclado
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <button onclick="resetAccessibility()">Restablecer accesibilidad</button>
+                    </div>
+
+                    <div class="action-btns">
+                        <button class="btn-action" style="background-color: #a3cf9e;" onclick="showSection('cuenta')">CANCELAR</button> 
+                        <button class="btn-action" style="background-color: #a3cf9e;" onclick="alert('Configuración guardada')">GUARDAR</button> 
+                    </div>
+                </div>
+
+
+
+                <!-- CAMBIAR EN PANTALLA -->
+                <div id="pantalla" class="form-section">
+
+                    <div class="label-box">Cambiar Color de Pantalla</div>
+
+                    <p style="margin-bottom: 20px;">
+                        Podés cambiar el color del fondo de las configuraciones, haciendo click en el círculo de tu preferencia
+                    </p>
+
+                     <!-- ROJOS -->
+                    <div class="color-category-title">Gama de los Rojos</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#ff2400')"><div class="color-circle" style="background:#ff2400"></div><span>Escarlata</span></div>
+                            <div class="color-item" onclick="setBg('#8a0303')"><div class="color-circle" style="background:#8a0303"></div><span>Rojo sangre</span></div>
+                            <div class="color-item" onclick="setBg('#dc143c')"><div class="color-circle" style="background:#dc143c"></div><span>Rojo carmesí</span></div>
+                            <div class="color-item" onclick="setBg('#722f37')"><div class="color-circle" style="background:#722f37"></div><span>Rojo vino</span></div>
+                            <div class="color-item" onclick="setBg('#9B111E')"><div class="color-circle" style="background:#9B111E"></div><span>Rubí</span></div>
+                            <div class="color-item" onclick="setBg('#CE2029')"><div class="color-circle" style="background:#CE2029"></div><span>fuego</span></div>
+                            <div class="color-item" onclick="setBg('#A3191E')"><div class="color-circle" style="background:#A3191E"></div><span>Granada</span></div>
+                            <div class="color-item" onclick="setBg('#E32620')"><div class="color-circle" style="background:#E32620"></div><span>Lacre</span></div>
+                            <div class="color-item" onclick="setBg('#C83443')"><div class="color-circle" style="background:#C83443"></div><span>Pasión</span></div>
+                            <div class="color-item" onclick="setBg('#A9392D')"><div class="color-circle" style="background:#A9392D"></div><span>Fresa madura</span></div>
+                            <div class="color-item" onclick="setBg('#C5221D')"><div class="color-circle" style="background:#C5221D"></div><span>Veneciano</span></div>
+                        </div>
+
+
+                    <!-- AMARILLOS -->
+                    <div class="color-category-title">Gama de los Amarillos</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#dfff00')"><div class="color-circle" style="background:#dfff00"></div><span>Limón</span></div>
+                            <div class="color-item" onclick="setBg('#ffd700')"><div class="color-circle" style="background:#ffd700"></div><span>Dorado</span></div>
+                            <div class="color-item" onclick="setBg('#FBEC5D')"><div class="color-circle" style="background:#FBEC5D"></div><span>Maíz</span></div>
+                            <div class="color-item" onclick="setBg('#ffdab9')"><div class="color-circle" style="background:#ffdab9"></div><span>Melocotón</span></div>
+                            <div class="color-item" onclick="setBg('#FF9E58')"><div class="color-circle" style="background:#FF9E58"></div><span>Papaya</span></div>
+                            <div class="color-item" onclick="setBg('#E69C33')"><div class="color-circle" style="background:#E69C33"></div><span>Mango</span></div>
+                            <div class="color-item" onclick="setBg('#F1C40F')"><div class="color-circle" style="background:#F1C40F"></div><span>Dorado</span></div>
+                            <div class="color-item" onclick="setBg('#FFEF00')"><div class="color-circle" style="background:#FFEF00"></div><span>Canario</span></div>
+                            <div class="color-item" onclick="setBg('#E9DD4E')"><div class="color-circle" style="background:#E9DD4E"></div><span>Piña</span></div>
+                            <div class="color-item" onclick="setBg('#EBD26A')"><div class="color-circle" style="background:#EBD26A"></div><span>Mostaza dijon</span></div>
+                            <div class="color-item" onclick="setBg('#DED466')"><div class="color-circle" style="background:#DED466"></div><span>Amarillo pastel</span></div>
+                            <div class="color-item" onclick="setBg('#EDCC65')"><div class="color-circle" style="background:#EDCC65"></div><span>Vainilla dorada</span></div>
+                        </div>
+
+
+                    <!-- NARANJA -->
+                    <div class="color-category-title">Gama de los Naranjas</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#F57C1F')"><div class="color-circle" style="background:#F57C1F"></div><span>Naranja</span></div>
+                            <div class="color-item" onclick="setBg('#ff8f00')"><div class="color-circle" style="background:#ff8f00"></div><span>Mandarina</span></div>
+                            <div class="color-item" onclick="setBg('#E36E19')"><div class="color-circle" style="background:#E36E19"></div><span>Fuego lento</span></div>
+                            <div class="color-item" onclick="setBg('#EA7F4A')"><div class="color-circle" style="background:#EA7F4A"></div><span>Naranja neón</span></div>
+                            <div class="color-item" onclick="setBg('#E37239')"><div class="color-circle" style="background:#E37239"></div><span>Ámbar solar</span></div>
+                            <div class="color-item" onclick="setBg('#EDA744')"><div class="color-circle" style="background:#EDA744"></div><span>Fulvo</span></div>
+                            <div class="color-item" onclick="setBg('#DA9F4B')"><div class="color-circle" style="background:#DA9F4B"></div><span>Bronce cálido</span></div>
+                            <div class="color-item" onclick="setBg('#F28638')"><div class="color-circle" style="background:#F28638"></div><span>Damasco</span></div>
+                        </div>
+
+
+                    <!-- MARRONES -->
+                    <div class="color-category-title">Gama de los Marrones</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#6f4e37')"><div class="color-circle" style="background:#6f4e37"></div><span>Café</span></div>
+                            <div class="color-item" onclick="setBg('#964b00')"><div class="color-circle" style="background:#964b00"></div><span>Castaño</span></div>
+                            <div class="color-item" onclick="setBg('#704214')"><div class="color-circle" style="background:#704214"></div><span>Sepia</span></div>
+                            <div class="color-item" onclick="setBg('#c88a53')"><div class="color-circle" style="background:#c88a53"></div><span>Dulce de leche</span></div>
+                            <div class="color-item" onclick="setBg('#6F3421')"><div class="color-circle" style="background:#6F3421"></div><span>Caoba</span></div>
+                            <div class="color-item" onclick="setBg('#C19A6B')"><div class="color-circle" style="background:#C19A6B"></div><span>Camel</span></div>
+                            <div class="color-item" onclick="setBg('#7C5B2F')"><div class="color-circle" style="background:#7C5B2F"></div><span>Espresso</span></div>
+                            <div class="color-item" onclick="setBg('#945E3A')"><div class="color-circle" style="background:#945E3A"></div><span>Roble</span></div>
+                            <div class="color-item" onclick="setBg('#7D523F')"><div class="color-circle" style="background:#7D523F"></div><span>Nogal</span></div>
+                            <div class="color-item" onclick="setBg('#B5651D')"><div class="color-circle" style="background:#B5651D"></div><span>Tostado</span></div>
+                        </div>
+
+
+                    <!-- VERDES -->
+                    <div class="color-category-title">Gama de los Verdes</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#50c878')"><div class="color-circle" style="background:#50c878"></div><span>Esmeralda</span></div>
+                            <div class="color-item" onclick="setBg('#228b22')"><div class="color-circle" style="background:#228b22"></div><span>Verde bosque</span></div>
+                            <div class="color-item" onclick="setBg('#7fff00')"><div class="color-circle" style="background:#7fff00"></div><span>Chartreuse</span></div>
+                            <div class="color-item" onclick="setBg('#00a86b')"><div class="color-circle" style="background:#00a86b"></div><span>Jade</span></div>
+                            <div class="color-item" onclick="setBg('#39ff14')"><div class="color-circle" style="background:#39ff14"></div><span>Verde neón</span></div>
+                            <div class="color-item" onclick="setBg('#8DB600')"><div class="color-circle" style="background:#8DB600"></div><span>Lima</span></div>
+                            <div class="color-item" onclick="setBg('#98D8A0')"><div class="color-circle" style="background:#98D8A0"></div><span>Menta</span></div>
+                            <div class="color-item" onclick="setBg('#4CA64C')"><div class="color-circle" style="background:#4CA64C"></div><span>Verde hierba</span></div>
+                            <div class="color-item" onclick="setBg('#3F9127')"><div class="color-circle" style="background:#3F9127"></div><span>Selva</span></div>
+                            <div class="color-item" onclick="setBg('#6FC954')"><div class="color-circle" style="background:#6FC954"></div><span>Abeto</span></div>
+                            <div class="color-item" onclick="setBg('#48B14E')"><div class="color-circle" style="background:#48B14E"></div><span>Verde césped</span></div>
+                            <div class="color-item" onclick="setBg('#6FB823')"><div class="color-circle" style="background:#6FB823"></div><span>Manzana verde</span></div>
+                            <div class="color-item" onclick="setBg('#8ECD4C')"><div class="color-circle" style="background:#8ECD4C"></div><span>Loro</span></div>
+                            <div class="color-item" onclick="setBg('#5CB342')"><div class="color-circle" style="background:#5CB342"></div><span>Pistacho</span></div>
+                        </div>
+
+
+                    <!-- CELESTE -->
+                    <div class="color-category-title">Gama Celeste</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#7fffd4')"><div class="color-circle" style="background:#7fffd4"></div><span>Aguamarina</span></div>
+                            <div class="color-item" onclick="setBg('#00ffff')"><div class="color-circle" style="background:#00ffff"></div><span>Celeste cian</span></div>
+                            <div class="color-item" onclick="setBg('#40e0d0')"><div class="color-circle" style="background:#40e0d0"></div><span>Turquesa</span></div>
+                            <div class="color-item" onclick="setBg('#005f73')"><div class="color-circle" style="background:#005f73"></div><span>Petróleo</span></div>
+                            <div class="color-item" onclick="setBg('#17a2b8')"><div class="color-circle" style="background:#17a2b8"></div><span>Caribe</span></div>
+                            <div class="color-item" onclick="setBg('#a8c3bc')"><div class="color-circle" style="background:#a8c3bc"></div><span>Ópalo</span></div>
+                        </div>
+
+
+                    <!-- AZULES -->
+                    <div class="color-category-title">Gama de los Azules</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#0047ab')"><div class="color-circle" style="background:#0047ab"></div><span>Cobalto</span></div>
+                            <div class="color-item" onclick="setBg('#0f52ba')"><div class="color-circle" style="background:#0f52ba"></div><span>Zafiro</span></div>
+                            <div class="color-item" onclick="setBg('#4682b4')"><div class="color-circle" style="background:#4682b4"></div><span>Acero</span></div>
+                            <div class="color-item" onclick="setBg('#1560bd')"><div class="color-circle" style="background:#1560bd"></div><span>Denim</span></div>
+                            <div class="color-item" onclick="setBg('#7df9ff')"><div class="color-circle" style="background:#7df9ff"></div><span>Eléctrico</span></div>
+                            <div class="color-item" onclick="setBg('#191970')"><div class="color-circle" style="background:#191970"></div><span>Medianoche</span></div>
+                            <div class="color-item" onclick="setBg('#85bb65')"><div class="color-circle" style="background:#002366"></div><span>Francia</span></div>
+                            <div class="color-item" onclick="setBg('#4a90e2')"><div class="color-circle" style="background:#4a90e2"></div><span>Azul lago</span></div>
+                            <div class="color-item" onclick="setBg('#1683CB')"><div class="color-circle" style="background:#1683CB"></div><span>Denim gastado</span></div>
+                            <div class="color-item" onclick="setBg('#3376C6')"><div class="color-circle" style="background:#3376C6"></div><span>Vaquero</span></div>
+                            <div class="color-item" onclick="setBg('#2155CA')"><div class="color-circle" style="background:#2155CA"></div><span>Marino profundo</span></div>
+                        </div>
+
+
+                    <!-- VIOLETAS -->
+                    <div class="color-category-title">Gama de los Violetas</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#800080')"><div class="color-circle" style="background:#800080"></div><span>Púrpura</span></div>
+                            <div class="color-item" onclick="setBg('#a020f0')"><div class="color-circle" style="background:#a020f0"></div><span>Morado</span></div>
+                            <div class="color-item" onclick="setBg('#9966cc')"><div class="color-circle" style="background:#9966cc"></div><span>Amatista</span></div>
+                            <div class="color-item" onclick="setBg('#e6e6fa')"><div class="color-circle" style="background:#e6e6fa"></div><span>Lavanda</span></div>
+                            <div class="color-item" onclick="setBg('#da70d6')"><div class="color-circle" style="background:#da70d6"></div><span>Orquídea</span></div>
+                            <div class="color-item" onclick="setBg('#6f2da8')"><div class="color-circle" style="background:#6f2da8"></div><span>Uva</span></div>
+                            <div class="color-item" onclick="setBg('#3b1443')"><div class="color-circle" style="background:#3b1443"></div><span>Berenjena oscura</span></div>
+                        </div>
+
+                    <!-- ROSAS -->
+                    <div class="color-category-title">Gama de los Rosas</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#FF69B4')"><div class="color-circle" style="background:#FF69B4"></div><span>Rosa chicle</span></div>
+                            <div class="color-item" onclick="setBg('#D6409F')"><div class="color-circle" style="background:#D6409F"></div><span>Magenta</span></div>
+                            <div class="color-item" onclick="setBg('#FF91A4')"><div class="color-circle" style="background:#FF91A4"></div><span>Salmón rosado</span></div>
+                            <div class="color-item" onclick="setBg('#E8B4B8')"><div class="color-circle" style="background:#E8B4B8"></div><span>palo</span></div>
+                            <div class="color-item" onclick="setBg('#D76897')"><div class="color-circle" style="background:#D76897"></div><span>Flamenco</span></div>
+                            <div class="color-item" onclick="setBg('#DF5681')"><div class="color-circle" style="background:#DF5681"></div><span>Rubor suave</span></div>
+                            <div class="color-item" onclick="setBg('#E30B5C')"><div class="color-circle" style="background:#E30B5C"></div><span>Frambuesa</span></div>
+                            <div class="color-item" onclick="setBg('#F88379')"><div class="color-circle" style="background:#F88379"></div><span>Coral rosa</span></div>
+                            <div class="color-item" onclick="setBg('#FADADD')"><div class="color-circle" style="background:#FADADD"></div><span>pálido</span></div>
+                            <div class="color-item" onclick="setBg('#E07AA6')"><div class="color-circle" style="background:#E07AA6"></div><span>fuerte intenso</span></div>
+                            <div class="color-item" onclick="setBg('#EC5DAA')"><div class="color-circle" style="background:#EC5DAA"></div><span>fresa</span></div>
+                        </div>
+
+                    <!-- BLANCO Y GRIS -->
+                    <div class="color-category-title">Gama de los Grises</div>
+                        <div class="palette-container">
+                            <div class="color-item" onclick="setBg('#FFF5EE')"><div class="color-circle" style="background:#FFF5EE"></div><span>Concha</span></div>
+                            <div class="color-item" onclick="setBg('#EAE0C8')"><div class="color-circle" style="background:#EAE0C8"></div><span>Perla</span></div>
+                            <div class="color-item" onclick="setBg('#EDECEA')"><div class="color-circle" style="background:#EDECEA"></div><span>Leche</span></div>
+                            <div class="color-item" onclick="setBg('#FFFFF0')"><div class="color-circle" style="background:#FFFFF0"></div><span>Marfil</span></div>
+                            <div class="color-item" onclick="setBg('#E3DAC9')"><div class="color-circle" style="background:#E3DAC9"></div><span>Hueso</span></div>
+                            <div class="color-item" onclick="setBg('#ECE9E5')"><div class="color-circle" style="background:#ECE9E5"></div><span>Espuma</span></div>
+                            <div class="color-item" onclick="setBg('#ECE9E2')"><div class="color-circle" style="background:#ECE9E2"></div><span>Porcelana</span></div>
+                            <div class="color-item" onclick="setBg('#F5F3F1')"><div class="color-circle" style="background:#F5F3F1"></div><span>Crudo</span></div>
+                            <div class="color-item" onclick="setBg('#F4F2EF')"><div class="color-circle" style="background:#F4F2EF"></div><span>Magnolia</span></div>
+                            <div class="color-item" onclick="setBg('#293133')"><div class="color-circle" style="background:#293133"></div><span>Antracita</span></div>
+                            <div class="color-item" onclick="setBg('#4A4A4A')"><div class="color-circle" style="background:#4A4A4A"></div><span>Gris oscuro</span></div>
+                            <div class="color-item" onclick="setBg('#857A74')"><div class="color-circle" style="background:#857A74"></div><span>Humo</span></div>
+                            <div class="color-item" onclick="setBg('#9E968F')"><div class="color-circle" style="background:#9E968F"></div><span>Pizarra clara</span></div>
+                            <div class="color-item" onclick="setBg('#8B827F')"><div class="color-circle" style="background:#8B827F"></div><span>Grafito claro</span></div>
+                            <div class="color-item" onclick="setBg('#918F8B')"><div class="color-circle" style="background:#918F8B"></div><span>Lluvia</span></div>
+                            <div class="color-item" onclick="setBg('#18171A')"><div class="color-circle" style="background:#18171A"></div><span>Eclipse</span></div>
+                        </div>
+
+
+                    
+                </div>
+
+                    
+                <div id="idioma" class="form-section">
+
+                    <div class="label-box">IDIOMA</div>
+                    <div class="intro-text">Seleccioná el idioma que prefieras para navegar en el Club.</div>
+
+                    <div class="idioma-overlay">
+
+                        <div class="idioma-bg">
+                        
+
+                        <div class="input-group">
+                            <div class="birthday-row">
+                                <select id="select-idioma">
+                                    <option value="" disabled selected>Idioma</option>
+                                    <option>Español</option>
+                                    <option>English</option>
+                                    <option>Português</option>
+                                    <option>Italiano</option>
+                                    <option>Deutsch</option>
+                                    <option>Latinus</option>
+                                    <option>Français</option>
+                                    <option>Shqiptare</option>
+                                    <option>Ndebele</option>
+                                    <option>Swati</option>
+                                    <option>ខ្មែរ</option>
+                                    <option>Русский</option>
+                                    <option>日本語</option>
+                                    <option>繁體中文</option>
+                                    <option>简体中文</option>
+                                    <option>한국인</option>
+                                    <option>Tiếng Việt</option>
+                                    <option>Soomaali</option>
+                                    <option>Lietuvių</option>
+                                    <option>Afrikaans</option>
+                                    <option>Sesotho</option>
+                                    <option>עברית</option>
+                                    <option>Cymraeg</option>
+                                    <option>Slovenčina</option>
+                                    <option>Slovenščina</option>
+                                    <option>Melayu</option>
+                                    <option>Fulani</option>
+                                    <option>Magyar</option>
+                                    <option>Azərbaycan</option>
+                                    <option>Kurdî</option>
+                                    <option>Dansk</option>
+                                    <option>Svenska</option>
+                                    <option>Cebuano</option>
+                                    <option>Ελληνικά</option>
+                                    <option>беларускі</option>
+                                    <option>Қазақша</option>
+                                    <option>тоҷикӣ</option>
+                                    <option>македонски</option>
+                                    <option>українська</option>
+                                    <option>српски</option>
+                                    <option>O'zbek</option>
+                                    <option>हिंदी</option>
+                                    <option>অসমীয়া</option>
+                                    <option>ଓଡ଼ିଆ</option>
+                                    <option>मराठी</option>
+                                    <option>বাংলা</option>
+                                    <option>தமிழ்</option>
+                                    <option>తెలుగు</option>
+                                    <option>ಕನ್ನಡ</option>
+                                    <option>فارسی</option>
+                                    <option>عربي</option>
+                                    <option>پښتو</option>
+                                    <option>سنڌ</option>
+                                    <option>Türkçe</option>
+                                    <option>Català</option>
+                                    <option>Bosanski</option>
+                                    <option>Euskara</option>
+                                    <option>Nederlands</option>
+                                    <option>Eesti keel</option>
+                                    <option>Suomi</option>
+                                    <option>Suomalainen</option>
+                                    <option>Kiswahili</option>
+                                    <option>Noruego</option>
+                                    <option>Norsk</option>
+                                    <option>Slovensky</option>
+                                    <option>Gaeilge</option>
+                                    <option>Tagalog</option>
+                                    <option>Polski</option>
+                                    <option>മലയാളം</option>
+                                    <option>ქართული</option>
+                                    <option>ಕನ್ನಡ</option>
+                                    <option>IsiXhosa</option>
+                                    <option>IsiZulu</option>
+                                    <option>Hrvatski</option>
+                                    <option>Filipino</option>
+                                    <option>Română</option>
+                                    <option>ไทย</option>
+                                    <option>Čeština</option>
+                                    <option>Bahasa Indonesia</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CENTRO DE PRIVACIDAD -->
+                <div id="centroPrivacidad" class="form-section">
+
+                    <div class="label-box">CENTRO DE PRIVACIDAD</div>
+
+
+                        <div class="config-group">
+                            <div class="opciones-privacidad">
+                                    <div class="item-privacidad" onclick="abrirModalPerfil()" style="cursor: pointer;">1️⃣ Perfil público o privado</div>
+
+                                        <!-- Modal para Perfil Público o Privado -->
+                                        <div id="modal-perfil" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 400px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalPerfil()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Configurar Privacidad del Perfil</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Seleccioná quién puede ver tu perfil y contenido en el Club:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="privacidad_perfil" value="publico" checked> Público
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="privacidad_perfil" value="miembros"> Solo miembros del Club
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="privacidad_perfil" value="privado"> Privado (Solo seguidores aprobados)
+                                                    </label>
+                                                </div>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Guardar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalPerfil()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalPerfil()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="item-privacidad" onclick="abrirModalComentarios()" style="cursor: pointer;">2️⃣ Preferencias de interacción y comentarios</div>
+
+                                        <!-- Modal para Preferencias de Interacción y Comentarios -->
+                                        <div id="modal-comentarios" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalComentarios()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Preferencias de Interacción y Comentarios</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Elegí quién puede comentar en tus videos y publicaciones:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="preferencia_comentarios" value="todos" checked> Todos los miembros del Club
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="preferencia_comentarios" value="seguidores"> Solo mis seguidores
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="preferencia_comentarios" value="nadie"> Nadie (Desactivar comentarios)
+                                                    </label>
+                                                    <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="filtro-ofensivos" checked> Ocultar automáticamente comentarios ofensivos
+                                                    </label>
+                                                </div>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Guardar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalComentarios()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalComentarios()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="item-privacidad" onclick="abrirModalDescargas()" style="cursor: pointer;">3️⃣ Permisos de descarga de videos</div>
+
+                                        <!-- Modal para Permisos de Descarga de Videos -->
+                                        <div id="modal-descargas" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalDescargas()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Permisos de Descarga de Videos</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Elegí cómo querés gestionar las descargas de tus videos compartidos:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="preferencia_descargas" value="todos"> Permitir descarga a cualquier miembro
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="preferencia_descargas" value="seguidores" checked> Solo mis seguidores aprobados
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="radio" name="preferencia_descargas" value="nadie"> Bloquear descargas (Solo reproducción online)
+                                                    </label>
+                                                    <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="marca-agua" checked> Incluir marca de agua de Malboro Little Club en las descargas
+                                                    </label>
+                                                </div>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Guardar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalDescargas()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalDescargas()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="item-privacidad" onclick="abrirModalDifusion()" style="cursor: pointer;">4️⃣ Difusión y enlaces externos</div>
+
+                                        <!-- Modal para Difusión y Enlaces Externos -->
+                                        <div id="modal-difusion" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalDifusion()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Difusión y Enlaces Externos</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Controlá cómo se difunde tu contenido fuera de Malboro Little Club:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="ext-buscador" checked> Permitir que motores de búsqueda indexen mi perfil y videos
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="ext-redes" checked> Mostrar botones de compartir rápido en redes externas (WhatsApp, etc.)
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="ext-embed"> Permitir incrustar (embed) mis videos en otros sitios web
+                                                    </label>
+                                                </div>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Guardar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalDifusion()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalDifusion()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="item-privacidad" onclick="abrirModalNotifPersonalizadas()" style="cursor: pointer;">5️⃣ Notificaciones personalizadas</div>
+
+                                        <!-- Modal para Notificaciones Personalizadas -->
+                                        <div id="modal-notif-personalizadas" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalNotifPersonalizadas()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Notificaciones Personalizadas</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Elegí por dónde querés recibir tus alertas y con qué frecuencia:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="canal-email" checked> Recibir alertas por correo electrónico
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="canal-push" checked> Activar notificaciones Push en el navegador
+                                                    </label>
+                                                    
+                                                    <div style="margin-top: 5px;">
+                                                        <label style="font-size: 13px; font-weight: bold; color: #333; display: block; margin-bottom: 5px;">Frecuencia de avisos:</label>
+                                                        <select id="frecuencia-notif" style="width: 100%; padding: 8px; border: 1px solid #7ccd98; border-radius: 6px; font-family: 'Outfit', sans-serif;">
+                                                            <option value="inmediata">Inmediata (en el momento)</option>
+                                                            <option value="diaria">Resumen diario</option>
+                                                            <option value="semanal">Resumen semanal</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Guardar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalNotifPersonalizadas()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalNotifPersonalizadas()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="item-privacidad" onclick="abrirModalComunicaciones()" style="cursor: pointer;">6️⃣ Comunicaciones y novedades</div>
+
+                                        <!-- Modal para Comunicaciones y Novedades -->
+                                        <div id="modal-comunicaciones" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalComunicaciones()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Comunicaciones y Novedades</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Seleccioná qué tipo de información institucional y de novedades querés recibir en tu correo:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="comm-boletin" checked> Boletín mensual con lo destacado de Malboro Little Club
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="comm-novedades" checked> Anuncios sobre nuevas funciones y mejoras en la plataforma
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="comm-encuestas"> Invitaciones a encuestas y propuestas para mejorar el Club
+                                                    </label>
+                                                </div>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Guardar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalComunicaciones()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalComunicaciones()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="imagen-privacidad">
+                                            <img src="images/joven2.jpeg" alt="joven2">
+                                        </div>
+
+                                
+                                    <div class="item-privacidad item-desplazado" onclick="abrirModalCookies()" style="cursor: pointer;">7️⃣ Gestión de cookies</div>
+
+                                        <!-- Modal para Gestión de Cookies -->
+                                        <div id="modal-cookies" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalCookies()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Gestión de Cookies y Preferencias</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Seleccioná qué tipos de cookies permitís que usemos en Malboro Little Club:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: not-allowed; font-size: 14px; color: #777;">
+                                                        <input type="checkbox" checked disabled> Cookies esenciales (Obligatorias para el funcionamiento básico)
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="cookie-rendimiento" checked> Cookies de rendimiento y estadísticas (Para mejorar la velocidad y estabilidad)
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="cookie-personalizacion" checked> Cookies de personalización y preferencias de usuario
+                                                    </label>
+                                                </div>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Guardar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalCookies()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalCookies()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="item-privacidad item-desplazado" onclick="abrirModalDescargarDatos()" style="cursor: pointer;">8️⃣ Descargar mis datos</div>
+
+                                        <!-- Modal para Descargar Mis Datos -->
+                                        <div id="modal-descargar-datos" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalDescargarDatos()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Exportar y Descargar Mis Datos</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Podés solicitar una copia completa de la información asociada a tu cuenta en Malboro Little Club:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="data-perfil" checked> Información de perfil y cuenta
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="data-videos" checked> Metadatos de mis videos y publicaciones
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="data-actividad" checked> Historial de actividad y comentarios
+                                                    </label>
+                                                </div>
+
+                                                <p style="font-size: 12px; color: #777; margin-bottom: 15px;">* Te enviaremos un enlace de descarga a tu correo electrónico registrado cuando el archivo esté listo.</p>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Solicitar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalDescargarDatos()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalDescargarDatos()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Solicitar descarga</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="item-privacidad item-desplazado" onclick="abrirModalEliminarCuenta()" style="cursor: pointer;">9️⃣ Eliminar mi cuenta</div>
+
+                                        <!-- Modal para Eliminar Mi Cuenta -->
+                                        <div id="modal-eliminar-cuenta" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #e57373; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalEliminarCuenta()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #d32f2f; font-size: 18px; border-bottom: 1px solid #ffcdd2; padding-bottom: 8px;">Eliminar Cuenta Permanentemente</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0; line-height: 1.5;">
+                                                    Estás a punto de eliminar tu cuenta de <strong>Malboro Little Club</strong>. Esta acción es <strong>irreversible</strong> y se borrarán todos tus videos, comentarios y datos guardados.
+                                                </p>
+                                                
+                                                <div style="margin-bottom: 20px;">
+                                                    <label style="font-size: 13px; font-weight: bold; color: #333; display: block; margin-bottom: 5px;">Ingresá tu contraseña para confirmar:</label>
+                                                    <input type="password" id="password-confirmacion" placeholder="Tu contraseña actual" style="width: 100%; padding: 10px; border: 1px solid #e57373; border-radius: 8px; box-sizing: border-box; font-family: 'Outfit', sans-serif;">
+                                                </div>
+                                                
+                                                <!-- Botones de Acción (Cancelar y Eliminar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalEliminarCuenta()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="ejecutarEliminacionCuenta()" style="background-color: #e57373; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Eliminar cuenta</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="item-privacidad item-desplazado" onclick="abrirModalSeguridadAcceso()" style="cursor: pointer;">🔟 Seguridad de acceso</div>
+
+                                        <!-- Modal para Seguridad de Acceso -->
+                                        <div id="modal-seguridad-acceso" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                                            <div style="background: white; padding: 25px; border-radius: 12px; width: 420px; border: 2px solid #7ccd98; position: relative; font-family: 'Outfit', sans-serif;">
+                                                
+                                                <!-- Botón de cierre (X) en la esquina superior -->
+                                                <span onclick="cerrarModalSeguridadAcceso()" style="position: absolute; top: 15px; right: 20px; font-size: 20px; cursor: pointer; color: #555;"><i class="fa-solid fa-xmark"></i></span>
+                                                
+                                                <h3 style="margin-top: 0; color: #2d5a8e; font-size: 18px; border-bottom: 1px solid #7ccd98; padding-bottom: 8px;">Seguridad de Acceso y Autenticación</h3>
+                                                
+                                                <p style="font-size: 14px; color: #555; margin: 15px 0;">Configurá los mecanismos de protección adicionales para el ingreso a tu cuenta:</p>
+                                                
+                                                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="seg-2fa" checked> Activar verificación en dos pasos (2FA)
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="seg-alertas" checked> Alertas por correo ante inicios de sesión sospechosos o nuevos dispositivos
+                                                    </label>
+                                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                                                        <input type="checkbox" id="seg-sesiones"> Cerrar sesión automáticamente al cerrar el navegador
+                                                    </label>
+                                                </div>
+                                                
+                                                <!-- Botões de Acción (Cancelar y Guardar) -->
+                                                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                                                    <button onclick="cerrarModalSeguridadAcceso()" style="background-color: #e0e0e0; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+                                                    <button onclick="guardarModalSeguridadAcceso()" style="background-color: #a3cf9e; color: black; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                            </div>
+                        </div>
+
+                </div>
+
+
+                <div id="suscripciones" class="form-section">
+                    <div class="label-box">SUSCRIPCIONES</div>
+        
+                    <div class="intro-text">
+                        <p>
+                            “Puedes elegir algunas de las siguientes opciones para suscribirte a Malboro Little Club.<br>
+                            También tendrás la opción de ingresar al sitio como invitado durante un mes, enviando un gift o regalo.<br>
+                            Únete al mundo a través de Malboro Little Club.”
+                        </p>
+                        </div>
+        
+                        <div class="subscription-container">
+                            <div class="sub-card">
+                                <h3>Suscripción Free</h3>
+                                <p>7 días</p>
+                                <p>Gratis</p>
+                                <p>Acceso al contenido</p>
+                                <p>Malboro Little Club</p>
+                                <p>Visita limitada</p>
+                                <p>Comentarios</p>
+                                <p>Regalos</p>
+                            <button class="sub-btn">Suscripcion</button>
+                        </div>
+
+                        <div class="sub-card">
+                            <h3>Suscripción Basica</h3>
+                            <p>$4.99/mes</p>
+                            <p>Oferta</p>
+                            <p>Contenido completo</p>
+                            <p>Club + Eventos</p>
+                            <p>Visita ilimitada</p>
+                            <p>Comentarios</p>
+                            <p>Regalos mensuales</p>
+                            <button class="sub-btn">Suscripcion</button>
+                        </div>
+
+                        <div class="sub-card">
+                            <h3>Suscripción Premium</h3>
+                            <p>$9.99/mes</p>
+                            <p>Todo incluido</p>
+                            <p>Contenido exclusivo</p>
+                            <p>Acceso VIP</p>
+                            <p>Visitas ilimitadas</p>
+                            <p>Comentarios</p>
+                            <p>Regalos exclusivos</p>
+                            <button class="sub-btn">Suscripcion</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.form-section').forEach(sec => {
+                sec.style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function toggleBox(id) {
+            const box = document.getElementById(id);
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+    <script>
+        const fileInput = document.getElementById('upload-photo');
+        const preview = document.getElementById('profile-preview');
+        const photoText = document.getElementById('photo-text');
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+                if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // 1. Ponemos la imagen en el <img>
+                    preview.src = e.target.result;
+                    // 2. Mostramos la imagen
+                    preview.style.display = 'block';
+                    // 3. Ocultamos el texto "Foto"
+                    photoText.style.display = 'none';
+                }
+            
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+
+    <script>
+        // Localiza el botón de Privacidad y Datos en tu menú
+        const btnPrivacidad = document.querySelector('.menu-btn:nth-child(2)');
+        btnPrivacidad.setAttribute('onclick', "showSection('privacidad')");
+
+        // La función showSection ya maneja el cambio de visualización
+    </script>
+
+    <script>
+        function navegar(id) {
+            // 1. Ocultar todas las secciones
+            const secciones = document.querySelectorAll('.form-section');
+            secciones.forEach(s => s.classList.remove('active'));
+
+            // 2. Mostrar la sección correspondiente
+            const seleccionada = document.getElementById('sec-' + id);
+            if (seleccionada) {
+                seleccionada.classList.add('active');
+            }
+        }
+    </script>
+
+
+    <script>
+        function setFontSize(size) {
+            document.body.style.fontSize = size + "px";
+        }
+
+        function toggleContrast(el) {
+            document.body.classList.toggle("high-contrast", el.checked);
+        }
+
+        function toggleAnimations(el) {
+            document.body.classList.toggle("reduce-animations", el.checked);
+        }
+
+        function toggleDyslexia(el) {
+            document.body.classList.toggle("dyslexia-font", el.checked);
+        }
+
+        function toggleKeyboardFocus(el) {
+            document.body.classList.toggle("keyboard-focus", el.checked);
+        }
+
+        function resetAccessibility() {
+            document.body.classList.remove(
+                "high-contrast",
+                "reduce-animations",
+                "dyslexia-font",
+                "keyboard-focus"
+            );
+            document.body.style.fontSize = "16px";
+        }
+    </script>
+
+    <script>
+        function setBg(color) {
+            document.querySelector('.content-area').style.backgroundColor = color;
+        }
+    </script>
+
+    <script>
+        function showSection(id) {
+
+            document.querySelectorAll('.form-section')
+                .forEach(sec => sec.classList.remove('active'));
+
+            const section = document.getElementById(id);
+
+            if (section) {
+                section.classList.add('active');
+            }
+        }
+    </script>
+
+
+    <script>
+        function showSection(id) {
+            // 1. Ocultamos todas las secciones que tengan la clase .form-section
+            document.querySelectorAll('.form-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+
+            // 2. Mostramos la sección que el usuario clickeó
+            const section = document.getElementById(id);
+            if (section) {
+                section.classList.add('active');
+            }
+        }
+    </script>
+
+    <script>
+        function guardarAccesibilidad() {
+            alert("Configuración de accesibilidad guardada correctamente.");
+        }
+
+        function cancelarAccesibilidad() {
+            // Restablece los cambios y opcionalmente puede recargar o volver a una sección predeterminada
+            resetAccessibility();
+            showSection('cuenta'); // O redirige a otra sección si lo prefieres
+        }
+    </script>
+
+
+
+    <script>
+        function abrirModalPerfil() {
+            document.getElementById('modal-perfil').style.display = 'flex';
+        }
+
+        function cerrarModalPerfil() {
+            document.getElementById('modal-perfil').style.display = 'none';
+        }
+
+        function guardarModalPerfil() {
+            const seleccion = document.querySelector('input[name="privacidad_perfil"]:checked').value;
+            alert("Preferencia de perfil guardada con éxito: " + seleccion);
+            cerrarModalPerfil();
+        }
+    </script>
+
+
+    <script>
+        function abrirModalComentarios() {
+            document.getElementById('modal-comentarios').style.display = 'flex';
+        }
+
+        function cerrarModalComentarios() {
+            document.getElementById('modal-comentarios').style.display = 'none';
+        }
+
+        function guardarModalComentarios() {
+            const seleccion = document.querySelector('input[name="preferencia_comentarios"]:checked').value;
+            const filtroActivo = document.getElementById('filtro-ofensivos').checked;
+            alert("Preferencias de comentarios guardadas con éxito.\nPermisos: " + seleccion + "\nFiltro ofensivo: " + (filtroActivo ? "Activado" : "Desactivado"));
+            cerrarModalComentarios();
+        }
+    </script>
+
+
+    <script>
+        function abrirModalDescargas() {
+            document.getElementById('modal-descargas').style.display = 'flex';
+        }
+
+        function cerrarModalDescargas() {
+            document.getElementById('modal-descargas').style.display = 'none';
+        }
+
+        function guardarModalDescargas() {
+            const seleccion = document.querySelector('input[name="preferencia_descargas"]:checked').value;
+            const marcaAguaActiva = document.getElementById('marca-agua').checked;
+            alert("Configuración de descargas guardada con éxito.\nPermisos: " + seleccion + "\nMarca de agua: " + (marcaAguaActiva ? "Activada" : "Desactivada"));
+            cerrarModalDescargas();
+        }
+    </script>
+
+    <script>
+        function abrirModalDifusion() {
+            document.getElementById('modal-difusion').style.display = 'flex';
+        }
+
+        function cerrarModalDifusion() {
+            document.getElementById('modal-difusion').style.display = 'none';
+        }
+
+        function guardarModalDifusion() {
+            const buscadores = document.getElementById('ext-buscador').checked;
+            const redes = document.getElementById('ext-redes').checked;
+            const embed = document.getElementById('ext-embed').checked;
+            
+            alert("Configuración de difusión externa guardada con éxito.\nBuscadores: " + (buscadores ? "Sí" : "No") + "\nRedes: " + (redes ? "Sí" : "No") + "\nIncrustar: " + (embed ? "Sí" : "No"));
+            cerrarModalDifusion();
+        }
+    </script>
+
+    <script>
+        function abrirModalNotifPersonalizadas() {
+            document.getElementById('modal-notif-personalizadas').style.display = 'flex';
+        }
+
+        function cerrarModalNotifPersonalizadas() {
+            document.getElementById('modal-notif-personalizadas').style.display = 'none';
+        }
+
+        function guardarModalNotifPersonalizadas() {
+            const email = document.getElementById('canal-email').checked;
+            const push = document.getElementById('canal-push').checked;
+            const frecuencia = document.getElementById('frecuencia-notif').value;
+            
+            alert("Preferencias de notificaciones guardadas con éxito.\nCorreo: " + (email ? "Sí" : "No") + "\nPush: " + (push ? "Sí" : "No") + "\nFrecuencia: " + frecuencia);
+            cerrarModalNotifPersonalizadas();
+        }
+    </script>
+
+
+    <script>
+        function abrirModalComunicaciones() {
+            document.getElementById('modal-comunicaciones').style.display = 'flex';
+        }
+
+        function cerrarModalComunicaciones() {
+            document.getElementById('modal-comunicaciones').style.display = 'none';
+        }
+
+        function guardarModalComunicaciones() {
+            const boletin = document.getElementById('comm-boletin').checked;
+            const novedades = document.getElementById('comm-novedades').checked;
+            const encuestas = document.getElementById('comm-encuestas').checked;
+            
+            alert("Preferencias de comunicaciones guardadas con éxito.\nBoletín mensual: " + (boletin ? "Sí" : "No") + "\nNovedades de la plataforma: " + (novedades ? "Sí" : "No") + "\nEncuestas: " + (encuestas ? "Sí" : "No"));
+            cerrarModalComunicaciones();
+        }
+    </script>
+
+    <script>
+        function abrirModalCookies() {
+            document.getElementById('modal-cookies').style.display = 'flex';
+        }
+
+        function cerrarModalCookies() {
+            document.getElementById('modal-cookies').style.display = 'none';
+        }
+
+        function guardarModalCookies() {
+            const rendimiento = document.getElementById('cookie-rendimiento').checked;
+            const personalizacion = document.getElementById('cookie-personalizacion').checked;
+            
+            alert("Preferencias de cookies guardadas con éxito.\nEsenciales: Obligatorias (Sí)\nRendimiento: " + (rendimiento ? "Sí" : "No") + "\nPersonalización: " + (personalizacion ? "Sí" : "No"));
+            cerrarModalCookies();
+        }
+    </script>
+
+    <script>
+        function abrirModalDescargarDatos() {
+            document.getElementById('modal-descargar-datos').style.display = 'flex';
+        }
+
+        function cerrarModalDescargarDatos() {
+            document.getElementById('modal-descargar-datos').style.display = 'none';
+        }
+
+        function guardarModalDescargarDatos() {
+            const perfil = document.getElementById('data-perfil').checked;
+            const videos = document.getElementById('data-videos').checked;
+            const actividad = document.getElementById('data-actividad').checked;
+            
+            alert("Solicitud de exportación procesada con éxito.\nSe ha generado el paquete de datos para su descarga.\nPerfil: " + (perfil ? "Sí" : "No") + "\nVideos: " + (videos ? "Sí" : "No") + "\nActividad: " + (actividad ? "Sí" : "No"));
+            cerrarModalDescargarDatos();
+        }
+    </script>
+
+    <script>
+        function abrirModalEliminarCuenta() {
+            document.getElementById('modal-eliminar-cuenta').style.display = 'flex';
+        }
+
+        function cerrarModalEliminarCuenta() {
+            document.getElementById('modal-eliminar-cuenta').style.display = 'none';
+            document.getElementById('password-confirmacion').value = ""; // Limpiar campo
+        }
+
+        function ejecutarEliminacionCuenta() {
+            const password = document.getElementById('password-confirmacion').value;
+            if (password.trim() === "") {
+                alert("Por favor, ingresá tu contraseña para confirmar la eliminación de la cuenta.");
+                return;
+            }
+            
+            alert("Cuenta eliminada correctamente. Lamentamos verte partir de Malboro Little Club.");
+            cerrarModalEliminarCuenta();
+            // Aquí podrías redirigir al login o página principal: window.location.href = "login.html";
+        }
+    </script>
+
+    <script>
+        function abrirModalSeguridadAcceso() {
+            document.getElementById('modal-seguridad-acceso').style.display = 'flex';
+        }
+
+        function cerrarModalSeguridadAcceso() {
+            document.getElementById('modal-seguridad-acceso').style.display = 'none';
+        }
+
+        function guardarModalSeguridadAcceso() {
+            const dosfa = document.getElementById('seg-2fa').checked;
+            const alertas = document.getElementById('seg-alertas').checked;
+            const sesiones = document.getElementById('seg-sesiones').checked;
+            
+            alert("Configuración de seguridad guardada con éxito.\nVerificación en dos pasos: " + (dosfa ? "Activada" : "Desactivada") + "\nAlertas de inicio: " + (alertas ? "Sí" : "No") + "\nCierre automático: " + (sesiones ? "Sí" : "No"));
+            cerrarModalSeguridadAcceso();
+        }
+    </script>
+    
+
+</body>
+</html>

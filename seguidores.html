@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguidores</title>
+    <link rel="icon" type="image/png" href="images/favicon2.png">
+</head>
+
+
+<style>
+
+body {
+    background-color: #2e5f43; /* verde oscuro */
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+.followers-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 15px;  /* espacio horizontal entre imágenes */
+    row-gap: 30px;     /* espacio vertical */
+    justify-items: center;
+    width: 90%;        /* permite que use casi todo el ancho de pantalla */
+    max-width: 1200px; /* más ancho que antes */
+    margin: 0 auto;
+}
+
+.follower {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.90rem;
+}
+
+.follower img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.follower-name {
+    margin-top: 5px;
+    font-size: 0.80rem;
+    color: #ffffff;
+}
+
+.greeting {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    height: 22px; /* Reservamos espacio para que no empuje otras filas */
+}
+
+
+</style>
+
+<body>
+
+<h1>Seguidores</h1>
+
+<div class="followers-container">
+
+    
+    <div class="follower">
+        <div class="avatar"><img src="img/33.gif" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">janicubabe</div>
+    </div> 
+   
+
+    <div class="follower">
+        <div class="avatar"><img src="img/52.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">daniel-52</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/28.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">nellyolla</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/30.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">minsterocka</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/50.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">bayadmiliam</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/44.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">rosemary</div>
+    </div>
+
+        <!-- fila 2 -->
+    <div class="follower">
+        <div class="avatar"><img src="img/57.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">chappellroandeary</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/21.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">olga---s</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/25.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">tsurgeeminda</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/19.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">mafaldatilde</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/47.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">marilynshoesss</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/37.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">amelianabunny</div>
+    </div>
+
+        <!-- fila 3 -->
+    <div class="follower">
+        <div class="avatar"><img src="img/43.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">younganina</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/38.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">florenciaaromance</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/1.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">victorharrison</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/27.gif" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">popbubble</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/54.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">mikaelashoudald1</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/55.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">shironiko</div>
+    </div>
+
+        <!-- fila 4 -->
+    <div class="follower">
+        <div class="avatar"><img src="img/17.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">anitatita</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/14.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">leocampo</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/7.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">cameellooou</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/40.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">clarityschedule</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/61.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">chappellmonky</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/42.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">qualityaesthetic.43</div>
+    </div>
+
+    <!-- Fila 5 -->
+    <div class="follower">
+        <div class="avatar"><img src="img/30.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">moonchilddd</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/13.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">riegodavid</div>
+    </div>
+
+    <div class="follower">
+       <div class="avatar"><img src="img/11.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">cherrycupidwhore</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/2.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">ZORINCOLD</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/56.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">floramaybe</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/15.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">maximustaxis</div>
+    </div>
+
+    <!-- Fila 6 -->
+    <div class="follower">
+        <div class="avatar"><img src="img/12.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">noriaelenamarianela54</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/32.gif" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">sombras.ombrero</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/48.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">atlasmovaliut</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/60.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">briannamore</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/58.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">kirokilo</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/6.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">queenamalcriable</div>
+    </div>
+
+    <!-- Fila 7 -->
+    <div class="follower">
+        <div class="avatar"><img src="img/9.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">fuckinthat-roll</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/10.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">dealer__whatugirl</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/59.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">katherineshaffol63</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/5.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">quitemadness-</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/16.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">tiyochi.-matiku</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/38.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">bummerseaofjanis</div>
+    </div>
+
+    <!-- Fila 8 -->
+    <div class="follower">
+        <div class="avatar"><img src="img/3.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">wonderlandcoat</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/41.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">supergraphicultragirl</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/31.gif" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div>
+        <div class="follower-username">calvinderreson</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/4.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">creamsweetest</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/26.gif" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">gonedownproblemmaybe</div>
+    </div>
+
+    <div class="follower">
+        <div class="avatar"><img src="img/39.jpg" alt="Logo de Usuario" class=".follower img" id="logo-circulo"></div> 
+        <div class="follower-username">annieradionactive</div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

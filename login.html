@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Malboro Little Club</title>
+    <link rel="icon" type="image/png" href="images/favicon2.png">
+
+<style>
+
+/* FONDO DE LA PÁGINA (Para que no se vea blanco) */
+body {
+    background-color: #7ccd98; /* Verde oscuro de fondo */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.options { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 15px; }
+.options a, .register-text a { color: #fff; text-decoration: none; font-weight: bold; }
+
+/* DISEÑO DE LOS CONTENEDORES (Modales) */
+.login-container {
+    width: 320px;
+    padding: 45px 30px; /* Se aumentó el padding vertical para hacerlo más alto */
+    border-radius: 15px;
+    background: linear-gradient(135deg, #28a745, #53755A);
+    color: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    text-align: center;
+    position: relative;
+}
+
+.login-container h2, .login-container h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* GRUPOS DE ENTRADA */
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    box-sizing: border-box; /* Para que el padding no ensanche el input */
+    padding: 12px 12px 12px 35px;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    font-size: 14px;
+}
+
+.input-group .icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+/* MARGEN SUPERIOR ESPECÍFICO PARA SEPARAR COUNTRY DE LA FECHA DE NACIMIENTO */
+.country-group {
+    margin-top: 15px;
+}
+
+/* BOTONES */
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: #fff;
+    color: #28a745;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.btn-login:hover { background: #f1f1f1; }
+.birth-fields {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr 1.1fr;
+    gap: 8px;
+    margin-bottom: 15px; /* Espacio debajo de la selección de fecha */
+}
+
+.birth-fields select {
+    width: 100%;
+    height: 46px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 24px;
+    outline: none;
+    background: white;
+    color: #555;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* SEGUNDO MODAL: GÉNERO Y FECHA */
+.gender-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-gender {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-gender.active {
+    background: white;
+    color: #28a745;
+}
+
+.btn-step2-submit {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #28a745, #53755A);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(86, 255, 100, 0.35);
+}
+
+.btn-step2-submit:hover {
+    background: linear-gradient(135deg, #28a745, #53755A);
+    transform: translateY(-2px);
+}
+
+/* PASO 3: SELECCIONA TUS INTERESES (MODAL BLANCO - VISTOSO Y COMPACTO) */
+.interests-container {
+    width: 96%;
+    max-width: 960px;
+    max-height: 94vh;
+    padding: 24px 28px;
+    border-radius: 24px;
+    background: #ffffff;
+    color: #2ae35bdf;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.interests-header {
+    text-align: center;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.interests-header h3 {
+    margin: 0 0 4px 0;
+    color: #52fa98;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.interests-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* GRIDA DE CATEGORÍAS */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    overflow-y: auto;
+    padding-right: 6px;
+    margin-bottom: 16px;
+    flex-grow: 1;
+}
+
+.categories-grid::-webkit-scrollbar {
+    width: 6px;
+}
+.categories-grid::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+.categories-grid::-webkit-scrollbar-thumb {
+    background: #63e36e;
+    border-radius: 10px;
+}
+.categories-grid::-webkit-scrollbar-thumb:hover {
+    background: #50d768c5;
+}
+
+/* TARJETA DE CATEGORÍA */
+.category-card {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.category-card:hover {
+    border-color: #30ffa2;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+/* RECUADRO DE TÍTULO DE CATEGORÍA AZUL CON LETRAS BLANCAS */
+.category-title {
+    background: linear-gradient(135deg, #28a745, #53755A);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    margin: 0 0 10px 0;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(65, 255, 132, 0.839);
+}
+
+/* RECUADROS DE TAGS Y ETIQUETAS AZULES CON LETRAS BLANCAS */
+.tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    user-select: none;
+    background-color: #28a745;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+}
+
+.tag-btn:hover {
+    background-color: #53755A;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(94, 255, 123, 0.898);
+}
+
+.tag-btn.selected {
+    background-color: #4cc54a;
+    color: #ffffff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.tag-btn.selected::after {
+    content: ' ✓';
+    font-size: 11px;
+    margin-left: 4px;
+}
+
+/* BOTÓN DE CONTINUAR */
+.btn-save-interests {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #28a745, #53755A);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(124, 255, 143, 0.816);
+    flex-shrink: 0;
+}
+
+/* MENSAJE DE BIENVENIDA */
+.welcome-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    color: #28a745;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 2000;
+    border: 2px solid #28a745;
+}
+
+/* CLASE PARA OCULTAR */
+.hidden { display: none !important; }
+
+@media (max-width: 640px) {
+    .interests-container {
+        padding: 18px 16px;
+        max-height: 95vh;
+    }
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <div class="login-container" id="login-form">
+        <h2>Login</h2>
+        <form id="form-paso-1">
+            <div class="input-group">
+                <span class="icon">👤</span>
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <span class="icon">🔒</span>
+                <input type="password" placeholder="Password" required>
+            </div>
+            <div class="options">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn-login">Login</button>
+            <p class="register-text">Don’t have an account? <a href="#">Register</a></p>
+        </form>
+    </div>
+
+    <div class="login-container hidden" id="extra-data-form">
+        <h3>WHEN'S YOUR BIRTHDAY?</h3>
+        <form id="form-paso-2">
+            <div class="gender-selection">
+                <button type="button" class="btn-gender" id="btn-male" onclick="selectGender('male')">male</button>
+                <button type="button" class="btn-gender" id="btn-female" onclick="selectGender('female')">female</button>
+            </div>
+            
+            <div class="birth-fields">
+                <select id="birthDay" required>
+                    <option value="">Day</option>
+                </select>
+                <select id="birthMonth" required>
+                    <option value="">Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select id="birthYear" required>
+                    <option value="">Year</option>
+                </select>
+            </div>
+            
+            <!-- SE AGREGÓ LA CLASE country-group AQUÍ -->
+            <div class="input-group country-group">
+                <input type="text" placeholder="COUNTRY" required style="padding-left: 15px;">
+            </div>
+            <button type="submit" class="btn-login">Enviar</button>
+        </form>
+    </div>
+
+    <div id="welcome-message" class="welcome-toast hidden"></div>
+
+
+    <!-- PASO 3: SELECCIÓN DE CATEGORÍAS Y TAGS (NUEVO DISEÑO MODAL BLANCO + RECUADROS AZULES) -->
+    <div class="interests-container hidden" id="interests-form">
+        <div class="interests-header">
+            <h3>Selecciona tus Intereses</h3>
+            <p>Elige tus categorías y temas preferidos para personalizar tu experiencia</p>
+        </div>
+        
+        <div class="categories-grid">
+            <!-- ART -->
+            <div class="category-card">
+                <div class="category-title"># Art</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Painting</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Design</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Artwork</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Mi arte</button>
+                </div>
+            </div>
+
+            <!-- AESTHETIC -->
+            <div class="category-card">
+                <div class="category-title"># Aesthetic</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Dreamy</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Cyberpunk</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Cottagecore</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Dark Academy</button>
+                </div>
+            </div>
+
+            <!-- NATURE -->
+            <div class="category-card">
+                <div class="category-title"># Nature</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Flowers</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Plants</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Landscape</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Mountains</button>
+                </div>
+            </div>
+
+            <!-- COMICS -->
+            <div class="category-card">
+                <div class="category-title"># Comics</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Spider-Man</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Marvell</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Superman</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Batman</button>
+                </div>
+            </div>
+
+            <!-- ANIMALS -->
+            <div class="category-card">
+                <div class="category-title"># Animals</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Fish</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Pets</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Birds</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Felines</button>
+                </div>
+            </div>
+
+            <!-- TV & CINE -->
+            <div class="category-card">
+                <div class="category-title"># TV & Cine</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">short film</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Series</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Movies</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Programs</button>
+                </div>
+            </div>
+
+            <!-- WRITTING -->
+            <div class="category-card">
+                <div class="category-title"># Writting</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Community</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Poetry</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Books</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Literatura</button>
+                </div>
+            </div>
+
+            <!-- MUSIC -->
+            <div class="category-card">
+                <div class="category-title"># Music</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Rock Indie</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Chappell Roan</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Depeche Mode</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Lana Del Rey</button>
+                </div>
+            </div>
+
+            <!-- GAMING -->
+            <div class="category-card">
+                <div class="category-title"># Gaming</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Pinguin</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Pokemon</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Video games</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Minecraft</button>
+                </div>
+            </div>
+
+            <!-- SCIENCE & TECNOLOGIC -->
+            <div class="category-card">
+                <div class="category-title"># Science & Tecnologic</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Biology</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Computing</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Zoology</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">History</button>
+                </div>
+            </div>
+
+            <!-- ANIME -->
+            <div class="category-card">
+                <div class="category-title"># Anime</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Dragon ball</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Manga</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Sailor moon</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Naruto</button>
+                </div>
+            </div>
+
+            <!-- MODA & TENDENCIA -->
+            <div class="category-card">
+                <div class="category-title"># Moda & Tendencia</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Artists</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Memes</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Chanel</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Louis Vuitton</button>
+                </div>
+            </div>
+
+            <!-- COMEDY -->
+            <div class="category-card">
+                <div class="category-title"># Comedy</div>
+                <div class="tags-wrapper">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Epic Stories</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Dark Humor</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Funny</button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">Laughing Out Loud</button>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn-save-interests" onclick="finishLogin()">Continuar a la web</button>
+    </div>
+
+
+
+    <script>
+        let generoSeleccionado = "male";
+
+        // 1. Al enviar el primer formulario (Paso 1)
+        document.getElementById("form-paso-1").addEventListener("submit", (e) => {
+            e.preventDefault();
+            document.getElementById("login-form").classList.add("hidden");
+            document.getElementById("extra-data-form").classList.remove("hidden");
+        });
+
+        // 2. Selección de género (Paso 2)
+        function selectGender(gender) {
+            generoSeleccionado = gender;
+            document.querySelectorAll('.btn-gender').forEach(b => b.classList.remove('active'));
+            if(gender === 'male') document.getElementById('btn-male').classList.add('active');
+            else document.getElementById('btn-female').classList.add('active');
+        }
+
+        // 3. Al enviar el segundo formulario -> Muestra bienvenida -> Abre panel de categorías (Paso 3)
+        document.getElementById("form-paso-2").addEventListener("submit", (e) => {
+            e.preventDefault();
+            document.getElementById("extra-data-form").classList.add("hidden");
+            
+            const msgDiv = document.getElementById("welcome-message");
+            const texto = generoSeleccionado === "female" ? "Bienvenida" : "Bienvenido";
+            msgDiv.innerText = `¡${texto} a Malboro Little Club!`;
+            
+            msgDiv.classList.remove("hidden");
+            
+            // Ocultar mensaje tras 2 segundos y abrir el modal de categorías/tags
+            setTimeout(() => {
+                msgDiv.classList.add("hidden");
+                document.getElementById("interests-form").classList.remove("hidden");
+            }, 2000);
+        });
+
+        // 4. Alternar selección de las etiquetas (tags/categorías)
+        function toggleTag(button) {
+            button.classList.toggle("selected");
+        }
+
+        // 5. Finalizar proceso y redirigir
+        function finishLogin() {
+            window.location.href = "index.html";
+        }
+
+        // Generar días y años automáticamente
+        const daySelect = document.getElementById("birthDay");
+        for (let day = 1; day <= 31; day++) {
+            const option = document.createElement("option");
+            option.value = String(day).padStart(2, "0");
+            option.textContent = day;
+            daySelect.appendChild(option);
+        }
+
+        const yearSelect = document.getElementById("birthYear");
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear; year >= 1900; year--) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        }
+    </script>
+
+
+</body>
+</html>

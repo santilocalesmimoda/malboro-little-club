@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Malboro Little Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/favicon2.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+</head>
+
+<body>
+
+<style>
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para la página de perfil */
+.profile-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color:var(--main-color)
+}
+
+/* Estilos para el encabezado */
+
+.header {
+    position: relative;
+    /*background-color: #4CAF50;  Fondo más oscuro */
+    background-image: url("images/mlc.jpg");
+    background-size: cover; /* Para que la imagen se adapte al ancho */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
+    height: 7cm; /* 6 centímetros de alto */
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+/* Estilos para el contenedor del logo */
+.logo-container {
+    position: absolute;
+    left: 20%; /* Desplaza el logo hacia la izquierda */
+    top: 100%; /* Centra el logo verticalmente en relación con el contenedor padre */
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10; /* Asegura que el logo esté por encima de todos los elementos */
+
+}
+
+.header {
+    display: flex;
+    align-items: center; /* Alinea verticalmente */
+    gap: 15px; /* Espacio entre logo y texto */
+}
+
+.user-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+/* Estilos para la información del usuario */
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+    white-space: nowrap; /* Previene salto de línea */
+
+}
+
+.name-lastname {
+    margin: 0;
+    font-size: 30px;
+    margin-top: 160%;
+    margin-left: 178%;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+}
+
+.username {
+    margin: 2px 0 0 0;
+    font-size: 25px;
+    margin-left: 178%;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+}
+
+/* Estilos para el contenido principal */
+
+.content {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* AJUSTE PARA EL BOTÓN EDITAR CON TU DISEÑO */
+.follow-stats {
+    position: absolute;
+    top: 8.2cm; /* Bajado un poco para alinear con el centro del texto */
+    right: 430px;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    color: #000;
+    z-index: 2;
+    white-space: nowrap;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.edit-profile-btn { 
+    background-color: white; 
+    color: #4CAF50; 
+    border: 1.5px solid black; 
+    padding: 8px 20px; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-item {
+    white-space: nowrap;
+    cursor: pointer; /* muestra la mano al pasar el mouse */
+}
+
+.stat-item strong {
+    margin-left: 6px; /* Aumentá este valor si querés más espacio */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+}
+
+/* Contenedor que agrupa barra y recuadros */
+.center-wrapper {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Barra de navegación centrada */
+.navbar {
+    position: relative;
+    top: 1205px;
+    left: 70px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20%;
+    margin-bottom: 10px;
+    font-family: "Outfit", sans-serif;
+    cursor: pointer;
+}
+
+.navbar div {
+    position: relative;
+}
+
+.navbar div:hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: black;
+    bottom: -4px;
+    left: 0;
+}
+
+/* Recuadros debajo */
+.content-box {
+    display: none;
+    position: fixed;
+    top: 60%; /* Ajustá según el alto de tu encabezado */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px; /* o el tamaño que prefieras */
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-top: 20px; /* Espacio entre la barra y el cuadro desplegado */
+    background-color: white;
+}
+
+.close {
+    margin-top: 10px;
+    background: #ddd;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+#like-count {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+input[type="date"], input[type="file"] {
+    font-size: 16px;
+    padding: 6px;
+    margin-top: 10px;
+}
+
+.icon-container {
+    position: absolute;
+    right: 20px;
+    top: 230px;
+    display: flex;
+    gap: 10px;
+    font-size: 40px; /* Tamaño de los íconos */
+    justify-content: center;
+    margin: 50px 5px 0 0;
+    z-index: 1000;
+}
+
+.icon-container i {
+    font-size: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.header {
+    position: relative;
+}
+
+.icon-button {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-button i {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+}
+
+.icon-button span {
+    font-size: 16px;
+    color: white;
+}
+
+#color-picker-box {
+    display: none;
+    position: fixed;
+    top: 400px; /* o top: 60%; */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#palette-icon {
+    position: relative;
+    z-index: 9999;
+}
+
+body {
+    --main-color: #7ccd98;
+    background-color: var(--main-color);
+    transition: background-color 0.5 ease;
+}
+
+/* Ajustes para que la sección quede claramente debajo de la cabecera/ avatar */
+.video-section{
+    clear: both;             /* asegura que no quede junto a elementos flotantes */
+    margin-top: 204%;        /* separa de la línea de tabs; aumentá si el avatar lo tapa */
+    padding: 10px 0 50px 0;  /* espacio superior e inferior */
+    width: 165%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 0;
+}
+
+
+/* Cambiamos el wrapper de flex a grid para manejar filas y columnas */
+.video-wrapper {
+    width: 90%; /* Ajustado para mejor centrado */
+    max-width: 950px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Crea las dos columnas */
+    gap: 40px; /* Espacio entre videos */
+    justify-items: center;
+    box-sizing: border-box;
+}
+
+/* Ajustamos la tarjeta para que no use flexbox innecesario */
+.video-card {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+/* Control de tamaño del elemento <video> para evitar altas desagradables */
+.video-card video{
+    width: 100%;
+    aspect-ratio: 16 / 9; /* fija proporción 16:9; evita videos extremadamente altos */
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    background: #000;
+}
+
+
+/* Títulos opcionales debajo de cada video */
+.video-title{
+    font-size: 20px;
+    font-weight: bold;
+    color: #083; /* ajustalo a tu paleta */
+    text-align: center;
+}
+
+/* Responsive: en pantallas pequeñas apilar verticalmente */
+@media (max-width: 720px){
+    .video-wrapper{
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+    }
+    .video-card{
+        flex: 0 1 100%;
+        max-width: 600px; /* o 100% */
+    }
+}
+
+.about-modal {
+    display: none;              /* oculto por defecto */
+    position: fixed;            /* se fija en toda la ventana */
+    top: 0;
+    left: 0;
+    width: 100vw;               /* ocupa todo el ancho del viewport */
+    height: 100vh;              /* ocupa toda la altura del viewport */
+    background: rgba(0, 0, 0, 0.6); /* fondo oscuro semitransparente */
+    z-index: 9999;              /* 🔹 valor alto para sobreponerse a todo */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px); /* efecto de desenfoque */
+}
+
+.about-content {
+    background: linear-gradient(180deg, #e8ffd6, #9dffba); /* beige suave a amarillo tenue */
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 480px;  /* mantiene ancho controlado */
+    height: 400px;     /* más alto que ancho */
+    text-align: left;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    filter: none !important;
+    animation: fadeIn 0.3s ease-out;
+    align-items: flex-start;   /* <-- Esto libera el título y lo lleva a la izquierda */
+    border: 2px solid rgba(255, 215, 0, 0.3); /* borde dorado sutil */
+}
+
+.about-content h2 {
+    font-size: 1.5rem;
+    color: #2b2b2b;
+    margin-bottom: 75px;
+    margin-top: -10px;
+    text-align: center;
+    transform: translateX(-20px); /* Ajustable */
+    letter-spacing: 1px;
+}
+
+.about-content h3 {
+    font-size: 1.2rem;
+    color: #3e3e3e;
+    margin-bottom: 8px;
+}
+
+.about-content p {
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Animación de entrada suave */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#page-wrapper.blurred {
+    filter: blur(6px);
+    pointer-events: none; /* evita interactuar con el fondo mientras el modal está abierto */
+}
+
+.blurred {
+    filter: blur(4px);
+    pointer-events: none;
+}
+
+#logo-circulo.blurred {
+    filter: blur(6px);
+}
+
+.blurred #profileLogo {
+    filter: blur(4px);
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+/* LÁPIZ DE EDICIÓN (DESPLAZADO AL EXTREMO) */
+
+.edit-overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    background: #fdfce7;
+    border: 1.5px solid #000;
+    border-radius: 50%;
+    display: none; /* Solo aparece al pulsar Editar Perfil */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 11;
+}
+
+.logo-container.editing .edit-overlay { display: flex; }
+
+/*  ***************************** */
+
+#wallpaper-icon {
+    cursor: pointer; 
+    color: white;
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease,filter 0.3s ease;
+    margin: 0 10px; 
+    user-select: none;
+    position: relative;
+    align-self: center;
+    margin-top: -50px;
+}
+
+#wallpaper-icon svg { 
+    width: 40px; 
+    height: 40px; 
+    fill: white; 
+}
+
+/* ===== PANEL SELECTOR DE FONDOS ===== */
+
+#wallpaper-selector {
+    display: none; 
+    position: absolute; 
+    top: 50px; 
+    left: 8px; 
+    transform: translateX(-50%);
+    background: linear-gradient(200deg, #70BFE0, #ffff6f); 
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 16px; 
+    padding: 12px 10px; 
+    z-index: 99997;
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+    width: 130px;
+}
+
+#wallpaper-selector.open { 
+    display: block; 
+    animation: selectorFadeIn 0.22s ease; 
+}
+
+@keyframes selectorFadeIn { 
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-8px)
+    } 
+    to { 
+        opacity: 1;
+        transform: translateX(-50%) translateY(0)
+    } 
+}
+
+#wallpaper-selector .ws-grid {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 8px;
+} 
+
+#wallpaper-selector .ws-btn {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    background: rgba(255,255,255,0.08); 
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 10px; 
+    padding: 7px 4px; 
+    cursor: pointer; 
+    transition: all 0.18s ease;
+    font-size: 22px; 
+    line-height: 1;
+}
+
+#wallpaper-selector .ws-btn.active-theme {
+    background: rgba(255,255,255,0.28); 
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+
+/* ===== CANVAS TRANSPARENTE — sin fondo oscuro ===== */
+
+#wallpaper-canvas {
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    z-index: 99998; 
+    pointer-events: auto; 
+    cursor: none;
+}
+
+#wallpaper-canvas.active { 
+    display: block; 
+}
+
+#wallpaper-label {
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.55); 
+    color: white; 
+    padding: 6px 18px;
+    border-radius: 20px; 
+    font-size: 15px; 
+    font-family: "Outfit",sans-serif;
+    z-index: 99999; 
+    pointer-events: none; 
+    transition: opacity 0.5s ease;
+}
+
+/* ********************************************** */
+</style>
+
+
+<div id="page-wrapper" class="profile-page">
+    <div class="header">
+        <div class="logo-container">
+            <img src="images/perfil2.png" alt="Logo de Usuario" class="user-logo" id="logo-circulo">
+        </div>
+
+            <div class="user-info">
+                <h1 class="name-lastname">Nombre Apellido</h1>
+                <p class="username">@nombredeusuario</p>
+            </div>
+
+            
+            <div class="follow-stats">
+                <a href="editor.html">
+                    <button class="edit-profile-btn" id="edit-profile-link">Editar perfil</button>
+                </a>
+
+                <span class="stat-item" id="followers-link">seguidores <strong id="followers-count">8</strong></span>
+                <span class="stat-item" id="following-link">siguiendo <strong id="following-count">5</strong></span>
+
+            </div>
+
+            <div class="icon-container">
+                <div style="text-align: center;">
+                    <div style="display: inline-block;">
+                        <i class="fi fi-rr-eye" style="cursor: pointer; font-size: 45px;"></i>
+                        <div id="visit-count" style="font-size: 15px; color: white; margin-top: 0px; min-width: 20px; display: block; text-align: center;">
+                            0 Visitas
+                        </div>
+                    </div>
+                </div>
+
+                <div id="main-section">
+                <!-- Aquí va el contenido central -->
+                    <i id="palette-icon" class="fi fi-sr-palette" style="font-size: 40px; color: white; cursor: pointer;"></i>
+
+                    <div id="color-picker-box">
+                        <p style="font-size: 16px;"><strong>Elegí un color principal:</strong></p>
+                        <input type="color" id="color-input" value="#7ccd98">
+                        <br><br>
+                        <button onclick="applyColor()" style="font-size: 14px;">Aplicar</button>
+                        <button onclick="closeColorPicker()" style="font-size: 14px;">Cerrar</button>
+                    </div>
+
+                
+                </div>
+
+                <i class="fi fi-rr-settings" onclick="window.location.href='settings.html'" style="cursor: pointer;"></i>
+
+
+                <div id="wallpaper-icon" title="Fondos de pantalla dinámicos" onclick="toggleSelector()">
+                    <img src="images/diamante.png" alt="Fondos de pantalla" style="width:45px;height:45px;object-fit:contain;display:inline-block;vertical-align:middle;">
+
+                    <div id="wallpaper-selector">
+                        <div class="ws-grid">
+                            <div class="ws-btn" onclick="selectTheme(event,0)" title="Círculos de luz">🔵</div>
+                            <div class="ws-btn" onclick="selectTheme(event,1)" title="Medias lunas">🌙</div>
+                            <div class="ws-btn" onclick="selectTheme(event,2)" title="Espadas">⚔️</div>
+                            <div class="ws-btn" onclick="selectTheme(event,3)" title="Estrellas amarillas">⭐</div>
+                            <div class="ws-btn" onclick="selectTheme(event,4)" title="Mariposas">🦋</div>
+                            <div class="ws-btn" onclick="selectTheme(event,5)" title="Tortas y pasteles">🎂</div>
+                            <div class="ws-btn" onclick="selectTheme(event,6)" title="Cruces">✝️</div>
+                            <div class="ws-btn" onclick="selectTheme(event,7)" title="Calaveras">💀</div>
+                            <div class="ws-btn" onclick="selectTheme(event,8)" title="Hojas de otoño">🍂</div>
+                            <div class="ws-btn" onclick="selectTheme(event,9)" title="Flores">🌸</div>
+                            <div class="ws-btn" onclick="selectTheme(event,10)" title="Moños">🎀</div>
+                            <div class="ws-btn" onclick="selectTheme(event,11)" title="Botellas">🔮</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Contenido debajo del header -->
+
+        <div class="content">
+            <div class="center-wrapper">
+                <div class="navbar">
+                    <div onclick="openModal()">Publicar</div>
+                    <div onclick="location.href='like.html'" style="cursor:pointer;">
+                        Like
+                    </div>
+                    <div onclick="window.location.href='archivo.html'">Archivo</div>
+                    <div onclick="showAbout()">Acerca de</div>
+                </div>
+
+                    <section class="video-section">
+                        <div class="video-wrapper">
+                            <div class="video-card">
+                                <video controls>
+                                    <source src="videos/portrait stuff.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-title">portrait stuff</div>
+                            </div>
+
+                            <div class="video-card">
+                                <video controls>
+                                    <source src="videos/rockin poll.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-title">rockin poll</div>
+                            </div>
+
+                            <div class="video-card">
+                                <video controls>
+                                    <source src="videos/Yee.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-title">Yee</div>
+                            </div>
+
+                            <div class="video-card">
+                                <video controls>
+                                    <source src="videos/rainy day.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-title">rainy day</div>
+                            </div>
+                        </div>
+                    </section>
+                   
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+        <div id="aboutModal" class="about-modal">
+            <div class="about-content">
+                <span class="close-btn" onclick="closeAbout()">&times;</span>
+                <h2>Malboro Little Club</h2>
+                <h3>Descripción:</h3>
+                <p>Hola. ¿Cómo estás? Bienvenido al mundo de Malboro Little Club.</p>
+                <p id="join-date"></p>
+            </div>
+        </div>  
+
+
+    <script>
+        // Navegación
+        document.getElementById("followers-link").onclick = () => window.location.href = "seguidores.html";
+        document.getElementById("following-link").onclick = () => window.location.href = "siguiendo.html";
+    </script>    
+
+    <script>
+        document.getElementById("ver-perfil").onclick = function() {
+            window.location.href = "'perfil2.html'"; // Navega a la página de perfil
+        };
+    </script>
+
+
+    <script>
+        
+    // Mostrar y ocultar el modal de video
+    function openModal() {
+        closeAll();
+        document.getElementById('modal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+    // Mostrar y ocultar calendario
+    function toggleCalendar() {
+        const box = document.getElementById('calendar-box');
+        const isVisible = box.style.display === 'block';
+        closeAll();
+        if (!isVisible) box.style.display = 'block';
+    }
+
+    // 📌 Función CORREGIDA para abrir el modal "Acerca de"
+    // Se ejecuta SOLO al hacer click en el enlace
+    function showAbout() {
+        closeAll(); // Cierra otros modales/cajas si están abiertos
+        const modal = document.getElementById("aboutModal");
+        const joinDate = document.getElementById("join-date");
+
+        const today = new Date();
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        joinDate.textContent = `Te uniste el ${today.toLocaleDateString('es-ES', options)}`;
+
+        modal.style.display = "flex"; // Muestra el modal
+
+        // Aplica el difuminado al wrapper de la página
+        document.getElementById("page-wrapper").classList.add("blurred");
+        // Esto es opcional, si quieres difuminar el logo también
+        document.getElementById("logo-circulo").classList.add("blurred"); 
+    }
+
+    // 📌 Función CORREGIDA para cerrar el modal "Acerca de"
+    function closeAbout() {
+        document.getElementById("aboutModal").style.display = "none"; // Oculta el modal
+    
+        // Quita las clases de difuminado
+        document.getElementById("page-wrapper").classList.remove("blurred");
+        document.getElementById("logo-circulo").classList.remove("blurred");
+    }
+
+    // Cierra otros modales/cajas (se usará al abrir "Post")
+    function closeAll() {
+        document.getElementById('modal').style.display = 'none';
+        document.getElementById('calendar-box').style.display = 'none';
+        // Asegura que el modal "Acerca de" también se pueda cerrar desde aquí
+        document.getElementById('aboutModal').style.display = 'none'; 
+    
+        // También elimina el blur si se cierra el modal de otra forma
+        document.getElementById("page-wrapper").classList.remove("blurred");
+        document.getElementById("logo-circulo").classList.remove("blurred");
+    } 
+  </script>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const paletteIcon = document.getElementById('palette-icon');
+            const colorBox = document.getElementById('color-picker-box');
+            const colorInput = document.getElementById('color-input');
+
+        // Mostrar u ocultar el selector al hacer clic en el ícono 🎨
+        paletteIcon.addEventListener('click', () => {
+            colorBox.style.display = (colorBox.style.display === 'none') ? 'block' : 'none';
+        });
+
+        // ✅ Hacemos las funciones globales para que funcionen con onclick=""
+        window.applyColor = function () {
+            const selectedColor = colorInput.value;
+            document.body.style.setProperty('--main-color', selectedColor);
+        };
+
+        window.closeColorPicker = function () {
+        colorBox.style.display = 'none';
+        };
+    });
+    </script>
+        
+
+
+    <script>
+        // Al cargar la página
+        document.addEventListener("DOMContentLoaded", function () {
+            // Tomar valor del localStorage
+            let count = localStorage.getItem("visitas");
+            if (!count) count = 0;
+
+            // Sumar uno
+            count = parseInt(count) + 1;
+
+            // Guardar
+            localStorage.setItem("visitas", count);
+
+            // Mostrar en pantalla
+            document.getElementById("visit-count").textContent = count + " Visitas";
+        });
+    </script>
+
+
+    <script>
+        function showAbout() {
+            const modal = document.getElementById("aboutModal");
+            const joinDate = document.getElementById("join-date");
+
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            joinDate.textContent = `Te uniste el ${today.toLocaleDateString('es-ES', options)}`;
+
+            modal.style.display = "flex";
+
+            document.getElementById("page-wrapper").classList.add("blurred");
+            document.getElementById("logo-circulo").classList.add("blurred");
+        }
+
+        function closeAbout() {
+            document.getElementById("aboutModal").style.display = "none";
+            document.getElementById("page-wrapper").classList.remove("blurred");
+            document.getElementById("logo-circulo").classList.remove("blurred");
+        }
+    </script>
+
+
+    <script>
+            // --- LÓGICA DE CARGA DEL LOGO ---
+        const logoOriginal = document.getElementById("logo-circulo");
+        const logoOverlay = document.getElementById("logo-overlay");
+        const animatingLogo = document.getElementById("animating-logo");
+
+        logoOriginal.addEventListener("click", () => {
+            logoOverlay.style.display = "flex";
+            document.body.style.overflow = "hidden";
+            
+            const spinner = logoOverlay.querySelector('.loader-circle');
+            const text = logoOverlay.querySelector('.loading-text-universal');
+            
+            spinner.style.display = "block";
+            text.style.display = "block";
+            animatingLogo.classList.remove("active");
+
+            setTimeout(() => {
+                spinner.style.display = "none";
+                text.style.display = "none";
+                animatingLogo.classList.add("active");
+            }, 3000);
+        });
+
+        logoOverlay.addEventListener("click", () => {
+            if (animatingLogo.classList.contains("active")) {
+                logoOverlay.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        });
+
+        // --- LÓGICA DE CARGA DEL FONDO (WALLPAPER) ---
+        const headerLayer = document.getElementById("header-click-layer");
+        const headerLoading = document.getElementById("header-loading-overlay");
+        const imageViewer = document.getElementById("header-image-viewer");
+
+        headerLayer.addEventListener("click", (e) => {
+            e.stopPropagation();
+            headerLoading.style.display = "flex";
+            document.body.style.overflow = "hidden";
+
+            setTimeout(() => {
+                headerLoading.style.display = "none";
+                imageViewer.style.display = "flex";
+            }, 3000);
+        });
+
+        imageViewer.addEventListener("click", () => {
+            imageViewer.style.display = "none";
+            document.body.style.overflow = "auto";
+        });
+    </script>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function(){
+
+        (function(){
+            const canvas = document.getElementById('wallpaper-canvas');
+            const ctx    = canvas.getContext('2d');
+            const label  = document.getElementById('wallpaper-label');
+            let isActive=false, currentTheme=-1, particles=[], animFrame=null;
+
+            const themeNames=[
+                '🔵 Círculos de luz','🌙 Medias lunas','⚔️ Espadas',
+                '⭐ Estrellas amarillas','🦋 Mariposas','🎂 Tortas y pasteles',
+                '✝️ Cruces','💀 Calaveras','🍂 Hojas de otoño',
+                '🌸 Flores','🎀 Moños','🔮 Botellas'
+
+            ];
+
+            
+            function resizeCanvas(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            canvas.addEventListener('mousemove', stopWallpaper);
+            canvas.addEventListener('click', stopWallpaper);
+
+            function stopWallpaper(){
+                if(!isActive)return;
+                isActive=false; canvas.classList.remove('active'); label.style.display='none';
+                if(animFrame) cancelAnimationFrame(animFrame);
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+
+            }
+
+            // ===== NUEVO: toggle del panel selector =====
+            const selectorPanel = document.getElementById('wallpaper-selector');
+                window._selectorOpen = false;
+
+            window.toggleSelector = function(){
+
+                window._selectorOpen = !window._selectorOpen;
+
+                if(window._selectorOpen){
+                    selectorPanel.classList.add('open');
+                } else {
+                    selectorPanel.classList.remove('open');
+                }
+
+            };
+
+            // ===== NUEVO: seleccionar un tema desde el panel =====
+
+            window.selectTheme = function(e, themeIndex){
+                e.stopPropagation(); // evitar que dispare toggleSelector
+                // Quitar activo de todos los botones
+                document.querySelectorAll('.ws-btn').forEach(b => b.classList.remove('active-theme'));
+                // Marcar el botón activo
+                e.currentTarget.classList.add('active-theme');
+                // Activar el fondo
+                currentTheme = themeIndex;
+                isActive = true;
+
+                canvas.classList.add('active');
+                label.textContent = themeNames[currentTheme];
+                label.style.display = 'block';
+                label.style.opacity = '1';
+
+                if(animFrame) cancelAnimationFrame(animFrame);
+                initParticles(currentTheme);
+                animate();
+                setTimeout(()=>{ label.style.opacity='0'; }, 2500);
+            };
+
+            const rand=(a,b)=>Math.random()*(b-a)+a;
+            const randInt=(a,b)=>Math.floor(rand(a,b+1));
+            const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
+            const COUNTS=[90,80,70,100,70,80,60,75,85,95,80,65];
+
+            function initParticles(theme){
+                particles=[];
+                const n=COUNTS[theme]||80;
+                for(let i=0;i<n;i++) particles.push(createParticle(theme,true));
+            }
+
+            function createParticle(theme,initial){
+                const x=rand(0,canvas.width);
+                const y=initial?rand(-canvas.height,canvas.height):rand(-120,-10);
+                const p={x,y,theme}; applyProps(p,theme); return p;
+            }
+
+        function applyProps(p,theme){
+            p.speed=rand(1.8,4.5); p.size=rand(14,36); p.opacity=rand(0.75,1);
+            p.angle=rand(0,Math.PI*2); p.spin=rand(-0.05,0.05);
+            p.drift=rand(-0.9,0.9); p.wobble=rand(0,Math.PI*2); p.wobbleSpeed=rand(0.03,0.08);
+
+            switch(theme){
+                case 0: // Círculos de luz — blanco y verde, distintos tamaños
+                    p.color=pick(['#ffffff','#e0ffe0','#a8f0a8','#c8ffc8','#f0fff0','#b2ffb2','#d4ffd4']);
+                    p.size=rand(10,55); p.speed=rand(3.5,7.0); p.spin=0; p.drift=rand(-0.5,0.5);
+                    p.glowIntensity=rand(0.5,1.0); break;
+
+                case 1: // Medias lunas — amarillas y blancas
+                    p.color=pick(['#ffe082','#ffd54f','#ffca28','#ffffff','#fff9c4','#ffee58','#fffde7']);
+                    p.size=rand(16,50); p.speed=rand(1.8,4.2); p.drift=rand(-1.2,1.2); p.spin=rand(-0.05,0.05); break;
+
+                case 2: // Espadas — más gris y verde, tamaños variados
+                    p.color=pick(['#b0bec5','#78909c','#607d8b','#90a4ae','#66bb6a','#4caf50','#81c784','#cfd8dc','#ffd54f','#ef9a9a']);
+                    p.size=rand(28,75); p.speed=rand(1.5,3.8); p.spin=rand(-0.05,0.05); p.drift=rand(-0.8,0.8); p.swordType=randInt(0,3); break;
+
+                case 3: // Estrellas — SOLO amarillo
+                    p.color=pick(['#ffe082','#ffd54f','#ffca28','#ffb300','#fff59d','#ffee58','#f9a825']);
+                    p.size=rand(10,46); p.arms=pick([4,5,6,8]); p.glow=true; p.speed=rand(1.8,4.0); break;
+
+                case 4: // Mariposas — más reales
+                    p.color=pick(['#f48fb1','#ce93d8','#80cbc4','#ffcc80','#a5d6a7','#90caf9','#ffe082','#ef9a9a','#ff8a65','#b39ddb']);
+                    p.wingColor2=pick(['#f8bbd0','#e1bee7','#b2ebf2','#fff9c4','#c8e6c9','#bbdefb']);
+                    p.size=rand(18,55); p.speed=rand(3.5,6.5); p.flutter=rand(0,Math.PI*2); p.flutterSpeed=rand(7.0, 10.0); p.drift=rand(-1.2,1.2); break;
+
+                case 5: // Tortas — más grandes y reales
+                    p.color=pick(['#f48fb1','#ffcc80','#ffe082','#a5d6a7','#ce93d8','#ef9a9a','#80deea','#bcaaa4','#fff59d']);
+                    p.frostColor=pick(['#ffffff','#f8bbd0','#e1bee7','#b2ebf2','#fff9c4']);
+                    p.size=rand(35,80); p.speed=rand(8.0,10.6); p.spin=rand(-0.02,0.02); p.topping=randInt(0,2); p.layers=randInt(1,3); break;
+
+                case 6: // Cruces — más grandes, grises/negras con brillo
+                    p.color=pick(['#616161','#424242','#757575','#9e9e9e','#000000','#212121','#37474f','#546e7a']);
+                    p.glowColor=pick(['#e0e0e0','#b0bec5','#90a4ae','#ffffff','#78909c']);
+                    p.size=rand(28,72); p.speed=rand(6.8,8.5); p.spin=rand(-0.06,0.06); p.crossType=randInt(0,2); break;
+
+                case 7: // Calaveras — más rápidas y reales
+                    p.color=pick(['#ffffff','#f5f5f5','#e0e0e0','#bdbdbd','#eeeeee','#fff9c4']);
+                    p.size=rand(22,60); p.speed=rand(10.0, 14.0);     // <--- Aumentado para mayor velocidad de desplazamiento
+                    p.spin=rand(-0.15, 0.15);     // <--- Opcional: giro más rápido acorde a la velocidad
+                    p.flutterSpeed=rand(8.6, 10.6); 
+                    p.style=randInt(0,2); 
+                    break;
+
+                case 8: // Hojas — distintos tonos de verde
+                    p.color=pick(['#2e7d32','#388e3c','#43a047','#4caf50','#66bb6a','#81c784','#1b5e20','#558b2f','#33691e','#8bc34a','#aed581','#689f38']);
+                    p.size=rand(18,58); p.speed=rand(6.3,8.6); p.spin=rand(-0.07,0.07); p.drift=rand(-2.5,2.5); p.leafType=randInt(0,3); p.wobbleSpeed=rand(0.14,4.6); break;
+
+                case 9: // Flores — más rápidas
+                    p.flowerType=randInt(0,4);
+                    p.color=[
+                        pick(['#ef5350','#e53935','#c62828','#ff8a80']),
+                        pick(['#ff7043','#ff5722','#e64a19','#ff8a65']),
+                        pick(['#ffffff','#f8bbd0','#fce4ec']),
+                        pick(['#ffd54f','#ffca28','#ffb300']),
+                        pick(['#ef5350','#ff1744','#d32f2f','#f48fb1'])
+                    ][p.flowerType];
+                    p.size=rand(18,48); p.speed=rand(9.4,9.7); p.spin=rand(-0.05,0.05); p.drift=rand(-8.4,7.9); p.wobbleSpeed=rand(0.13,5.8); break;
+
+                case 10: // Moños — tonalidades rosado y rojo
+                    p.color=pick(['#f48fb1','#f06292','#e91e63','#ec407a','#ff80ab','#ff4081','#c2185b','#ad1457','#ff8a80','#ff6090']);
+                    p.centerColor=pick(['#ffffff','#fce4ec','#f8bbd0']);
+                    p.size=rand(20,58); p.speed=rand(6.5,7.8); p.spin=rand(-0.04,0.04); p.drift=rand(-0.6,0.6); break; p.flutterSpeed=rand(6.5,9.8);
+
+                case 11: // Botellas — distintos tipos y colores
+                    p.color=pick(['#80cbc4','#4db6ac','#26a69a','#80deea','#4dd0e1','#b2ebf2','#a5d6a7','#81c784','#ce93d8','#b39ddb']);
+                    p.size=rand(28,65); p.speed=rand(6.5,9.0); p.spin=rand(-0.03,0.03); p.drift=rand(-0.5,0.5); p.bottleType=randInt(0,2); break;
+            }
+        }
+
+        /* ===================== DRAW ===================== */
+        function drawParticle(p){
+            ctx.save(); ctx.globalAlpha=p.opacity; ctx.translate(p.x,p.y); ctx.rotate(p.angle);
+
+            switch(p.theme){
+                case 0:  drawLightCircle(p); break;
+                case 1:  drawMoon(p);       break;
+                case 2:  drawSword(p);      break;
+                case 3:  drawStar(p);       break;
+                case 4:  drawButterfly(p);  break;
+                case 5:  drawCake(p);       break;
+                case 6:  drawCross(p);      break;
+                case 7:  drawSkull(p);      break;
+                case 8:  drawLeaf(p);       break;
+                case 9:  drawFlower(p);     break;
+                case 10:  drawBow(p);        break;
+                case 11:  drawBottle(p);     break;
+
+            }
+            ctx.restore();
+        }
+
+        /* 0 — Círculos de luz con glow blanco y verde */
+
+        function drawLightCircle(p){
+            const r=p.size/2;
+            const grd=ctx.createRadialGradient(0,0,r*0.1,0,0,r);
+
+            grd.addColorStop(0,'rgba(255,255,255,0.95)');
+            grd.addColorStop(0.35,p.color);
+            grd.addColorStop(1,'rgba(255,255,255,0)');
+
+            ctx.shadowColor=p.color; ctx.shadowBlur=r*(1.2+(p.glowIntensity||0.7));
+            ctx.globalAlpha=p.opacity*(0.7+0.3*(p.glowIntensity||0.7));
+            ctx.fillStyle=grd;
+            ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.fill();
+            // anillo exterior suave
+            ctx.shadowBlur=r*2.5;
+            ctx.strokeStyle=p.color; ctx.lineWidth=r*0.08; ctx.globalAlpha=0.22*(p.glowIntensity||0.7);
+            ctx.beginPath(); ctx.arc(0,0,r*1.18,0,Math.PI*2); ctx.stroke();
+            ctx.globalAlpha=p.opacity;
+        }
+
+        /* 1 — Media luna PURA (sin burbuja/fondo) */
+
+        function drawMoon(p){
+            const r=p.size/2;
+            ctx.shadowColor=p.color; ctx.shadowBlur=12;
+            // Técnica: dibujar luna con path complejo sin relleno de círculo exterior visible
+            ctx.fillStyle=p.color;
+            ctx.beginPath();
+            // Arco exterior (la luna)
+            ctx.arc(0,0,r,Math.PI*0.15,Math.PI*1.85);
+            ctx.closePath();
+            ctx.fill();
+            // Recortar la parte interior para dar forma de luna creciente
+            ctx.globalCompositeOperation='destination-out';
+            ctx.beginPath();
+            ctx.arc(r*0.38, r*0.08, r*0.74, 0, Math.PI*2);
+            ctx.fill();
+            ctx.globalCompositeOperation='source-over';
+        }
+
+        /* 2 — Espadas distintos tipos */
+
+        function drawSword(p){
+            const L=p.size, t=p.swordType||0;
+            ctx.shadowColor=p.color; ctx.shadowBlur=10; ctx.fillStyle=p.color;
+            if(t===0){
+                ctx.beginPath(); ctx.moveTo(0,-L*0.52); ctx.lineTo(3.5,L*0.2); ctx.lineTo(-3.5,L*0.2); ctx.closePath(); ctx.fill();
+                ctx.fillRect(-L*0.24,L*0.2,L*0.48,L*0.08);
+                ctx.fillStyle='#8d6e63'; ctx.fillRect(-3.5,L*0.28,7,L*0.26);
+
+            } else if(t===1){
+                ctx.beginPath(); ctx.moveTo(0,-L*0.5); ctx.quadraticCurveTo(L*0.28,0,L*0.12,L*0.22); ctx.lineTo(-L*0.06,L*0.22); ctx.quadraticCurveTo(-L*0.1,0,0,-L*0.5); ctx.closePath(); ctx.fill();
+                ctx.fillStyle='#ffd54f'; ctx.fillRect(-L*0.22,L*0.22,L*0.44,L*0.07);
+                ctx.fillStyle='#4e342e'; ctx.fillRect(-3,L*0.29,6,L*0.24);
+
+            } else if(t===2){
+                ctx.beginPath(); ctx.moveTo(0,-L*0.5); ctx.lineTo(L*0.13,L*0.18); ctx.lineTo(-L*0.13,L*0.18); ctx.closePath(); ctx.fill();
+                ctx.fillRect(-L*0.32,L*0.18,L*0.64,L*0.1);
+                ctx.fillStyle='#6d4c41'; ctx.fillRect(-4.5,L*0.28,9,L*0.28);
+
+            } else {
+                ctx.beginPath(); ctx.moveTo(0,-L*0.56); ctx.lineTo(2,L*0.16); ctx.lineTo(-2,L*0.16); ctx.closePath(); ctx.fill();
+                ctx.fillStyle='#212121'; ctx.fillRect(-2,L*0.16,4,L*0.08);
+                ctx.fillStyle='#4e342e'; ctx.fillRect(-3,L*0.24,6,L*0.32);
+                ctx.beginPath(); ctx.arc(0,L*0.16,L*0.09,0,Math.PI*2); ctx.fillStyle='#ffd54f'; ctx.fill();
+            }
+
+        }
+
+        /* 3 — Estrellas SOLO amarillas con brillo */
+
+        function drawStar(p){
+            const arms=p.arms||5, outerR=p.size/2, innerR=outerR*0.42;
+            ctx.shadowColor='#ffe082'; ctx.shadowBlur=24;
+            ctx.fillStyle=p.color;
+            ctx.beginPath();
+
+            for(let i=0;i<arms*2;i++){
+                const r=i%2===0?outerR:innerR, a=(i*Math.PI/arms)-Math.PI/2;
+                if(i===0) ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r);
+                else       ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);
+            }
+
+            ctx.closePath(); ctx.fill();
+            ctx.fillStyle='rgba(255,255,220,0.75)';
+            ctx.beginPath(); ctx.arc(0,0,outerR*0.18,0,Math.PI*2); ctx.fill();
+        }
+
+        /* 4 — Mariposas con aleteo real */
+
+        function drawButterfly(p){
+            const s=p.size, ft=p.flutter||0, flap=Math.cos(ft), sx=Math.abs(flap);
+            ctx.shadowColor=p.color; ctx.shadowBlur=8;
+
+            // Alas superiores
+            [[- 1],[1]].forEach(([side])=>{
+                ctx.save(); ctx.scale(side*sx,1); ctx.fillStyle=p.color;
+                ctx.beginPath(); ctx.moveTo(0,0);
+                ctx.bezierCurveTo(-s*0.05,-s*0.35,-s*0.58,-s*0.42,-s*0.46,-s*0.05);
+                ctx.bezierCurveTo(-s*0.4,s*0.1,-s*0.05,s*0.08,0,0);
+                ctx.closePath(); ctx.fill();
+                ctx.fillStyle=p.wingColor2||'rgba(255,255,255,0.3)'; ctx.globalAlpha=0.5;
+                ctx.beginPath(); ctx.ellipse(-s*0.26,-s*0.16,s*0.14,s*0.09,Math.PI*0.2,0,Math.PI*2); ctx.fill();
+                ctx.globalAlpha=p.opacity; ctx.restore();
+            });
+
+            // Alas inferiores
+            [[- 1],[1]].forEach(([side])=>{
+                ctx.save(); ctx.scale(side*sx*0.85,1); ctx.fillStyle=p.color;
+                ctx.beginPath(); ctx.moveTo(0,0);
+                ctx.bezierCurveTo(-s*0.08,s*0.1,-s*0.46,s*0.36,-s*0.3,s*0.18);
+                ctx.bezierCurveTo(-s*0.2,s*0.08,-s*0.05,s*0.05,0,0);
+                ctx.closePath(); ctx.fill(); ctx.restore();
+            });
+
+            // Cuerpo
+            ctx.fillStyle='rgba(30,20,10,0.78)';
+            ctx.beginPath(); ctx.ellipse(0,0,s*0.055,s*0.3,0,0,Math.PI*2); ctx.fill();
+
+            // Antenas
+            ctx.strokeStyle='rgba(30,20,10,0.65)'; ctx.lineWidth=0.9;
+            ctx.beginPath(); ctx.moveTo(-s*0.03,-s*0.28); ctx.quadraticCurveTo(-s*0.2,-s*0.5,-s*0.15,-s*0.56); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo( s*0.03,-s*0.28); ctx.quadraticCurveTo( s*0.2,-s*0.5, s*0.15,-s*0.56); ctx.stroke();
+            ctx.fillStyle='#333';
+            ctx.beginPath(); ctx.arc(-s*0.15,-s*0.56,s*0.03,0,Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.arc( s*0.15,-s*0.56,s*0.03,0,Math.PI*2); ctx.fill();
+        }
+
+        
+        /* 5 — Tortas reales con toppings */
+
+        function drawCake(p){
+            const s=p.size, layers=p.layers||1, lH=s*0.28, baseY=s*0.3;
+            const colors=[p.color,p.frostColor||'#ffffff',pick(['#ffcc80','#ce93d8','#a5d6a7'])];
+
+            ctx.shadowColor=p.color; ctx.shadowBlur=8;
+
+            for(let l=0;l<Math.min(layers+1,3);l++){
+                const ly=baseY-l*lH, lw=s*(0.46-l*0.04);
+                ctx.fillStyle=colors[l%colors.length];
+                ctx.beginPath();
+                if(ctx.roundRect) ctx.roundRect(-lw,ly-lH,lw*2,lH,[4,4,0,0]); else ctx.rect(-lw,ly-lH,lw*2,lH);
+                ctx.fill();
+                ctx.fillStyle='rgba(255,255,255,0.65)'; ctx.fillRect(-lw,ly-lH*0.07,lw*2,lH*0.07);
+                if(l===0){ ctx.fillStyle='#5d4037'; ctx.fillRect(-lw,ly-lH*0.32,lw*2,lH*0.09); }
+            }
+
+            const topY=baseY-layers*lH;
+            if(p.topping===0){
+                for(let i=-1;i<=1;i++){
+                    ctx.fillStyle='#ef5350'; ctx.beginPath(); ctx.arc(i*s*0.17,topY-s*0.06,s*0.1,0,Math.PI*2); ctx.fill();
+                    ctx.fillStyle='#388e3c'; ctx.fillRect(i*s*0.17-s*0.015,topY-s*0.16,s*0.04,s*0.1);
+                }
+
+            } else if(p.topping===1){
+                for(let i=-1;i<=1;i++){
+                    ctx.fillStyle='#b71c1c'; ctx.beginPath(); ctx.arc(i*s*0.17,topY-s*0.06,s*0.09,0,Math.PI*2); ctx.fill();
+                    ctx.strokeStyle='#2e7d32'; ctx.lineWidth=1.4;
+                    ctx.beginPath(); ctx.moveTo(i*s*0.17,topY-s*0.14); ctx.quadraticCurveTo(i*s*0.17+s*0.1,topY-s*0.24,i*s*0.12,topY-s*0.24); ctx.stroke();
+                }
+
+            } else {
+                ctx.strokeStyle='#3e2723'; ctx.lineWidth=s*0.055; ctx.lineCap='round';
+                for(let i=-1;i<=1;i++){
+                    ctx.beginPath(); ctx.moveTo(i*s*0.22,topY); ctx.quadraticCurveTo(i*s*0.22,topY+s*0.1,i*s*0.18,topY+s*0.2); ctx.stroke();
+                }
+            }
+
+            const cc=['#ef5350','#42a5f5','#66bb6a','#ffa726','#ab47bc','#fff176'];
+            for(let c=-1;c<=1;c++){
+                const cx=c*s*0.18;
+                ctx.fillStyle=pick(cc); ctx.fillRect(cx-s*0.038,topY-s*0.26,s*0.076,s*0.24);
+                ctx.fillStyle='#ffe082'; ctx.beginPath(); ctx.ellipse(cx,topY-s*0.32,s*0.05,s*0.09,0,0,Math.PI*2); ctx.fill();
+                ctx.fillStyle='rgba(255,140,0,0.5)'; ctx.beginPath(); ctx.ellipse(cx,topY-s*0.38,s*0.028,s*0.045,0,0,Math.PI*2); ctx.fill();
+            }
+
+        }
+
+        
+
+        /* 6 — Cruces grandes variadas con brillo */
+
+        function drawCross(p){
+            const s = p.size;
+            const w = s * 0.22;  // grosor del brazo
+
+            ctx.shadowColor = p.color;
+            ctx.shadowBlur = 14;
+
+            // Sombra exterior para dar profundidad
+            ctx.fillStyle = 'rgba(0,0,0,0.45)';
+            ctx.fillRect(-w/2 + 3, -s/2 + 3, w, s);
+            ctx.fillRect(-s/2 + 3, -w/2 + 3, s, w);
+
+            // Cuerpo principal de la cruz
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-w/2, -s/2, w, s);
+            ctx.fillRect(-s/2, -w/2, s, w);
+
+            // Brillo lateral izquierdo
+            ctx.fillStyle = 'rgba(255,255,255,0.18)';
+            ctx.fillRect(-w/2, -s/2, w * 0.3, s);
+            ctx.fillRect(-s/2, -w/2, s, w * 0.3);
+
+            // Borde oscuro para efecto 3D
+            ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(-w/2, -s/2, w, s);
+            ctx.strokeRect(-s/2, -w/2, s, w);
+
+            // Centro con brillo
+            ctx.fillStyle = 'rgba(255,255,255,0.3)';
+            ctx.beginPath();
+            ctx.arc(0, 0, w * 0.35, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+
+        /* 7 — Calaveras más reales */
+
+        function drawSkull(p){
+            const s = p.size;
+
+            ctx.shadowColor = p.color;
+            ctx.shadowBlur = 12;
+
+            // Cráneo
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.ellipse(0, -s*0.1, s*0.38, s*0.42, 0, 0, Math.PI*2);
+            ctx.fill();
+
+            // Mandíbula
+            ctx.beginPath();
+            ctx.ellipse(0, s*0.28, s*0.28, s*0.18, 0, 0, Math.PI);
+            ctx.fill();
+
+            // Sombra lateral para volumen
+            const grad = ctx.createRadialGradient(-s*0.1, -s*0.2, s*0.05, 0, -s*0.1, s*0.42);
+            grad.addColorStop(0, 'rgba(255,255,255,0.25)');
+            grad.addColorStop(1, 'rgba(0,0,0,0.4)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.ellipse(0, -s*0.1, s*0.38, s*0.42, 0, 0, Math.PI*2);
+            ctx.fill();
+
+            // Cuencas de los ojos
+            ctx.fillStyle = 'rgba(0,0,0,0.85)';
+            ctx.beginPath();
+            ctx.ellipse(-s*0.13, -s*0.08, s*0.1, s*0.12, -0.2, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(s*0.13, -s*0.08, s*0.1, s*0.12, 0.2, 0, Math.PI*2);
+            ctx.fill();
+
+            // Nariz
+            ctx.beginPath();
+            ctx.moveTo(0, s*0.08);
+            ctx.lineTo(-s*0.05, s*0.18);
+            ctx.lineTo(s*0.05, s*0.18);
+            ctx.closePath();
+            ctx.fill();
+
+            // Dientes
+            ctx.fillStyle = p.color;
+            const toothW = s*0.08, toothH = s*0.1;
+            for(let i = -1; i <= 1; i++){
+                ctx.fillRect(i*toothW*1.1 - toothW/2, s*0.22, toothW - 2, toothH);
+            }
+
+            // Línea de separación mandíbula
+            ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+            ctx.lineWidth = s*0.03;
+            ctx.beginPath();
+            ctx.moveTo(-s*0.28, s*0.2);
+            ctx.lineTo(s*0.28, s*0.2);
+            ctx.stroke();
+
+            // Grietas
+            ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+            ctx.lineWidth = s*0.015;
+            ctx.beginPath();
+            ctx.moveTo(-s*0.05, -s*0.35);
+            ctx.lineTo(-s*0.02, -s*0.15);
+            ctx.lineTo(-s*0.08, -s*0.05);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(s*0.1, -s*0.3);
+            ctx.lineTo(s*0.14, -s*0.1);
+            ctx.stroke();
+        }
+
+        /* 8 — Hojas distintas especies */
+
+        function drawLeaf(p){
+
+            const s=p.size, t=p.leafType||0;
+
+            ctx.shadowColor=p.color; ctx.shadowBlur=8;
+
+            if(t===0){ // Hoja simple con nervaduras
+
+                ctx.fillStyle=p.color;
+                ctx.beginPath();
+                ctx.moveTo(0,-s*0.5);
+                ctx.bezierCurveTo(s*0.4,-s*0.3,s*0.4,s*0.2,0,s*0.5);
+                ctx.bezierCurveTo(-s*0.4,s*0.2,-s*0.4,-s*0.3,0,-s*0.5);
+                ctx.fill();
+                const g0=ctx.createLinearGradient(-s*0.4,0,s*0.4,0);
+                g0.addColorStop(0,'rgba(0,0,0,0.28)');
+                g0.addColorStop(0.4,'rgba(255,255,255,0.2)');
+                g0.addColorStop(1,'rgba(0,0,0,0.22)');
+                ctx.fillStyle=g0;
+                ctx.beginPath();
+                ctx.moveTo(0,-s*0.5);
+                ctx.bezierCurveTo(s*0.4,-s*0.3,s*0.4,s*0.2,0,s*0.5);
+                ctx.bezierCurveTo(-s*0.4,s*0.2,-s*0.4,-s*0.3,0,-s*0.5);
+                ctx.fill();
+                ctx.strokeStyle='rgba(0,0,0,0.32)'; ctx.lineWidth=s*0.04;
+                ctx.beginPath(); ctx.moveTo(0,-s*0.5); ctx.lineTo(0,s*0.5); ctx.stroke();
+                ctx.lineWidth=s*0.018;
+                [-0.3,-0.1,0.1,0.3].forEach(y=>{
+                    ctx.beginPath(); ctx.moveTo(0,s*y); ctx.lineTo(s*0.3,s*(y-0.12)); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(0,s*y); ctx.lineTo(-s*0.3,s*(y-0.12)); ctx.stroke();
+                });
+
+            } else if(t===1){ // Hoja de roble irregular
+
+                ctx.fillStyle=p.color;
+                ctx.beginPath();
+                ctx.moveTo(0,-s*0.5);
+                ctx.bezierCurveTo(s*0.15,-s*0.4,s*0.35,-s*0.35,s*0.3,-s*0.2);
+                ctx.bezierCurveTo(s*0.45,-s*0.2,s*0.4,-s*0.05,s*0.25,-s*0.05);
+                ctx.bezierCurveTo(s*0.4,s*0.05,s*0.35,s*0.2,s*0.2,s*0.18);
+                ctx.bezierCurveTo(s*0.3,s*0.3,s*0.15,s*0.45,0,s*0.5);
+                ctx.bezierCurveTo(-s*0.15,s*0.45,-s*0.3,s*0.3,-s*0.2,s*0.18);
+                ctx.bezierCurveTo(-s*0.35,s*0.2,-s*0.4,s*0.05,-s*0.25,-s*0.05);
+                ctx.bezierCurveTo(-s*0.4,-s*0.05,-s*0.45,-s*0.2,-s*0.3,-s*0.2);
+                ctx.bezierCurveTo(-s*0.35,-s*0.35,-s*0.15,-s*0.4,0,-s*0.5);
+                ctx.fill();
+                const g1=ctx.createLinearGradient(-s*0.4,-s*0.3,s*0.2,s*0.3);
+                g1.addColorStop(0,'rgba(255,255,255,0.22)');
+                g1.addColorStop(0.6,'rgba(0,0,0,0.0)');
+                g1.addColorStop(1,'rgba(0,0,0,0.28)');
+                ctx.fillStyle=g1;
+                ctx.beginPath();
+                ctx.moveTo(0,-s*0.5);
+                ctx.bezierCurveTo(s*0.15,-s*0.4,s*0.35,-s*0.35,s*0.3,-s*0.2);
+                ctx.bezierCurveTo(s*0.45,-s*0.2,s*0.4,-s*0.05,s*0.25,-s*0.05);
+                ctx.bezierCurveTo(s*0.4,s*0.05,s*0.35,s*0.2,s*0.2,s*0.18);
+                ctx.bezierCurveTo(s*0.3,s*0.3,s*0.15,s*0.45,0,s*0.5);
+                ctx.bezierCurveTo(-s*0.15,s*0.45,-s*0.3,s*0.3,-s*0.2,s*0.18);
+                ctx.bezierCurveTo(-s*0.35,s*0.2,-s*0.4,s*0.05,-s*0.25,-s*0.05);
+                ctx.bezierCurveTo(-s*0.4,-s*0.05,-s*0.45,-s*0.2,-s*0.3,-s*0.2);
+                ctx.bezierCurveTo(-s*0.35,-s*0.35,-s*0.15,-s*0.4,0,-s*0.5);
+                ctx.fill();
+                ctx.strokeStyle='rgba(0,0,0,0.28)'; ctx.lineWidth=s*0.032;
+                ctx.beginPath(); ctx.moveTo(0,-s*0.5); ctx.lineTo(0,s*0.5); ctx.stroke();
+
+            } else if(t===2){ // Hoja lanceolada fina
+
+                ctx.fillStyle=p.color;
+                ctx.beginPath();
+                ctx.moveTo(0,-s*0.55);
+                ctx.bezierCurveTo(s*0.18,-s*0.2,s*0.18,s*0.2,0,s*0.55);
+                ctx.bezierCurveTo(-s*0.18,s*0.2,-s*0.18,-s*0.2,0,-s*0.55);
+                ctx.fill();
+                const g2=ctx.createLinearGradient(-s*0.18,0,s*0.18,0);
+                g2.addColorStop(0,'rgba(0,0,0,0.25)');
+                g2.addColorStop(0.35,'rgba(255,255,255,0.3)');
+                g2.addColorStop(1,'rgba(0,0,0,0.2)');
+                ctx.fillStyle=g2;
+                ctx.beginPath();
+                ctx.moveTo(0,-s*0.55);
+                ctx.bezierCurveTo(s*0.18,-s*0.2,s*0.18,s*0.2,0,s*0.55);
+                ctx.bezierCurveTo(-s*0.18,s*0.2,-s*0.18,-s*0.2,0,-s*0.55);
+                ctx.fill();
+                ctx.strokeStyle='rgba(0,0,0,0.28)'; ctx.lineWidth=s*0.03;
+                ctx.beginPath(); ctx.moveTo(0,-s*0.55); ctx.lineTo(0,s*0.55); ctx.stroke();
+                ctx.lineWidth=s*0.015;
+                [-0.3,-0.1,0.1,0.3].forEach(y=>{
+                    ctx.beginPath(); ctx.moveTo(0,s*y); ctx.lineTo(s*0.14,s*(y-0.1)); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(0,s*y); ctx.lineTo(-s*0.14,s*(y-0.1)); ctx.stroke();
+                });
+
+            } else { // Hoja tipo arce con lóbulos
+
+                ctx.fillStyle=p.color;
+                ctx.beginPath();
+                ctx.moveTo(0,s*0.5);
+                ctx.lineTo(0,s*0.1);
+                ctx.bezierCurveTo(-s*0.05,-s*0.1,-s*0.1,-s*0.5,0,-s*0.55);
+                ctx.bezierCurveTo(s*0.1,-s*0.5,s*0.05,-s*0.1,0,s*0.1);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(0,s*0.0);
+                ctx.bezierCurveTo(s*0.1,-s*0.05,s*0.45,-s*0.25,s*0.5,-s*0.35);
+                ctx.bezierCurveTo(s*0.4,-s*0.18,s*0.2,s*0.0,0,s*0.0);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(0,s*0.0);
+                ctx.bezierCurveTo(-s*0.1,-s*0.05,-s*0.45,-s*0.25,-s*0.5,-s*0.35);
+                ctx.bezierCurveTo(-s*0.4,-s*0.18,-s*0.2,s*0.0,0,s*0.0);
+                ctx.fill();
+                const g3=ctx.createRadialGradient(-s*0.1,-s*0.2,s*0.05,0,0,s*0.5);
+                g3.addColorStop(0,'rgba(255,255,255,0.28)');
+                g3.addColorStop(1,'rgba(0,0,0,0.3)');
+                ctx.fillStyle=g3;
+                ctx.beginPath(); ctx.arc(0,0,s*0.5,0,Math.PI*2); ctx.fill();
+                ctx.strokeStyle='rgba(0,0,0,0.28)'; ctx.lineWidth=s*0.03;
+                ctx.beginPath(); ctx.moveTo(0,s*0.5); ctx.lineTo(0,-s*0.5); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0,s*0.0); ctx.lineTo(s*0.45,-s*0.3); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0,s*0.0); ctx.lineTo(-s*0.45,-s*0.3); ctx.stroke();
+
+            }
+
+        }
+
+        /* ===================== LOOP ===================== */
+
+        function animate(){
+            if(!isActive) return;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+
+            // SIN relleno de fondo: canvas completamente transparente
+            for(let i=0;i<particles.length;i++){
+                const p=particles[i];
+                p.y+=p.speed; p.x+=p.drift; p.angle+=p.spin; p.wobble+=p.wobbleSpeed;
+                if(p.flutter!==undefined) p.flutter+=p.flutterSpeed;
+                // Movimiento ondulante mariposas
+                if(p.theme===5){ p.x+=Math.sin(p.wobble)*1.2; p.y+=Math.cos(p.wobble*0.4)*0.35; }
+                // Péndulo hojas
+                if(p.theme===10) p.x+=Math.sin(p.wobble*1.4)*1.4;
+                // Bamboleo flores
+                if(p.theme===9) p.x+=Math.sin(p.wobble*0.9)*0.55;
+                if(p.y>canvas.height+90||p.x<-110||p.x>canvas.width+110){
+                    const fresh=createParticle(p.theme,false); particles[i]=fresh;
+                } else drawParticle(p);
+            }
+            animFrame=requestAnimationFrame(animate);
+        }
+
+        /* 9 — Flores reales */
+
+        function drawFlower(p){
+            const s=p.size, t=p.flowerType||0;
+            ctx.shadowColor=p.color; ctx.shadowBlur=8;
+
+            if(t===0){ // Rosa
+                ctx.fillStyle=p.color;
+                for(let pe=0;pe<5;pe++){
+                    ctx.save(); ctx.rotate(pe*Math.PI*2/5);
+                    ctx.beginPath(); ctx.moveTo(0,0);
+                    ctx.bezierCurveTo(-s*0.2,-s*0.25,-s*0.15,-s*0.5,0,-s*0.45);
+                    ctx.bezierCurveTo(s*0.15,-s*0.5,s*0.2,-s*0.25,0,0);
+                    ctx.closePath(); ctx.fill(); ctx.restore();
+                }
+
+                ctx.fillStyle='#c62828'; ctx.beginPath(); ctx.arc(0,0,s*0.18,0,Math.PI*2); ctx.fill();
+
+            } else if(t===1){ // Tulipán
+                ctx.fillStyle=p.color;
+                ctx.beginPath(); ctx.moveTo(0,s*0.1);
+                ctx.bezierCurveTo(-s*0.36,s*0.05,-s*0.38,-s*0.3,-s*0.18,-s*0.46);
+                ctx.bezierCurveTo(-s*0.05,-s*0.56,s*0.05,-s*0.56,s*0.18,-s*0.46);
+                ctx.bezierCurveTo(s*0.38,-s*0.3,s*0.36,s*0.05,0,s*0.1);
+                ctx.closePath(); ctx.fill();
+                ctx.fillStyle='rgba(255,255,255,0.2)';
+                ctx.beginPath(); ctx.ellipse(0,-s*0.3,s*0.08,s*0.2,0,0,Math.PI*2); ctx.fill();
+
+            } else if(t===2){ // Margarita
+                ctx.fillStyle=p.color;
+                for(let pe=0;pe<12;pe++){
+                    ctx.save(); ctx.rotate(pe*Math.PI/6);
+                    ctx.beginPath(); ctx.ellipse(0,-s*0.32,s*0.08,s*0.22,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+                }
+
+                ctx.fillStyle='#ffd54f'; ctx.beginPath(); ctx.arc(0,0,s*0.18,0,Math.PI*2); ctx.fill();
+                ctx.fillStyle='#f9a825'; ctx.beginPath(); ctx.arc(0,0,s*0.1,0,Math.PI*2); ctx.fill();
+
+            } else if(t===3){ // Girasol
+
+                ctx.fillStyle=p.color;
+                for(let pe=0;pe<16;pe++){
+                    ctx.save(); ctx.rotate(pe*Math.PI/8);
+                    ctx.beginPath(); ctx.ellipse(0,-s*0.36,s*0.1,s*0.22,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+                }
+
+                ctx.fillStyle='#4e342e'; ctx.beginPath(); ctx.arc(0,0,s*0.22,0,Math.PI*2); ctx.fill();
+                ctx.fillStyle='#3e2723';
+
+                for(let d=0;d<8;d++){
+                    ctx.save(); ctx.rotate(d*Math.PI/4);
+                    ctx.fillRect(-s*0.02,-s*0.18,s*0.04,s*0.09); ctx.restore();
+                }
+
+            } else { // Clavel
+                ctx.fillStyle=p.color;
+
+                for(let pe=0;pe<8;pe++){
+                    ctx.save(); ctx.rotate(pe*Math.PI/4+(p.wobble||0)*0.05);
+                    ctx.beginPath(); ctx.moveTo(0,0);
+                    ctx.bezierCurveTo(-s*0.18,-s*0.1,-s*0.22,-s*0.42,-s*0.1,-s*0.44);
+                    ctx.bezierCurveTo(0,-s*0.46,0,-s*0.46,s*0.1,-s*0.44);
+                    ctx.bezierCurveTo(s*0.22,-s*0.42,s*0.18,-s*0.1,0,0);
+                    ctx.closePath(); ctx.fill(); ctx.restore();
+                }
+            }
+
+            // Tallo
+            ctx.strokeStyle='#388e3c'; ctx.lineWidth=Math.max(1,s*0.07);
+            ctx.beginPath(); ctx.moveTo(0,s*0.1); ctx.lineTo(0,s*0.5); ctx.stroke();
+
+        }
+
+        /* 10 — Moños en tonos rosado y rojo */
+
+        function drawBow(p){
+            const s=p.size;
+            ctx.shadowColor=p.color; ctx.shadowBlur=10;
+            ctx.fillStyle=p.color;
+
+            // Ala izquierda
+            ctx.beginPath();
+            ctx.moveTo(0,0);
+            ctx.bezierCurveTo(-s*0.12,-s*0.18,-s*0.48,-s*0.22,-s*0.46,-s*0.02);
+            ctx.bezierCurveTo(-s*0.44,s*0.18,-s*0.1,s*0.2,0,0);
+            ctx.closePath(); ctx.fill();
+
+            // Ala derecha
+            ctx.beginPath();
+            ctx.moveTo(0,0);
+            ctx.bezierCurveTo(s*0.12,-s*0.18,s*0.48,-s*0.22,s*0.46,-s*0.02);
+            ctx.bezierCurveTo(s*0.44,s*0.18,s*0.1,s*0.2,0,0);
+            ctx.closePath(); ctx.fill();
+
+            // Brillo en alas
+            ctx.fillStyle='rgba(255,255,255,0.22)';
+            ctx.beginPath();
+            ctx.ellipse(-s*0.24,-s*0.06,s*0.12,s*0.07,0.3,0,Math.PI*2); ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(s*0.24,-s*0.06,s*0.12,s*0.07,-0.3,0,Math.PI*2); ctx.fill();
+
+            // Nudo central
+            ctx.fillStyle=p.centerColor||'#ffffff';
+            ctx.beginPath(); ctx.ellipse(0,0,s*0.1,s*0.12,0,0,Math.PI*2); ctx.fill();
+
+            // Brillo nudo
+            ctx.fillStyle='rgba(255,255,255,0.5)';
+            ctx.beginPath(); ctx.ellipse(-s*0.02,-s*0.03,s*0.04,s*0.04,0,0,Math.PI*2); ctx.fill();
+        }
+
+        /* 11 — Botellas de distintos tipos */
+
+        function drawBottle(p){
+            const s=p.size, t=p.bottleType||0;
+            ctx.shadowColor=p.color; ctx.shadowBlur=12;
+            ctx.fillStyle=p.color;
+
+            if(t===0){ // Botella clásica
+                // Cuerpo
+                ctx.beginPath();
+                if(ctx.roundRect) ctx.roundRect(-s*0.2,s*0.05,s*0.4,s*0.5,[3,3,8,8]);
+                else ctx.rect(-s*0.2,s*0.05,s*0.4,s*0.5);
+                ctx.fill();
+
+                // Cuello
+                ctx.beginPath();
+                if(ctx.roundRect) ctx.roundRect(-s*0.1,-s*0.28,s*0.2,s*0.34,[3]);
+                else ctx.rect(-s*0.1,-s*0.28,s*0.2,s*0.34);
+                ctx.fill();
+
+                // Tapa
+                ctx.fillStyle='rgba(255,255,255,0.5)';
+                ctx.beginPath();
+                if(ctx.roundRect) ctx.roundRect(-s*0.12,-s*0.36,s*0.24,s*0.1,[3]);
+                else ctx.rect(-s*0.12,-s*0.36,s*0.24,s*0.1);
+                ctx.fill();
+
+                // Brillo
+                ctx.fillStyle='rgba(255,255,255,0.25)';
+                ctx.beginPath(); ctx.ellipse(-s*0.07,s*0.22,s*0.055,s*0.18,0,0,Math.PI*2); ctx.fill();
+
+            } else if(t===1){ // Botella de vino
+                ctx.fillStyle=p.color;
+
+                // Cuerpo redondeado
+                ctx.beginPath(); ctx.ellipse(0,s*0.32,s*0.22,s*0.28,0,0,Math.PI*2); ctx.fill();
+
+                // Cuello largo
+                ctx.beginPath();
+
+                if(ctx.roundRect) ctx.roundRect(-s*0.07,-s*0.3,s*0.14,s*0.45,[4]);
+                else ctx.rect(-s*0.07,-s*0.3,s*0.14,s*0.45);
+                ctx.fill();
+
+                // Corcho
+                ctx.fillStyle='#bcaaa4';
+                ctx.beginPath();
+                if(ctx.roundRect) ctx.roundRect(-s*0.065,-s*0.38,s*0.13,s*0.1,[3]);
+                else ctx.rect(-s*0.065,-s*0.38,s*0.13,s*0.1);
+                ctx.fill();
+
+                // Brillo
+                ctx.fillStyle='rgba(255,255,255,0.22)';
+                ctx.beginPath(); ctx.ellipse(-s*0.08,s*0.2,s*0.05,s*0.14,0,0,Math.PI*2); ctx.fill();
+
+            } else { // Botella con tapa dorada
+
+                ctx.fillStyle=p.color;
+                // Cuerpo hexagonal aprox
+                ctx.beginPath();
+                ctx.moveTo(-s*0.22,s*0.55); ctx.lineTo(-s*0.24,s*0.1);
+                ctx.lineTo(-s*0.12,-s*0.04); ctx.lineTo(-s*0.1,-s*0.28);
+                ctx.lineTo(s*0.1,-s*0.28); ctx.lineTo(s*0.12,-s*0.04);
+                ctx.lineTo(s*0.24,s*0.1); ctx.lineTo(s*0.22,s*0.55);
+                ctx.closePath(); ctx.fill();
+
+                // Tapa dorada
+                ctx.fillStyle='#ffd54f';
+                ctx.beginPath();
+                if(ctx.roundRect) ctx.roundRect(-s*0.13,-s*0.42,s*0.26,s*0.16,[4,4,0,0]);
+                else ctx.rect(-s*0.13,-s*0.42,s*0.26,s*0.16);
+                ctx.fill();
+
+                // Brillo
+                ctx.fillStyle='rgba(255,255,255,0.22)';
+                ctx.beginPath(); ctx.ellipse(-s*0.08,s*0.24,s*0.06,s*0.18,0,0,Math.PI*2); ctx.fill();
+            }
+        }
+
+        })();
+
+        }); // fin DOMContentLoaded
+
+    // Cerrar el panel selector al hacer click fuera del ícono diamante
+
+    document.addEventListener('click', function(e){
+
+        const wallpaperIcon = document.getElementById('wallpaper-icon');
+        const panel = document.getElementById('wallpaper-selector');
+
+        if(!wallpaperIcon.contains(e.target)){
+            panel.classList.remove('open');
+            window._selectorOpen = false;
+        }
+    });
+    </script>
+
+    <canvas id="wallpaper-canvas"></canvas>
+
+    <div id="wallpaper-label"></div>
+
+
+</body>
+
+</html>

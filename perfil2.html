@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Malboro Little Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/favicon2.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+</head>
+
+<body>
+
+<style>
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para la página de perfil */
+.profile-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color:var(--main-color)
+}
+
+/* Estilos para el encabezado */
+.header {
+    position: relative;
+    background-image: url("images/mlc.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 7cm;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+/* Estilos para el contenedor del logo */
+.logo-container {
+    position: absolute;
+    left: 20%; /* Desplaza el logo hacia la izquierda */
+    top: 100%; /* Centra el logo verticalmente en relación con el contenedor padre */
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10; /* Asegura que el logo esté por encima de todos los elementos */
+}
+
+.header {
+    display: flex;
+    align-items: center; /* Alinea verticalmente */
+    gap: 15px; /* Espacio entre logo y texto */
+}
+
+.user-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+/* Estilos para la información del usuario */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+    white-space: nowrap; /* Previene salto de línea */
+}
+
+.name-lastname {
+    margin: 0;
+    font-size: 30px;
+    margin-top: 160%;
+    margin-left: 178%;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+}
+
+.username {
+    margin: 2px 0 0 0;
+    font-size: 25px;
+    margin-left: 178%;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+}
+
+/* Estilos para el contenido principal */
+.content {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+
+/* AJUSTE PARA EL BOTÓN EDITAR CON TU DISEÑO */
+.follow-stats {
+    position: absolute;
+    top: 8.2cm; /* Bajado un poco para alinear con el centro del texto */
+    right: 430px;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    color: #000;
+    z-index: 2;
+    white-space: nowrap;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+
+.stat {
+    text-align: center;
+}
+
+.stat-item {
+    white-space: nowrap;
+    cursor: pointer; /* muestra la mano al pasar el mouse */
+}
+
+.stat-item strong {
+    margin-left: 6px; /* Aumentá este valor si querés más espacio */
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+}
+
+/* Contenedor que agrupa barra y recuadros */
+.center-wrapper {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Barra de navegación centrada */
+.navbar {
+    position: relative;
+    top: 1205px;
+    left: 70px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20%;
+    margin-bottom: 10px;
+    font-family: "Outfit", sans-serif;
+    cursor: pointer;
+}
+
+.navbar div {
+    position: relative;
+}
+
+.navbar div:hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: black;
+    bottom: -4px;
+    left: 0;
+}
+
+/* Recuadros debajo */
+.content-box {
+    display: none;
+    position: fixed;
+    top: 60%; /* Ajustá según el alto de tu encabezado */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px; /* o el tamaño que prefieras */
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-top: 20px; /* Espacio entre la barra y el cuadro desplegado */
+    background-color: white;
+}
+
+.close {
+    margin-top: 10px;
+    background: #ddd;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+#like-count {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+input[type="date"], input[type="file"] {
+    font-size: 16px;
+    padding: 6px;
+    margin-top: 10px;
+}
+
+
+.icon-container {
+    position: absolute;
+    right: 20px;
+    top: 230px;
+    display: flex;
+    gap: 10px;
+    font-size: 40px; /* Tamaño de los íconos */
+    justify-content: center;
+    margin: 50px 80px 0 0;
+    z-index: 1000;
+}
+
+.icon-container i {
+    font-size: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.header {
+    position: relative;
+}
+
+.icon-button {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-button i {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+}
+
+.icon-button span {
+    font-size: 16px;
+    color: white;
+}
+
+#color-picker-box {
+    display: none;
+    position: fixed;
+    top: 400px; /* o top: 60%; */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#palette-icon {
+    position: relative;
+    z-index: 9999;
+}
+
+
+body {
+    --main-color: #7ccd98;
+    background-color: var(--main-color);
+    transition: background-color 0.5 ease;
+}
+
+/* Ajustes para que la sección quede claramente debajo de la cabecera/ avatar */
+.video-section{
+    clear: both;             /* asegura que no quede junto a elementos flotantes */
+    margin-top: 204%;        /* separa de la línea de tabs; aumentá si el avatar lo tapa */
+    padding: 10px 0 50px 0;  /* espacio superior e inferior */
+    width: 165%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 0;
+}
+
+/* Cambiamos el wrapper de flex a grid para manejar filas y columnas */
+.video-wrapper {
+    width: 90%; /* Ajustado para mejor centrado */
+    max-width: 950px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Crea las dos columnas */
+    gap: 40px; /* Espacio entre videos */
+    justify-items: center;
+    box-sizing: border-box;
+}
+
+/* Ajustamos la tarjeta para que no use flexbox innecesario */
+.video-card {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Control de tamaño del elemento <video> para evitar altas desagradables */
+.video-card video{
+    width: 100%;
+    aspect-ratio: 16 / 9; /* fija proporción 16:9; evita videos extremadamente altos */
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    background: #000;
+}
+
+/* Títulos opcionales debajo de cada video */
+.video-title{
+    font-size: 20px;
+    font-weight: bold;
+    color: #083; /* ajustalo a tu paleta */
+    text-align: center;
+}
+
+/* Responsive: en pantallas pequeñas apilar verticalmente */
+@media (max-width: 720px){
+    .video-wrapper{
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+    }
+    .video-card{
+        flex: 0 1 100%;
+        max-width: 600px; /* o 100% */
+    }
+}
+
+.about-modal {
+    display: none;              /* oculto por defecto */
+    position: fixed;            /* se fija en toda la ventana */
+    top: 0;
+    left: 0;
+    width: 100vw;               /* ocupa todo el ancho del viewport */
+    height: 100vh;              /* ocupa toda la altura del viewport */
+    background: rgba(0, 0, 0, 0.6); /* fondo oscuro semitransparente */
+    z-index: 9999;              /* 🔹 valor alto para sobreponerse a todo */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px); /* efecto de desenfoque */
+}
+
+.about-content {
+    background: linear-gradient(180deg, #e8ffd6, #9dffba); /* beige suave a amarillo tenue */
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 480px;  /* mantiene ancho controlado */
+    height: 400px;     /* más alto que ancho */
+    text-align: left;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    filter: none !important;
+    animation: fadeIn 0.3s ease-out;
+    align-items: flex-start;   /* <-- Esto libera el título y lo lleva a la izquierda */
+    border: 2px solid rgba(255, 215, 0, 0.3); /* borde dorado sutil */
+}
+
+.about-content h2 {
+    font-size: 1.5rem;
+    color: #2b2b2b;
+    margin-bottom: 75px;
+    margin-top: -10px;
+    text-align: center;
+    transform: translateX(-20px); /* Ajustable */
+    letter-spacing: 1px;
+}
+
+.about-content h3 {
+    font-size: 1.2rem;
+    color: #3e3e3e;
+    margin-bottom: 8px;
+}
+
+.about-content p {
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+
+/* Animación de entrada suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+#page-wrapper.blurred {
+    filter: blur(6px);
+    pointer-events: none; /* evita interactuar con el fondo mientras el modal está abierto */
+}
+
+.blurred {
+    filter: blur(4px);
+    pointer-events: none;
+}
+
+
+#logo-circulo.blurred {
+    filter: blur(6px);
+}
+
+.blurred #profileLogo {
+    filter: blur(4px);
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+
+/* --- OVERLAYS DE CARGA (Centrados exactos) --- */
+#logo-overlay, #header-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--main-color);
+    z-index: 50000; /* Prioridad máxima */
+    display: none; /* Se activa por JS */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* El spinner de carga */
+.loader-circle {
+    width: 80px !important;
+    height: 80px !important;
+    border: 6px solid rgba(255, 255, 255, 0.2);
+    border-top: 6px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-sizing: border-box;
+    display: block;
+}
+
+.loading-text-universal {
+    margin-top: 15px;
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: white;
+    font-family: "Outfit", sans-serif;
+    text-align: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* El logo que hará la animación */
+.logo-zoom-element {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    /* Empieza en la posición del logo original (20% a la izquierda) */
+    left: 10px; 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efecto elástico */
+}
+
+/* Clase que se activa después de 3 segundos */
+.logo-zoom-element.active {
+    margin-top: 142px;
+    opacity: 1;
+    left: 780px; /* Se mueve al centro */
+    transform: translate(-50%, -50%) scale(2.5); /* Zoom */
+}
+
+
+/* Capa invisible clickeable sobre el header */
+#header-click-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    cursor: pointer;
+}
+
+#header-image-viewer {
+    position: fixed;
+    inset: 0;
+    background: var(--main-color);
+    z-index: 55000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor adaptativo para que la imagen se vea entera */
+.header-image-content {
+    width: 85vw;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Imagen del fondo optimizada para mostrarse íntegramente */
+.header-image {
+    width: 100%;
+    height: 100%;
+    background-image: url("images/mlc.jpg");
+    background-size: contain; /* 💡 Evita recortes: muestra la imagen al 100% */
+    background-position: center;
+    background-repeat: no-repeat; /* Evita que la imagen se duplique */
+}
+
+/*  ***************************** */
+
+/* ********************************************** */
+</style>
+
+<div id="page-wrapper" class="profile-page">
+    <div class="header">
+        <div id="header-click-layer"></div>
+        <div class="logo-container">
+            <img src="images/perfil2.png" alt="Logo de Usuario" class="user-logo" id="logo-circulo">
+        </div>
+
+
+        <div id="logo-overlay">
+            <div class="loader-circle"></div>
+                <div class="loading-text-universal">loading</div>
+            <img src="images/perfil2.png" id="animating-logo" class="logo-zoom-element">
+        </div>
+
+        <div id="header-loading-overlay">
+            <div class="loader-circle"></div>
+            <div class="loading-text-universal">loading</div>
+        </div>
+
+
+        <div id="header-image-viewer">
+            <div class="header-image-content">
+                <div class="header-image"></div>
+            </div>
+        </div>
+
+
+            <div class="user-info">
+                <h1 class="name-lastname">Nombre Apellido</h1>
+                <p class="username">@nombredeusuario</p>
+            </div>
+            
+            <div class="follow-stats">
+                <span class="stat-item" id="followers-link">seguidores <strong id="followers-count">8</strong></span>
+                <span class="stat-item" id="following-link">siguiendo <strong id="following-count">5</strong></span>
+            </div>
+
+            <div class="icon-container">
+
+                <div style="text-align: center;">
+                    <div style="display: inline-block;">
+                        <i class="fi fi-rr-eye" style="cursor: pointer; font-size: 45px;"></i>
+                        <div id="visit-count" style="font-size: 15px; color: white; margin-top: 0px; min-width: 20px; display: block; text-align: center;">
+                            0 Visitas
+                        </div>
+                    </div>
+                </div>
+
+                <div id="main-section">
+                <!-- Aquí va el contenido central -->
+                    <i id="palette-icon" class="fi fi-sr-palette" style="font-size: 40px; color: white; cursor: pointer;"></i>
+
+                    <div id="color-picker-box">
+                        <p style="font-size: 16px;"><strong>Elegí un color principal:</strong></p>
+                        <input type="color" id="color-input" value="#7ccd98">
+                        <br><br>
+                        <button onclick="applyColor()" style="font-size: 14px;">Aplicar</button>
+                        <button onclick="closeColorPicker()" style="font-size: 14px;">Cerrar</button>
+                    </div>
+                
+                </div>
+
+                <i class="fi fi-rr-settings" onclick="window.location.href='settings.html'" style="cursor: pointer;"></i>
+
+            </div>
+
+            <!-- Contenido debajo del header -->
+        
+        <div class="content">
+            <div class="center-wrapper">
+                <div class="navbar">
+                    <div onclick="openModal()">Publicar</div>
+                    <div onclick="location.href='like2.html'" style="cursor:pointer;">
+                        Like
+                    </div>
+                    <div onclick="window.location.href='archivo.html'">Archivo</div>
+                    <div onclick="showAbout()">Acerca de</div>
+                </div>
+
+                    <section class="video-section">
+                        <div class="video-wrapper">
+                            <div class="video-card">
+                                <video controls>
+                                    <source src="videos/portrait stuff.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-title">portrait stuff</div>
+                            </div>
+
+                            <div class="video-card">
+                                <video controls>
+                                    <source src="videos/rockin poll.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-title">rockin poll</div>
+                            </div>
+
+                            <div class="video-card">
+                                <video controls>
+                                    <source src="videos/Yee.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-title">Yee</div>
+                            </div>
+
+                            <div class="video-card">
+                                <video controls>
+                                    <source src="videos/rainy day.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-title">rainy day</div>
+                            </div>
+                        </div>
+                    </section>
+                   
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <div id="aboutModal" class="about-modal">
+            <div class="about-content">
+                <span class="close-btn" onclick="closeAbout()">&times;</span>
+                <h2>Malboro Little Club</h2>
+                <h3>Descripción:</h3>
+                <p>Hola. ¿Cómo estás? Bienvenido al mundo de Malboro Little Club.</p>
+                <p id="join-date"></p>
+            </div>
+        </div>  
+
+
+    <script>
+        // Navegación
+        document.getElementById("followers-link").onclick = () => window.location.href = "seguidores.html";
+        document.getElementById("following-link").onclick = () => window.location.href = "siguiendo.html";
+    </script>    
+
+    <script>
+        document.getElementById("ver-perfil").onclick = function() {
+            window.location.href = "'perfil2.html'"; // Navega a la página de perfil
+        };
+    </script>
+
+
+    <script>
+        
+    // Mostrar y ocultar el modal de video
+    function openModal() {
+        closeAll();
+        document.getElementById('modal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+    // Mostrar y ocultar calendario
+    function toggleCalendar() {
+        const box = document.getElementById('calendar-box');
+        const isVisible = box.style.display === 'block';
+        closeAll();
+        if (!isVisible) box.style.display = 'block';
+    }
+
+    // 📌 Función CORREGIDA para abrir el modal "Acerca de"
+    // Se ejecuta SOLO al hacer click en el enlace
+    function showAbout() {
+        closeAll(); // Cierra otros modales/cajas si están abiertos
+        const modal = document.getElementById("aboutModal");
+        const joinDate = document.getElementById("join-date");
+
+        const today = new Date();
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        joinDate.textContent = `Te uniste el ${today.toLocaleDateString('es-ES', options)}`;
+
+        modal.style.display = "flex"; // Muestra el modal
+
+        // Aplica el difuminado al wrapper de la página
+        document.getElementById("page-wrapper").classList.add("blurred");
+        // Esto es opcional, si quieres difuminar el logo también
+        document.getElementById("logo-circulo").classList.add("blurred"); 
+    }
+
+    // 📌 Función CORREGIDA para cerrar el modal "Acerca de"
+    function closeAbout() {
+        document.getElementById("aboutModal").style.display = "none"; // Oculta el modal
+    
+        // Quita las clases de difuminado
+        document.getElementById("page-wrapper").classList.remove("blurred");
+        document.getElementById("logo-circulo").classList.remove("blurred");
+    }
+
+    // Cierra otros modales/cajas (se usará al abrir "Post")
+    function closeAll() {
+        document.getElementById('modal').style.display = 'none';
+        document.getElementById('calendar-box').style.display = 'none';
+        // Asegura que el modal "Acerca de" también se pueda cerrar desde aquí
+        document.getElementById('aboutModal').style.display = 'none'; 
+    
+        // También elimina el blur si se cierra el modal de otra forma
+        document.getElementById("page-wrapper").classList.remove("blurred");
+        document.getElementById("logo-circulo").classList.remove("blurred");
+    } 
+  </script>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const paletteIcon = document.getElementById('palette-icon');
+            const colorBox = document.getElementById('color-picker-box');
+            const colorInput = document.getElementById('color-input');
+
+        // Mostrar u ocultar el selector al hacer clic en el ícono 🎨
+        paletteIcon.addEventListener('click', () => {
+            colorBox.style.display = (colorBox.style.display === 'none') ? 'block' : 'none';
+        });
+
+        // ✅ Hacemos las funciones globales para que funcionen con onclick=""
+        window.applyColor = function () {
+            const selectedColor = colorInput.value;
+            document.body.style.setProperty('--main-color', selectedColor);
+        };
+
+        window.closeColorPicker = function () {
+        colorBox.style.display = 'none';
+        };
+    });
+    </script>
+        
+
+
+    <script>
+        // Al cargar la página
+        document.addEventListener("DOMContentLoaded", function () {
+            // Tomar valor del localStorage
+            let count = localStorage.getItem("visitas");
+            if (!count) count = 0;
+
+            // Sumar uno
+            count = parseInt(count) + 1;
+
+            // Guardar
+            localStorage.setItem("visitas", count);
+
+            // Mostrar en pantalla
+            document.getElementById("visit-count").textContent = count + " Visitas";
+        });
+    </script>
+
+
+    <script>
+        function showAbout() {
+            const modal = document.getElementById("aboutModal");
+            const joinDate = document.getElementById("join-date");
+
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            joinDate.textContent = `Te uniste el ${today.toLocaleDateString('es-ES', options)}`;
+
+            modal.style.display = "flex";
+
+            document.getElementById("page-wrapper").classList.add("blurred");
+            document.getElementById("logo-circulo").classList.add("blurred");
+        }
+
+        function closeAbout() {
+            document.getElementById("aboutModal").style.display = "none";
+            document.getElementById("page-wrapper").classList.remove("blurred");
+            document.getElementById("logo-circulo").classList.remove("blurred");
+        }
+    </script>
+
+
+    <script>
+        // --- LÓGICA DE CARGA DEL LOGO ---
+    const logoOriginal = document.getElementById("logo-circulo");
+    const logoOverlay = document.getElementById("logo-overlay");
+    const animatingLogo = document.getElementById("animating-logo");
+
+    logoOriginal.addEventListener("click", () => {
+        logoOverlay.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        
+        const spinner = logoOverlay.querySelector('.loader-circle');
+        const text = logoOverlay.querySelector('.loading-text-universal');
+        
+        spinner.style.display = "block";
+        text.style.display = "block";
+        animatingLogo.classList.remove("active");
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+            text.style.display = "none";
+            animatingLogo.classList.add("active");
+        }, 3000);
+    });
+
+    logoOverlay.addEventListener("click", () => {
+        if (animatingLogo.classList.contains("active")) {
+            logoOverlay.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    });
+
+    // --- LÓGICA DE CARGA DEL FONDO (WALLPAPER) ---
+    const headerLayer = document.getElementById("header-click-layer");
+    const headerLoading = document.getElementById("header-loading-overlay");
+    const imageViewer = document.getElementById("header-image-viewer");
+
+    headerLayer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        headerLoading.style.display = "flex";
+        document.body.style.overflow = "hidden";
+
+        setTimeout(() => {
+            headerLoading.style.display = "none";
+            imageViewer.style.display = "flex";
+        }, 3000);
+    });
+
+    imageViewer.addEventListener("click", () => {
+        imageViewer.style.display = "none";
+        document.body.style.overflow = "auto";
+    });
+    </script>
+
+
+</body>
+</html>

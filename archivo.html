@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/favicon2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+
+<style>
+
+body {
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Barra verde oscuro arriba */
+.barra-busqueda {
+    background-color: #064d2f;
+    width: 100%;
+    height: 20mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.barra-busqueda label {
+    color: white;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+}
+
+.custom-select {
+    position: relative;
+    width: 130px;
+    background-color: #7ccd98;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid #4CAF50;
+    text-align: center;
+    padding: 10px;
+    color: #064d2f;
+    font-weight: bold;
+}
+
+.select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #7ccd98;
+    border-radius: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    display: none;
+    z-index: 1000;
+    border: 1px solid #4CAF50;
+    overflow: hidden;
+}
+
+.select-options li {
+    padding: 12px 15px;
+    color: #064d2f;
+    cursor: pointer;
+    text-align: center;
+}
+
+.lista-dias li {
+    padding: 4px 5px !important;
+    font-size: 14px !important;
+}
+
+/* Estilo para las filas de fechas repetidas alineadas al margen izquierdo */
+.fila-fecha {
+    grid-column: 1 / -1;
+    font-size: 18px;
+    font-weight: bold;
+    color: #064d2f;
+    font-family: "Inter", Arial, sans-serif;
+    padding: 15px 0 5px 0; /* Sin margen ni espacio izquierdo */
+    margin: 10px 20px;     /* Alineado con el margen de la página (20px igual que el padding del contenedor principal) */
+    border-bottom: 2px solid #064d2f;
+    justify-self: start; /* Anula el centrado general de la grilla */
+    width: 100%;         /* Ocupa todo el ancho disponible */
+    text-align: left;    /* Alinea el texto a la izquierda */
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+video {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 1200px) {
+    .video-container { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 900px) {
+    .video-container { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .video-container { grid-template-columns: 1fr; }
+}
+
+a.home-icon {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 40px;
+    color: white;
+}
+
+a.home-icon:hover { color: #a3f7bf; }
+
+</style>
+
+<script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+
+<body>
+
+    <div class="barra-busqueda">
+        <div class="custom-select" id="dia-container">
+            <div class="select-header">Día</div>
+            <ul class="select-options lista-dias">
+                <li data-value="1">1</li><li data-value="2">2</li><li data-value="3">3</li><li data-value="4">4</li><li data-value="5">5</li>
+                <li data-value="6">6</li><li data-value="7">7</li><li data-value="8">8</li><li data-value="9">9</li><li data-value="10">10</li>
+                <li data-value="11">11</li><li data-value="12">12</li><li data-value="13">13</li><li data-value="14">14</li><li data-value="15">15</li>
+                <li data-value="16">16</li><li data-value="17">17</li><li data-value="18">18</li><li data-value="19">19</li><li data-value="20">20</li>
+                <li data-value="21">21</li><li data-value="22">22</li><li data-value="23">23</li><li data-value="24">24</li><li data-value="25">25</li>
+                <li data-value="26">26</li><li data-value="27">27</li><li data-value="28">28</li><li data-value="29">29</li><li data-value="30">30</li>
+                <li data-value="31">31</li>
+            </ul>
+        </div>
+        <div class="custom-select" id="mes-container">
+            <div class="select-header">Meses</div>
+            <ul class="select-options">
+                <li data-value="1">Enero</li><li data-value="2">Febrero</li><li data-value="3">Marzo</li><li data-value="4">Abril</li>
+                <li data-value="5">Mayo</li><li data-value="6">Junio</li><li data-value="7">Julio</li><li data-value="8">Agosto</li>
+                <li data-value="9">Septiembre</li><li data-value="10">Octubre</li><li data-value="11">Noviembre</li><li data-value="12">Diciembre</li>
+            </ul>
+        </div>
+        <div class="custom-select" id="anio-container">
+            <div class="select-header">Años</div>
+            <ul class="select-options">
+                <li data-value="2026">2026</li><li data-value="2025">2025</li><li data-value="2024">2024</li><li data-value="2023">2023</li>
+                <li data-value="2022">2022</li><li data-value="2021">2021</li><li data-value="2020">2020</li><li data-value="2019">2019</li>
+                <li data-value="2018">2018</li><li data-value="2017">2017</li><li data-value="2016">2016</li><li data-value="2015">2015</li>
+            </ul>
+        </div>
+        <a href="index.html" class="home-icon"><i class="fas fa-home"></i></a>
+    </div>
+
+    <h1>Mis Archivos</h1>
+
+    <div class="video-container" id="video-container">
+        <video controls>
+            <source src="videos/charlie teh unicron.mp4" type="video/mp4">
+            </video>
+        <video controls>
+            <source src="videos/rainy day.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/portrait stuff.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/rockin poll.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/clouds colour.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/my art.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Plants.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Ice Cream.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/lovely place.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/stuff collect.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Mantel flowers.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/garden.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Antique whore.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/make a straw.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Window.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Day party.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Sunrose.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Glitter gum.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/party maybe.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Plantss.mp4" type="video/mp4">
+        </video>    
+        <video controls>
+            <source src="videos/lollipop.mp4" type="video/mp4">
+        </video>  
+        <video controls>
+            <source src="videos/bathroom plants.mp4" type="video/mp4">
+        </video>  
+        <video controls>
+            <source src="videos/tea artist.mp4" type="video/mp4">
+        </video>  
+        <video controls>
+            <source src="videos/Flood.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Gardeny plant.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/My stuff collect.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Flowery.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/kinda maybe.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/Plants green.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="videos/so much.mp4" type="video/mp4">
+        </video>
+    </div>
+
+<script>
+    // Generar la fecha actual formateada
+    function obtenerFechaTexto() {
+        const fecha = new Date();
+        const meses = [
+            "enero", "febrero", "marzo", "abril", "mayo", "junio",
+            "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+        ];
+        return `${fecha.getDate()} de ${meses[fecha.getMonth()]} de ${fecha.getFullYear()}`;
+    }
+
+    // Insertar las fechas dinámicamente entre las filas de videos
+    function insertarFechasEntreFilas() {
+        const contenedor = document.getElementById('video-container');
+        const videos = Array.from(contenedor.querySelectorAll('video'));
+        
+        // Limpiar separadores previos si los hubiera
+        contenedor.querySelectorAll('.fila-fecha').forEach(el => el.remove());
+
+        // Calcular cuántos videos entran por fila según el ancho actual de la pantalla
+        const estilosGrid = window.getComputedStyle(contenedor);
+        const columnas = estilosGrid.getPropertyValue('grid-template-columns').split(' ').length;
+
+        // Insertar un divisor de fecha antes de cada múltiplo del número de columnas (excepto al inicio)
+        for (let i = columnas; i < videos.length; i += columnas) {
+            const separador = document.createElement('div');
+            separador.className = 'fila-fecha';
+            separador.textContent = obtenerFechaTexto();
+            
+            // Insertar antes del video correspondiente en la nueva fila
+            contenedor.insertBefore(separador, videos[i]);
+        }
+    }
+
+    // Ejecutar al cargar y al cambiar el tamaño de la ventana (por si cambia la cantidad de columnas)
+    window.addEventListener('DOMContentLoaded', insertarFechasEntreFilas);
+    window.addEventListener('resize', insertarFechasEntreFilas);
+
+    document.querySelectorAll('.custom-select').forEach(container => {
+        container.addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.querySelectorAll('.select-options').forEach(opt => {
+                if(opt !== this.querySelector('.select-options')) opt.style.display = 'none';
+            });
+            const options = this.querySelector('.select-options');
+            options.style.display = (options.style.display === 'block') ? 'none' : 'block';
+        });
+    });
+
+    document.querySelectorAll('.select-options li').forEach(li => {
+        li.addEventListener('click', function() {
+            const header = this.closest('.custom-select').querySelector('.select-header');
+            header.innerText = this.innerText;
+            this.closest('.custom-select').setAttribute('data-valor-actual', this.getAttribute('data-value'));
+        });
+    });
+</script>
+
+
+</body>
+</html>
